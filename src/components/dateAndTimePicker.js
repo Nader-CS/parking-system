@@ -13,9 +13,11 @@ export default function DateTimePickerValue() {
       <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
         <DateTimePicker
           label="PARKING FROM"
+          sx={{backgroundColor:'white', border:'1px solid #AA23B6', borderRadius:"8px"}}
         />
         <DateTimePicker
           label="PARKING UNTIL"
+          sx={{backgroundColor:'white', border:'1px solid #AA23B6', borderRadius:"8px"}}
         />
         {/* <DateTimePicker
           label="Controlled picker"
