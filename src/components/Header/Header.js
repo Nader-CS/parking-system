@@ -12,7 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
-import { ReactComponent as Logo } from "./icons/logo-no-background.svg";
+import { ReactComponent as Logo } from "../../assets/icons/logo-no-background.svg";
 import HouseIcon from "@mui/icons-material/House";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";

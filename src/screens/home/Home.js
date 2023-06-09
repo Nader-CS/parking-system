@@ -1,9 +1,11 @@
-import React,{Fragment} from "react";
-import Carousel from "../../components/Home~Slider/Carousel";
+import React, { Fragment } from "react";
+import Carousel from "../../components/Home-Slider/Carousel";
+import LandingPage from "../../components/Parking-search/LandingPage";
 const Home = () => {
   return (
     <Fragment>
-      <Carousel></Carousel>
+      <LandingPage />
+      <Carousel />
     </Fragment>
   );
 };
