@@ -1,7 +1,8 @@
 import "./App.css";
+import MadeEasy from "./components/Home/madeEasy";
 
 function App() {
-  return <div>Hello world</div>;
+  return <MadeEasy></MadeEasy>
 }
 
 export default App;
