@@ -24,8 +24,8 @@ import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 //should write all navItems in lowercase
-const navItems = ["Home", "How it works", "Plan", "aboutUs", "login", "signup"];
-const pages = ["/", "how-it-works", "plan", "about-us", "login", "signup"];
+const navItems = ["Home", "How it works", "Plan", "AboutUs", "Login", "Signup"];
+const pages = ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"];
 const icons = [
   HouseIcon,
   LightbulbOutlinedIcon,
@@ -57,14 +57,15 @@ function Header(props) {
         {navItems.map((item, index) => {
           const Icon = icons[index]; // Get the icon for the current navItem
           return (
-            <Link to={pages[index]} key={item}>
+            <Link
+              to={pages[index]}
+              key={item}
+              style={{ textDecoration: "none", color: "rgb(122, 38, 193)" }}
+            >
               <ListItem key={item} disablePadding>
                 <ListItemButton sx={{ textAlign: "center" }}>
                   <Icon className={classes["nav-icon"]} />
-                  <ListItemText
-                    primary={item}
-                    sx={{ textDecoration: "none" }}
-                  />
+                  <ListItemText primary={item} />
                 </ListItemButton>
               </ListItem>
             </Link>
@@ -104,17 +105,20 @@ function Header(props) {
                 <Button
                   sx={{
                     color:
-                      item === "login" || item === "signup"
+                      item.toLowerCase() === "login" ||
+                      item.toLowerCase() === "signup"
                         ? "rgb(122, 38, 193)"
                         : "#999",
                     border:
-                      item === "signup"
+                      item.toLowerCase() === "signup"
                         ? "1.5px solid rgb(122, 38, 193)"
                         : "none",
-                    borderRadius: item === "signup" ? "50px" : "none",
+                    borderRadius:
+                      item.toLowerCase() === "signup" ? "50px" : "none",
                     fontSize: "1rem",
                     textTransform: "capitalize",
-                    padding: item === "signup" ? "0.3rem 1.2rem" : "",
+                    padding:
+                      item === "signup".toLowerCase() ? "0.3rem 1.2rem" : "",
                   }}
                 >
                   {item}
@@ -144,7 +148,7 @@ function Header(props) {
           {drawer}
         </Drawer>
       </Box>
-      <Box component="main" sx={{ p: 3 }}>
+      <Box component="main" className={classes.main}>
         <Toolbar />
       </Box>
     </Box>
