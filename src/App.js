@@ -8,6 +8,7 @@ import Plan from "./screens/plan/Plan";
 import AboutUs from "./screens/about-us/AboutUs";
 import Login from "./screens/login/Login";
 import SignUp from "./screens/signup/SignUp";
+
 function App() {
   return (
     <Fragment>
