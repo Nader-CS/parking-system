@@ -1,7 +1,7 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import React from "react";
-import appleSvg from "../../assets/apple.svg";
-import googlePlaySvg from "../../assets/google-play.svg";
+import appleSvg from "../../assets/icons/apple.svg";
+import googlePlaySvg from "../../assets/icons/google-play.svg";
 
 export default function StoreButton({ text, isGoogle = false }) {
   return (
@@ -39,10 +39,10 @@ export default function StoreButton({ text, isGoogle = false }) {
         />
       )}
       <Stack direction="column" marginLeft={1} alignItems="start">
-        <Typography fontSize={10} lineHeight={1} marginTop={0.5}>
+        <Typography fontSize={9} lineHeight={1} marginTop={0.5}>
           {isGoogle ? "GET IT ON" : "Download on the"}
         </Typography>
-        <Typography fontSize={18} fontWeight="bold">
+        <Typography fontSize={17} fontWeight="bold">
           {text}
         </Typography>
       </Stack>
