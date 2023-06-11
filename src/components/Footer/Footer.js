@@ -40,22 +40,30 @@ const Footer = () => {
             className={`${classes.icons} col d-flex align-items-center justify-content-around`}
           >
             <div className="icons-container d-flex gap-3">
-              <BsFacebook
-                style={{ fontSize: "2rem" }}
-                className={classes.facebook}
-              />
-              <BsTwitter
-                style={{ fontSize: "2rem" }}
-                className={classes.twitter}
-              />
-              <BsInstagram
-                style={{ fontSize: "2rem" }}
-                className={classes.instagram}
-              />
-              <BsGoogle
-                style={{ fontSize: "2rem" }}
-                className={classes.google}
-              />
+              <a href="#">
+                <BsFacebook
+                  style={{ fontSize: "2rem" }}
+                  className={classes.facebook}
+                />
+              </a>
+              <a href="#">
+                <BsTwitter
+                  style={{ fontSize: "2rem" }}
+                  className={classes.twitter}
+                />
+              </a>
+              <a href="#">
+                <BsInstagram
+                  style={{ fontSize: "2rem" }}
+                  className={classes.instagram}
+                />
+              </a>
+              <a href="#">
+                <BsGoogle
+                  style={{ fontSize: "2rem" }}
+                  className={classes.google}
+                />
+              </a>
             </div>
           </div>
         </div>
