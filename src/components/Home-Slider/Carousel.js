@@ -263,7 +263,6 @@ export default function Carousel() {
           </Card>
         </div>
       </OwlCarousel>
-      ;
     </>
   );
 }
