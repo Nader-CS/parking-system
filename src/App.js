@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import Home from "./screens/home/Home";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -8,10 +7,11 @@ import Plan from "./screens/plan/Plan";
 import AboutUs from "./screens/about-us/AboutUs";
 import Login from "./screens/login/Login";
 import SignUp from "./screens/signup/SignUp";
-
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./utilities/theme";
 function App() {
   return (
-    <Fragment>
+    <ThemeProvider theme={theme}>
       <Header />
       <Routes>
         <Route path="/" index element={<Home />}></Route>
@@ -21,7 +21,7 @@ function App() {
         <Route path="login" element={<Login />}></Route>
         <Route path="signup" element={<SignUp />}></Route>
       </Routes>
-    </Fragment>
+    </ThemeProvider>
   );
 }
 

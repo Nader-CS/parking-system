@@ -5,9 +5,9 @@ import "owl.carousel/dist/assets/owl.carousel.min.css";
 import "owl.carousel/dist/assets/owl.theme.default.min.css";
 import style from "./madeEasy.module.css";
 import WebFont from "webfontloader";
-import img1 from "../../assets/imgs/find.png";
-import img2 from "../../assets/imgs/park.png";
-import img3 from "../../assets/imgs/reserve.png";
+import img1 from "../../assets/images/Made-easy/find.png";
+import img2 from "../../assets/images/Made-easy/park.png";
+import img3 from "../../assets/images/Made-easy/reserve.png";
 const MadeEasy = () => {
   useEffect(() => {
     WebFont.load({

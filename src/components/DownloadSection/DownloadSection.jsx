@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import StoreButton from "./StoreButton";
-import AppImage from "../../assets/imgs/IPark-app.png";
+import AppImage from "../../assets/images/Download/IPark-app.png";
 
 export default function DownloadSection() {
   return (
