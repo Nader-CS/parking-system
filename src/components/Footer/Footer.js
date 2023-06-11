@@ -26,7 +26,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <hr class="hr" />
+        <hr className="hr" />
         <div className="row ps-md-3 pe-md-3 mb-2">
           <div className="col d-flex gap-2">
             <div className={classes.logoContainer}>
