@@ -9,6 +9,7 @@ import Login from "./screens/login/Login";
 import SignUp from "./screens/signup/SignUp";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utilities/theme";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -21,6 +22,7 @@ function App() {
         <Route path="login" element={<Login />}></Route>
         <Route path="signup" element={<SignUp />}></Route>
       </Routes>
+      <Footer />
     </ThemeProvider>
   );
 }
