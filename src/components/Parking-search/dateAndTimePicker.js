@@ -10,8 +10,6 @@ const StyledDateTimePicker = styled(DateTimePicker)`
     color: #851fbf;
     font-weight: bold;
     font-size: 18px;
-    background-color: white;
-    padding: 5px;
   }
 
   & + & {
@@ -27,8 +25,9 @@ export default function DateTimePickerValue() {
           label="PARKING FROM"
           sx={{
             backgroundColor: "white",
-            border: "1px solid #851fbf",
+            border: "2px solid #851fbf",
             borderRadius: "8px",
+            zIndex:'0'
           }}
         />
         <StyledDateTimePicker
@@ -37,6 +36,7 @@ export default function DateTimePickerValue() {
             backgroundColor: "white",
             border: "1px solid #851fbf",
             borderRadius: "8px",
+            zIndex:'0'
           }}
         />
       </DemoContainer>
