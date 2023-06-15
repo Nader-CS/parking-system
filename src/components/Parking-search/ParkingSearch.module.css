@@ -20,3 +20,13 @@
 .White {
   color: white;
 }
+
+.autocompleteContainer {
+ font-size: 18px;
+ color: #851fbf;
+}
+
+/* .autocompleteContainer .suggestion {
+  background-color: #851fbf;
+  font-size: 18px;
+} */
