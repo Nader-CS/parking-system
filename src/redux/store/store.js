@@ -1,5 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import dateGeocodeReducer from "../slices/geoCodeSlice";
 
-const store = configureStore({ reducer: {} });
+const rootReducer = combineReducers({
+  dateGeocode: dateGeocodeReducer,
+});
+
+const store = configureStore({ reducer: rootReducer });
 
 export default store;
