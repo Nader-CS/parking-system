@@ -8,6 +8,10 @@ import Plan from "./screens/plan/Plan";
 import AboutUs from "./screens/about-us/AboutUs";
 import Login from "./screens/login/Login";
 import SignUp from "./screens/signup/SignUp";
+import CarOwner from "./screens/signup/CarOwner/CarOwner";
+import GarageOwner from "./screens/signup/GarageOwner/GarageOwner";
+import GarageOwnerTwo from "./screens/signup/GarageOwner/GarageOwnerTwo";
+
 
 function App() {
   return (
@@ -19,9 +23,12 @@ function App() {
         <Route path="plan" element={<Plan />}></Route>
         <Route path="about-us" element={<AboutUs />}></Route>
         <Route path="login" element={<Login />}></Route>
-        <Route path="signup" element={<SignUp />}></Route>
+        <Route path="signup" element={<SignUp />} ></Route>
+        <Route path="signup/garageOwner" element={<GarageOwner />}></Route>
+        <Route path="signup/garageDetails" element={<GarageOwnerTwo />}></Route>
+        <Route path="signup/carOwner" element={<CarOwner />}></Route>
       </Routes>
-    </Fragment>
+    </Fragment >
   );
 }
 

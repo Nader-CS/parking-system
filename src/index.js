@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import store from "./redux/store/store";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";

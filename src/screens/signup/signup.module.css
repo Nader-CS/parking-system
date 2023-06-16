@@ -1,0 +1,17 @@
+.mainBg {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('../../assets/images/SignUp/mainBg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.crdIcon {
+    width: 4rem;
+    height: 4rem;
+}
+
+.crdI {
+    color: #aa23b6;
+}

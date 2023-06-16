@@ -106,7 +106,7 @@ function Header(props) {
                   sx={{
                     color:
                       item.toLowerCase() === "login" ||
-                      item.toLowerCase() === "signup"
+                        item.toLowerCase() === "signup"
                         ? "rgb(122, 38, 193)"
                         : "#999",
                     border:
