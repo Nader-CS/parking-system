@@ -66,6 +66,14 @@ export default function DateTimePickerValue() {
     };
   };
 
+  const disableDate = (date) => {
+    if (!parkingFrom) {
+      return false;
+    }
+    const selectedDate = dayjs(parkingFrom).startOf("day");
+    return date.isBefore(selectedDate, "day");
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DateTimePicker", "DateTimePicker"]}>
@@ -73,23 +81,15 @@ export default function DateTimePickerValue() {
           label="PARKING FROM"
           value={parkingFrom}
           onChange={handleParkingFromChange}
-          // sx={{
-          //   backgroundColor: "white",
-          //   border: "2px solid #851fbf",
-          //   borderRadius: "8px",
-          //   zIndex: "0",
-          // }}
+          disablePast
         />
         <StyledDateTimePicker
           label="PARKING UNTIL"
           value={parkingUntil}
           onChange={handleParkingUntilChange}
-          // sx={{
-          //   backgroundColor: "white",
-          //   border: "1px solid #851fbf",
-          //   borderRadius: "8px",
-          //   zIndex: "0",
-          // }}
+          disablePast
+          shouldDisableDate={disableDate}
+          minTime={dayjs(parkingFrom).add(1, 'hour')}
         />
       </DemoContainer>
     </LocalizationProvider>
