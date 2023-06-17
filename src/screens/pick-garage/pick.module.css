@@ -1,4 +1,8 @@
-.container {
-    width: 95% !important;
+.pick_container {
+    width: 98% !important;
     margin: auto;
+}
+.height {
+    height: 490px;
+    overflow-y: scroll;
 }

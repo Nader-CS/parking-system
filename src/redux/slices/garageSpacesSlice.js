@@ -8,6 +8,7 @@ const garageSpacesSlice = createSlice({
     reducers:{
         getNearbyGarageSpaces: (state, {payload}) => {
             state.data = [...payload];
+            
         }
     }
 })

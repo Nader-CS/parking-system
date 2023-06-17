@@ -1,14 +1,50 @@
-import GarageCards from "../../components/Cards/cards"
-import style from './pick.module.css'
-const PickGarage = ()=> {
-    return <div className={`${style.container}`}>
-        <div className="row" style={{height: 100}}></div>
-        <div className="row">
-            <div className="col-5">
-                <GarageCards />
-            </div>
-            <div className="col-7"></div>
+import { TextField } from "@mui/material";
+import GarageCards from "../../components/Cards/cards";
+import style from "./pick.module.css";
+import "./pick.css";
+import { RemoveScrollBar } from "react-remove-scroll-bar";
+import { useEffect } from "react";
+const PickGarage = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+  return (
+    <div className={`${style.pick_container}`}>
+      <div className="row shadow-sm p-3" style={{ height: 70 }}>
+        <div className="col-8">
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Parking at"
+            variant="outlined"
+          />
         </div>
+        <div className="col-2">
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Parking from"
+            variant="outlined"
+          />
+        </div>
+        <div className="col-2">
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Parking until"
+            variant="outlined"
+          />
+        </div>
+      </div>
+
+      <div className="row">
+        <div className={`${style.height} col-4 p-0`}>
+          <GarageCards />
+        </div>
+        <div className="col-8"></div>
+      </div>
+      <RemoveScrollBar></RemoveScrollBar>
     </div>
-}
+  );
+};
 export default PickGarage;

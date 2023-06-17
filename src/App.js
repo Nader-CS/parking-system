@@ -24,6 +24,7 @@ function App() {
         <Route path="login" element={<Login />}></Route>
         <Route path="signup" element={<SignUp />}></Route>
         <Route path="search" element={<PickGarage />}></Route>
+        {/* <Route path="checkout" element={<Checkout />}></Route> */}
       </Routes>
       <Footer />
     </ThemeProvider>

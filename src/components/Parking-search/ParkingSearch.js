@@ -10,13 +10,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import closestGarage from "../../utilities/closestGarage";
 import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
+import { Link } from "react-router-dom";
 
 const ParkingSearch = () => {
   const dispatch = useDispatch();
   const [locationInfo, setLocationInfo] = useState("");
   const [showModal, setShowModal] = useState(false); // State variable for modal
   const autocompleteRef = useRef(null);
-  const {data} = useSelector(state => state.garageSpaces)
   const handlePlaceSelect = (place) => {
     if (place && place.geometry) {
       const { geometry } = place;
@@ -72,12 +72,6 @@ const ParkingSearch = () => {
   };
 
   
-  
-  const handleGetParkingSpaces = async()=>{
-     await closestGarage().then((res => {
-     dispatch(getNearbyGarageSpaces(res))
-    }));
-  }
   library.add(faLocationCrosshairs);
 
   return (
@@ -135,16 +129,16 @@ const ParkingSearch = () => {
             <div className="row my-3">
               <DateTimePickerValue />
             </div>
-
+            <Link to="search">
             <button
               className="btn mt-2"
               style={{ backgroundColor: "#851fbf", color: "white" }}
-              onClick={handleGetParkingSpaces}
             >
               Show parking spaces
             </button>
+            </Link>
           </div>
-
+                  
           {/* Modal */}
           <div
             className={`modal fade bd-example-modal-lg ${
@@ -169,6 +163,7 @@ const ParkingSearch = () => {
                   >
                     Error!
                   </h5>
+                  
                   <button
                     type="button"
                     className="close"
@@ -179,6 +174,8 @@ const ParkingSearch = () => {
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>
+                
+                  
                 </div>
                 <div
                   className="modal-body"

@@ -1,15 +1,10 @@
-* {
+/* * {
     box-sizing: border-box !important;
-}
+} */
 .stars_size {
     font-size: 15px !important;
 }
-.sheet {
-    /* display: flex;
-    align-items:flex-start !important;
-    justify-content:flex-start !important; */
-   
-}
+
 .card {
     margin-bottom: 15px;
 }
