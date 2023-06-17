@@ -2,18 +2,20 @@ import React, { useRef, useState } from "react";
 import DateTimePickerValue from "./dateAndTimePicker";
 import classes from "./ParkingSearch.module.css";
 import AutoComplete from "react-google-autocomplete";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setGeocode } from "../../redux/slices/geoCodeSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import closestGarage from "../../utilities/closestGarage";
+import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 
 const ParkingSearch = () => {
   const dispatch = useDispatch();
   const [locationInfo, setLocationInfo] = useState("");
   const autocompleteRef = useRef(null);
-
+  const {data} = useSelector(state => state.garageSpaces)
   const handlePlaceSelect = (place) => {
     const { geometry } = place;
     const { lat, lng } = geometry.location;
@@ -63,7 +65,12 @@ const ParkingSearch = () => {
   };  
 
   library.add(faMapMarkerAlt);
-
+  
+  const handleGetParkingSpaces = async()=>{
+     await closestGarage().then((res => {
+     dispatch(getNearbyGarageSpaces(res))
+    }));
+  }
   return (
     <div className={`d-flex align-items-center ${classes["image-holder"]}`}>
       <div className="container">
@@ -119,6 +126,7 @@ const ParkingSearch = () => {
             <button
               className="btn mt-2"
               style={{ backgroundColor: "#851fbf", color: "white" }}
+              onClick={handleGetParkingSpaces}
             >
               Show parking spaces
             </button>

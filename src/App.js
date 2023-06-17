@@ -10,6 +10,7 @@ import SignUp from "./screens/signup/SignUp";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utilities/theme";
 import Footer from "./components/Footer/Footer";
+import PickGarage from "./screens/pick-garage/pickGarage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="about-us" element={<AboutUs />}></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="signup" element={<SignUp />}></Route>
+        <Route path="search" element={<PickGarage />}></Route>
       </Routes>
       <Footer />
     </ThemeProvider>

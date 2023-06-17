@@ -1,0 +1,19 @@
+
+.css-hz1bth-MuiDialog-container {
+    width: 105% !important;
+    position: absolute;
+    top:15% !important;
+    left: 7% !important;
+    align-items:flex-start !important;
+    justify-content:flex-start !important;
+}
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    margin-left: 10px !important;
+    margin-top: 10px !important;
+    margin-right: 0 !important;
+    width: 100%;
+    box-shadow: 0px 0px 15px -7px rgba(0,0,0,0.2), 0px 0px 5px 3px rgba(0,0,0,0.14), 0px 5px 7px 0px rgba(0,0,0,0.12) !important;
+}
+.css-heg063-MuiTabs-flexContainer { 
+    justify-content: space-around;
+}
