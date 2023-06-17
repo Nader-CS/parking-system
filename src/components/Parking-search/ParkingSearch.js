@@ -71,6 +71,13 @@ const ParkingSearch = () => {
     });
   };
 
+  
+  
+  const handleGetParkingSpaces = async()=>{
+     await closestGarage().then((res => {
+     dispatch(getNearbyGarageSpaces(res))
+    }));
+  }
   library.add(faLocationCrosshairs);
 
   return (
