@@ -51,12 +51,8 @@ const GarageCards = () => {
     setOpen(false);
   };
 
-  const handleClick = (e) => {
-    e.stopPropagation();
-    dispatch(getSelectedGarage());
-  };
+ 
   React.useEffect(() => {
-    console.log(duration);
     closestGarage().then((res) => {
       dispatch(getNearbyGarageSpaces(res));
     });
