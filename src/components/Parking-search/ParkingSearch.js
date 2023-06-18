@@ -9,9 +9,9 @@ import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import dayjs from "dayjs";
-import closestGarage from "../../utilities/closestGarage";
-import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
-import { Link } from "react-router-dom";
+// import closestGarage from "../../utilities/closestGarage";
+// import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
+import { useNavigate } from "react-router-dom";
 
 const ParkingSearch = () => {
   const dispatch = useDispatch();
@@ -28,14 +28,14 @@ const ParkingSearch = () => {
       const { geometry } = place;
       const { location } = geometry;
       const { lat, lng } = location;
-  
+
       const geocode = {
         lat: lat(),
         lng: lng(),
       };
-  
+
       dispatch(setGeocode(geocode));
-  
+
       // Set the locationInfo to the formatted address
       // setLocationInfo(place.formatted_address);
       setLocationChosen(true);
@@ -44,14 +44,13 @@ const ParkingSearch = () => {
       setShowModal(true);
       setLocationChosen(false);
     }
-  };    
+  };
 
   const handleLocationClick = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
       setLocationChosen(true);
-    } 
-    else {
+    } else {
       // setLocationInfo("Geolocation is not supported by this browser.");
       setLocationChosen(false);
     }
@@ -77,13 +76,11 @@ const ParkingSearch = () => {
           };
           dispatch(setGeocode(geocode));
           setLocationChosen(true);
-        } 
-        else {
+        } else {
           // setLocationInfo("No address found");
           setLocationChosen(false);
         }
-      } 
-      else {
+      } else {
         // setLocationInfo("Geocoder failed due to: " + status);
         setLocationChosen(false);
       }
@@ -93,26 +90,34 @@ const ParkingSearch = () => {
   useEffect(() => {
     const getMinimumTime = () => {
       if (dayjs(parkingFrom).isSame(dayjs(parkingUntil), "day")) {
-        return dayjs(parkingFrom).add(1, 'hour');
+        return dayjs(parkingFrom).add(1, "hour");
       }
       return parkingFrom;
     };
-    
+
     const currentDateBeforeParkingFrom = dayjs().isBefore(dayjs(parkingFrom));
-    const ParkingUntilBeforeParkingFrom = dayjs(parkingUntil).isBefore(getMinimumTime());
+    const ParkingUntilBeforeParkingFrom = dayjs(parkingUntil).isBefore(
+      getMinimumTime()
+    );
     const isParkingFromNotChosen = !parkingFrom;
     const isParkingUntilNotChosen = !parkingUntil;
     const isLocationNotChosen = !locationChosen;
-    const isFieldsValid = !isParkingFromNotChosen && !isParkingUntilNotChosen && !isLocationNotChosen;
-  
+    const isFieldsValid =
+      !isParkingFromNotChosen &&
+      !isParkingUntilNotChosen &&
+      !isLocationNotChosen;
+
     // console.log("currentDateBeforeParkingFrom: "+currentDateBeforeParkingFrom)
     // console.log("ParkingUntilBeforeParkingFrom: "+ParkingUntilBeforeParkingFrom)
     // console.log("isParkingFromNotChosen: "+isParkingFromNotChosen)
     // console.log("isParkingUntilNotChosen: "+isParkingUntilNotChosen)
-    console.log("isLocationNotChosen: "+isLocationNotChosen)
+    console.log("isLocationNotChosen: " + isLocationNotChosen);
     // console.log("isFieldsValid: "+isFieldsValid)
 
-    const isButtonDisabled = !isFieldsValid || !currentDateBeforeParkingFrom || ParkingUntilBeforeParkingFrom;
+    const isButtonDisabled =
+      !isFieldsValid ||
+      !currentDateBeforeParkingFrom ||
+      ParkingUntilBeforeParkingFrom;
     setIsDisabled(isButtonDisabled);
   }, [parkingFrom, parkingUntil, locationChosen, isDisabled]);
 
@@ -121,9 +126,10 @@ const ParkingSearch = () => {
     const isValidPlace = place && place.place_id && place.geometry;
     console.log("isValidPlace: " + isValidPlace);
     setLocationChosen(isValidPlace);
-  };  
-  
+  };
+
   library.add(faLocationCrosshairs);
+  const navigate = useNavigate();
 
   return (
     <div className={`d-flex align-items-center ${classes["image-holder"]}`}>
@@ -166,7 +172,8 @@ const ParkingSearch = () => {
                 onClick={handleLocationClick}
                 style={{ position: "relative" }}
               >
-                <FontAwesomeIcon icon={faLocationCrosshairs}
+                <FontAwesomeIcon
+                  icon={faLocationCrosshairs}
                   style={{
                     position: "absolute",
                     top: "-23px",
@@ -181,17 +188,23 @@ const ParkingSearch = () => {
             <div className="row my-3">
               <DateTimePickerValue />
             </div>
-            <Link to="search">
+            {/* <Link to="search"> */}
             <button
               className="btn mt-2"
               disabled={isDisabled}
+              onClick={() => {
+                console.log(isDisabled);
+                if (!isDisabled) {
+                  navigate("/search");
+                }
+              }}
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >
               Show parking spaces
             </button>
-            </Link>
+            {/* </Link> */}
           </div>
-                  
+
           {/* Modal */}
           <div
             className={`modal fade bd-example-modal-lg ${
@@ -204,7 +217,7 @@ const ParkingSearch = () => {
             style={{
               display: showModal ? "flex" : "none",
               alignItems: "center",
-              backgroundColor: 'rgba(0, 0, 0, 0.7)'
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
             }}
           >
             <div className="modal-dialog modal-lg" style={{ width: "80%" }}>
@@ -217,7 +230,7 @@ const ParkingSearch = () => {
                   >
                     Error!
                   </h5>
-                  
+
                   <button
                     type="button"
                     className="close"
@@ -228,8 +241,6 @@ const ParkingSearch = () => {
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>
-                
-                  
                 </div>
                 <div
                   className="modal-body"

@@ -21,11 +21,13 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import classes from "./Header.module.css";
 import { Link } from "react-router-dom";
+import { isNotSigned } from "../../utilities/Constants";
+import LanguageDropdown from "../Languages/LanguagesDropdown";
+import { useTranslation } from "react-i18next";
 
 const drawerWidth = 240;
 //should write all navItems in lowercase
-const navItems = ["Home", "How it works", "Plan", "AboutUs", "Login", "Signup"];
-const pages = ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"];
+
 const icons = [
   HouseIcon,
   LightbulbOutlinedIcon,
@@ -36,6 +38,13 @@ const icons = [
 ];
 
 function Header(props) {
+  const { t } = useTranslation();
+  const navItems = isNotSigned
+    ? [t("home"), "How it works", "Plan", "AboutUs", "Login", "Signup"]
+    : [t("home"), "How it works", "Plan", "AboutUs", "Profile"];
+  const pages = isNotSigned
+    ? ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"]
+    : ["/", "/how-it-works", "/plan", "/about-us", "/"];
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -99,6 +108,7 @@ function Header(props) {
               </Link>
             </div>
           </IconButton>
+
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item, index) => (
               <Link to={pages[index]} key={item}>
@@ -106,7 +116,7 @@ function Header(props) {
                   sx={{
                     color:
                       item.toLowerCase() === "login" ||
-                        item.toLowerCase() === "signup"
+                      item.toLowerCase() === "signup"
                         ? "rgb(122, 38, 193)"
                         : "#999",
                     border:
