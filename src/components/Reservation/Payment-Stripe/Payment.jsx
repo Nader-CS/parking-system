@@ -4,13 +4,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { Box, Stack, Typography } from "@mui/material";
 import CardBox from "../CardBox";
-import Visa from "../../../assets/icons/visa-10.svg";
-import MasterCard from "../../../assets/icons/mastercard.svg";
+import Visa from "../../../assets/icons/visa.svg";
+import MasterCard from "../../../assets/icons/master-card.svg";
 import { Lock } from "@mui/icons-material";
 const stripePromise = loadStripe(
   "pk_test_51KXpcGEcv5DBpHLpgsfICVjB9HnKnXFnzLI8QF3uYbiubSMnycqHe2regSgbh037URqiRyH8uKzN7uuaAfBLpfhJ00SBKPhAR7"
 );
-function Payment({ isDisabled }) {
+function Payment({ isDisabled, amount }) {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function Payment({ isDisabled }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        amount: 5999,
+        amount: 5000,
         currency: "EGP",
       }),
     }).then(async (response) => {
