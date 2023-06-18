@@ -79,7 +79,7 @@ export default function GarageOwnerTwo() {
                 initialValues={{...garageDetails, ownerId: ownerId}}
                 onSubmit={(values) => { submitForm(values) }}
             >
-                {({ errors, touched }) => (
+                {({ errors, touched, setFieldValue}) => (
                     <Form className={`w-50 mx-auto`}>
                         <div className={`container`}>
                             <div className={`row`}>
@@ -110,10 +110,10 @@ export default function GarageOwnerTwo() {
 
                                 <div className="col-md-12 py-3 px-0 mx-auto">
                                     <label className={`mt-4 d-block`} htmlFor='image'>Garage Images: </label>
-                                    <Field type='file' id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name="images[0]" />
-                                    <Field type='file' id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name="images[1]" />
-                                    <Field type='file' id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name="images[2]" />
-                                    <Field type='file' id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name="images[3]" />
+                                    <Field type='file' value={undefined} onChange={(event)=>{setFieldValue('images[0]', event.target.files[0])}} id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name='images[0]'/>
+                                    <Field type='file' value={undefined} onChange={(event)=>{setFieldValue('images[1]', event.target.files[0])}} id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name='images[1]'/>
+                                    <Field type='file' value={undefined} onChange={(event)=>{setFieldValue('images[2]', event.target.files[0])}} id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name='images[2]'/>
+                                    <Field type='file' value={undefined} onChange={(event)=>{setFieldValue('images[3]', event.target.files[0])}} id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name='images[3]'/>
                                     {errors.images && touched.images ? <div className={`my-1 alert w-100 alert-danger me-auto rounded-0 py-2`}>{errors.images ? '4 Images Required' : ''}</div> : ''}
                                 </div>
 

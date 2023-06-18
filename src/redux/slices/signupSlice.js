@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../services/firebase/firebase-config'
+import { auth, storage } from '../../services/firebase/firebase-config'
+import { ref, uploadBytes } from "firebase/storage";
 import axios from "axios";
 
 const _baseURL = `https://parking-system-eaece-default-rtdb.firebaseio.com/`;
@@ -12,16 +13,16 @@ export const signUpUser = createAsyncThunk('user/signup', async (uMainData) => {
     }
 })
 
-
 export const createUserCollection = createAsyncThunk('user/collection', async (uMainData) => {
     const response = await axios.post(`${_baseURL}user-collection.json`, uMainData)
-    console.log(response);
 })
-
 
 export const createGarageCollection = createAsyncThunk('garage/collection', async (gMainData) => {
     const response = await axios.post(`${_baseURL}garage-collection.json`, gMainData)
-    console.log(response);
+    gMainData.images.map((image) => {
+        const imageRef = ref(storage, `${response.data.name}/${image.name}`)
+        uploadBytes(imageRef, image)
+    })
 })
 
 const signUpData = createSlice({
@@ -62,11 +63,11 @@ const signUpData = createSlice({
         [createUserCollection.fulfilled]: (state, action) => {
             state.uCollection = true;
         },
-        
-        [createGarageCollection.fulfilled]: (state, action)=>{
+
+        [createGarageCollection.fulfilled]: (state, action) => {
             state.gCollection = true
         },
-        
+
     }
 })
 

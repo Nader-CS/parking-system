@@ -8,8 +8,6 @@ body {
   border: 01px solid #aa23b6;
 }
 
-
-
 .MuiDayCalendar-weekContainer .Mui-selected,
 .MuiList-root .Mui-selected {
   background-color: #aa23b6 !important;
