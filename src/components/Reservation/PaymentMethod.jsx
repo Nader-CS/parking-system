@@ -6,15 +6,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import CardBox from "./CardBox";
 
-export default function PaymentMethod({ isNotSigned }) {
-  const [selectedOption, setSelectedOption] = useState("cash");
-
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+export default function PaymentMethod({
+  isNotSigned,
+  selectedOption,
+  handleOptionChange,
+}) {
   return (
     <CardBox backgroundColor={isNotSigned ? "#e3e3e3" : "white"}>
       <Typography fontSize={22} marginBottom={3} fontWeight="bold">
@@ -41,8 +40,12 @@ export default function PaymentMethod({ isNotSigned }) {
         />
         <FormControlLabel
           value="card"
-          disabled={true}
-          control={<Radio />}
+          // disabled={true}
+          control={
+            <Radio
+              sx={{ color: "black", "&.Mui-checked": { color: "#AA23B6" } }}
+            />
+          }
           label={
             <Stack direction="row" alignItems="center">
               <CreditCard />
