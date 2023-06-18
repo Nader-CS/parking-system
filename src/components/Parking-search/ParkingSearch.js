@@ -9,6 +9,9 @@ import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import dayjs from "dayjs";
+import closestGarage from "../../utilities/closestGarage";
+import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
+import { Link } from "react-router-dom";
 
 const ParkingSearch = () => {
   const dispatch = useDispatch();
@@ -178,6 +181,7 @@ const ParkingSearch = () => {
             <div className="row my-3">
               <DateTimePickerValue />
             </div>
+            <Link to="search">
             <button
               className="btn mt-2"
               disabled={isDisabled}
@@ -185,8 +189,9 @@ const ParkingSearch = () => {
             >
               Show parking spaces
             </button>
+            </Link>
           </div>
-
+                  
           {/* Modal */}
           <div
             className={`modal fade bd-example-modal-lg ${
@@ -212,6 +217,7 @@ const ParkingSearch = () => {
                   >
                     Error!
                   </h5>
+                  
                   <button
                     type="button"
                     className="close"
@@ -222,6 +228,8 @@ const ParkingSearch = () => {
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>
+                
+                  
                 </div>
                 <div
                   className="modal-body"
