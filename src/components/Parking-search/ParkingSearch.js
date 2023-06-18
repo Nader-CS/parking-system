@@ -1,43 +1,56 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DateTimePickerValue from "./dateAndTimePicker";
 import classes from "./ParkingSearch.module.css";
 import AutoComplete from "react-google-autocomplete";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setGeocode } from "../../redux/slices/geoCodeSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import dayjs from "dayjs";
 
 const ParkingSearch = () => {
   const dispatch = useDispatch();
-  const [locationInfo, setLocationInfo] = useState("");
+  // const [locationInfo, setLocationInfo] = useState("");
+  const [locationChosen, setLocationChosen] = useState(false);
   const [showModal, setShowModal] = useState(false); // State variable for modal
   const autocompleteRef = useRef(null);
+  const [isDisabled, setIsDisabled] = useState(true); //state variable for button
+  const parkingFrom = useSelector((state) => state.dateGeocode.parkingFrom);
+  const parkingUntil = useSelector((state) => state.dateGeocode.parkingUntil);
 
   const handlePlaceSelect = (place) => {
     if (place && place.geometry) {
       const { geometry } = place;
       const { location } = geometry;
       const { lat, lng } = location;
-
+  
       const geocode = {
         lat: lat(),
         lng: lng(),
       };
-
+  
       dispatch(setGeocode(geocode));
+  
+      // Set the locationInfo to the formatted address
+      // setLocationInfo(place.formatted_address);
+      setLocationChosen(true);
       setShowModal(false);
     } else {
       setShowModal(true);
+      setLocationChosen(false);
     }
-  };
+  };    
 
   const handleLocationClick = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      setLocationInfo("Geolocation is not supported by this browser.");
+      setLocationChosen(true);
+    } 
+    else {
+      // setLocationInfo("Geolocation is not supported by this browser.");
+      setLocationChosen(false);
     }
   };
 
@@ -52,7 +65,7 @@ const ParkingSearch = () => {
       if (status === "OK") {
         if (results[0]) {
           const address = results[0].formatted_address;
-          setLocationInfo(address); // Update the location with the address
+          // setLocationInfo(address); // Update the location with the address
           autocompleteRef.current.value = address; // Update the autocomplete field value
 
           const geocode = {
@@ -60,15 +73,53 @@ const ParkingSearch = () => {
             lng: longitude,
           };
           dispatch(setGeocode(geocode));
-        } else {
-          setLocationInfo("No address found");
+          setLocationChosen(true);
+        } 
+        else {
+          // setLocationInfo("No address found");
+          setLocationChosen(false);
         }
-      } else {
-        setLocationInfo("Geocoder failed due to: " + status);
+      } 
+      else {
+        // setLocationInfo("Geocoder failed due to: " + status);
+        setLocationChosen(false);
       }
     });
   };
 
+  useEffect(() => {
+    const getMinimumTime = () => {
+      if (dayjs(parkingFrom).isSame(dayjs(parkingUntil), "day")) {
+        return dayjs(parkingFrom).add(1, 'hour');
+      }
+      return parkingFrom;
+    };
+    
+    const currentDateBeforeParkingFrom = dayjs().isBefore(dayjs(parkingFrom));
+    const ParkingUntilBeforeParkingFrom = dayjs(parkingUntil).isBefore(getMinimumTime());
+    const isParkingFromNotChosen = !parkingFrom;
+    const isParkingUntilNotChosen = !parkingUntil;
+    const isLocationNotChosen = !locationChosen;
+    const isFieldsValid = !isParkingFromNotChosen && !isParkingUntilNotChosen && !isLocationNotChosen;
+  
+    // console.log("currentDateBeforeParkingFrom: "+currentDateBeforeParkingFrom)
+    // console.log("ParkingUntilBeforeParkingFrom: "+ParkingUntilBeforeParkingFrom)
+    // console.log("isParkingFromNotChosen: "+isParkingFromNotChosen)
+    // console.log("isParkingUntilNotChosen: "+isParkingUntilNotChosen)
+    console.log("isLocationNotChosen: "+isLocationNotChosen)
+    // console.log("isFieldsValid: "+isFieldsValid)
+
+    const isButtonDisabled = !isFieldsValid || !currentDateBeforeParkingFrom || ParkingUntilBeforeParkingFrom;
+    setIsDisabled(isButtonDisabled);
+  }, [parkingFrom, parkingUntil, locationChosen, isDisabled]);
+
+  const handleAutocompleteChange = () => {
+    const place = autocompleteRef.current.value;
+    const isValidPlace = place && place.place_id && place.geometry;
+    console.log("isValidPlace: " + isValidPlace);
+    setLocationChosen(isValidPlace);
+  };  
+  
   library.add(faLocationCrosshairs);
 
   return (
@@ -92,6 +143,7 @@ const ParkingSearch = () => {
                 apiKey="AIzaSyDxE47Kh4gnM9Sh-Nj6vTjFzful_q7lZdY"
                 className={classes.autocompleteField}
                 ref={autocompleteRef}
+                onChange={handleAutocompleteChange}
                 style={{
                   width: "100%",
                   height: "60px",
@@ -126,9 +178,9 @@ const ParkingSearch = () => {
             <div className="row my-3">
               <DateTimePickerValue />
             </div>
-
             <button
               className="btn mt-2"
+              disabled={isDisabled}
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >
               Show parking spaces
@@ -147,6 +199,7 @@ const ParkingSearch = () => {
             style={{
               display: showModal ? "flex" : "none",
               alignItems: "center",
+              backgroundColor: 'rgba(0, 0, 0, 0.7)'
             }}
           >
             <div className="modal-dialog modal-lg" style={{ width: "80%" }}>

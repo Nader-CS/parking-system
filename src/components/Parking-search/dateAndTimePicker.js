@@ -71,7 +71,15 @@ export default function DateTimePickerValue() {
       return false;
     }
     const selectedDate = dayjs(parkingFrom).startOf("day");
+    console.log(date.isBefore(selectedDate, "day"));
     return date.isBefore(selectedDate, "day");
+  };
+
+  const getMinimumTime = () => {
+    if (dayjs(parkingFrom).isSame(dayjs(parkingUntil), "day")) {
+      return dayjs(parkingFrom).add(1, 'hour');
+    }
+    return null;
   };
 
   return (
@@ -89,7 +97,7 @@ export default function DateTimePickerValue() {
           onChange={handleParkingUntilChange}
           disablePast
           shouldDisableDate={disableDate}
-          minTime={dayjs(parkingFrom).add(1, 'hour')}
+          minTime={getMinimumTime()}
         />
       </DemoContainer>
     </LocalizationProvider>
