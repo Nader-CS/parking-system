@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import Home from "./screens/home/Home";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -8,6 +7,10 @@ import Plan from "./screens/plan/Plan";
 import AboutUs from "./screens/about-us/AboutUs";
 import Login from "./screens/login/Login";
 import SignUp from "./screens/signup/SignUp";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./utilities/theme";
+import Footer from "./components/Footer/Footer";
+import PickGarage from "./screens/pick-garage/pickGarage";
 import CarOwner from "./screens/signup/CarOwner/CarOwner";
 import GarageOwner from "./screens/signup/GarageOwner/GarageOwner";
 import GarageOwnerTwo from "./screens/signup/GarageOwner/GarageOwnerTwo";
@@ -15,7 +18,7 @@ import GarageOwnerTwo from "./screens/signup/GarageOwner/GarageOwnerTwo";
 
 function App() {
   return (
-    <Fragment>
+    <ThemeProvider theme={theme}>
       <Header />
       <Routes>
         <Route path="/" index element={<Home />}></Route>
@@ -27,8 +30,11 @@ function App() {
         <Route path="signup/garageOwner" element={<GarageOwner />}></Route>
         <Route path="signup/garageDetails" element={<GarageOwnerTwo />}></Route>
         <Route path="signup/carOwner" element={<CarOwner />}></Route>
+        <Route path="search" element={<PickGarage />}></Route>
+        {/* <Route path="checkout" element={<Checkout />}></Route> */}
       </Routes>
-    </Fragment >
+      <Footer />
+    </ThemeProvider>
   );
 }
 

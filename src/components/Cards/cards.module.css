@@ -1,0 +1,10 @@
+/* * {
+    box-sizing: border-box !important;
+} */
+.stars_size {
+    font-size: 15px !important;
+}
+
+.card {
+    margin-bottom: 15px;
+}

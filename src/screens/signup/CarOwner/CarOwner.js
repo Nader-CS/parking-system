@@ -108,11 +108,11 @@ export default function CarOwner() {
                                     {errors.ownerPhone && touched.ownerPhone ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.ownerPhone}</div> : ''}
                                 </div>
                                 <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
-                                    <Field id='password' validate={validatePassword} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Password' name="password" />
+                                    <Field type="password" id='password' validate={validatePassword} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Password' name="password" />
                                     {errors.password && touched.password ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.password}</div> : ''}
                                 </div>
                                 <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
-                                    <Field id='rePassword' validate={validateRePassword} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Confirm Password' name="rePassword" />
+                                    <Field type="password" id='rePassword' validate={validateRePassword} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Confirm Password' name="rePassword" />
                                     {errors.rePassword && touched.rePassword ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.rePassword}</div> : ''}
                                 </div>
                                 <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">

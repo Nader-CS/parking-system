@@ -1,9 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
-
-body {
-  font-family: 'Encode Sans Expanded', sans-serif !important;
-}
-
 .owl-theme button.active {
   border: 01px solid #aa23b6;
 }

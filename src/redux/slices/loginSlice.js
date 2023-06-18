@@ -34,7 +34,7 @@ const loginData = createSlice({
         }
     }
 })
-export default loginData;
+export default loginData.reducer;
 
 
 

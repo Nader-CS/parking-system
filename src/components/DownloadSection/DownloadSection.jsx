@@ -1,17 +1,21 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import StoreButton from "./StoreButton";
-import AppImage from "../../assets/imgs/IPark-app.png";
+import AppImage from "../../assets/images/Download/IPark-app.png";
 
 export default function DownloadSection() {
   return (
     <Box style={{ marginTop: "7rem" }}>
-      <Stack direction={{ xs: "column", md: "row" }} alignItems="center">
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Box
-          flex={1}
+          flex={{ md: 2, lg: 1 }}
           order={{ xs: 2, md: 1 }}
           marginTop={{ xs: 1, md: 5 }}
-          marginLeft={{ xs: 1, md: 5 }}
+          marginLeft={{ xs: 1, md: 4.5 }}
         >
           <Typography component="span" fontSize={32}>
             Download
@@ -46,8 +50,19 @@ export default function DownloadSection() {
         <Box flex={1} order={{ xs: 1, md: 2 }} marginLeft={{ md: 2 }}>
           <Box
             component="img"
-            height={{ xs: 350, md: 440, lg: 500 }}
-            width={{ xs: 500, md: 580, lg: 650 }}
+            sx={{
+              height: {
+                xs: "100%",
+                md: "auto",
+                lg: "auto",
+              },
+              width: {
+                xs: "100%",
+                sm: "28rem",
+                md: "35rem",
+                lg: "40rem",
+              },
+            }}
             src={AppImage}
             alt="App Image"
           ></Box>

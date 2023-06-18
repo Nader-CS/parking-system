@@ -67,7 +67,7 @@ const Login = () => {
                   {errors.userEmail && touched.userEmail ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.userEmail}</div> : ''}
                 </div>
                 <div className="col-md-12 py-4 px-0 mx-auto">
-                  <Field id='userPassword' validate={validatePassword} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Password' name="userPassword" />
+                  <Field type="password" id='userPassword' validate={validatePassword} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Password' name="userPassword" />
                   {errors.userPassword && touched.userPassword ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.userPassword}</div> : ''}
                 </div>
               </div>

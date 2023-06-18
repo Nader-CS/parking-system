@@ -2,38 +2,3 @@
 body {
   font-family: "Nunito", sans-serif;
 }
-#image-holder {
-  position: relative;
-  background-image: url("../public/images/landing.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
-
-#image-holder::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 0;
-}
-
-.White {
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

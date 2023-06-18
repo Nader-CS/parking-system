@@ -5,9 +5,9 @@ import "owl.carousel/dist/assets/owl.carousel.min.css";
 import "owl.carousel/dist/assets/owl.theme.default.min.css";
 import style from "./madeEasy.module.css";
 import WebFont from "webfontloader";
-import img1 from "../../assets/imgs/find.png";
-import img2 from "../../assets/imgs/park.png";
-import img3 from "../../assets/imgs/reserve.png";
+import img1 from "../../assets/images/Made-easy/find.png";
+import img2 from "../../assets/images/Made-easy/park.png";
+import img3 from "../../assets/images/Made-easy/reserve.png";
 const MadeEasy = () => {
   useEffect(() => {
     WebFont.load({
@@ -34,7 +34,7 @@ const MadeEasy = () => {
       >
         <div className={`${style.carousel_item} ${style.line} item`}>
           <div className={style.pic}>
-            <img src={img1}></img>
+            <img src={img1} alt="img"></img>
           </div>
           <div>
             <h2 className={`${style.sub_head} mt-5`}>Wherever, whenever</h2>
@@ -48,7 +48,7 @@ const MadeEasy = () => {
         </div>
         <div className={`${style.carousel_item} item`}>
           <div className={style.pic}>
-            <img src={img2}></img>
+            <img src={img2} alt="img"></img>
           </div>
           <div>
             <h2 className={`${style.sub_head} mt-5`}>Peace of mind</h2>
@@ -62,7 +62,7 @@ const MadeEasy = () => {
         </div>
         <div className={`${style.carousel_item} item`}>
           <div className={style.pic}>
-            <img src={img3}></img>
+            <img src={img3} alt="img"></img>
           </div>
           <div>
             <h2 className={`${style.sub_head} mt-5`}>Seamless experience</h2>

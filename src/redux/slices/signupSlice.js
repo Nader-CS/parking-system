@@ -73,7 +73,7 @@ const signUpData = createSlice({
 
 
 export const { createNewGarage, createNewUser } = signUpData.actions;
-export default signUpData;
+export default signUpData.reducer;
 
 
 
