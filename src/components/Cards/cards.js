@@ -29,6 +29,7 @@ import closestGarage from "../../utilities/closestGarage";
 import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { Link } from "react-router-dom";
 import { getSelectedGarage } from "../../redux/slices/selectedGarage";
+import { kCalculatePrice, kFormatDuration } from "../../utilities/Constants";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -51,7 +52,6 @@ const GarageCards = () => {
     setOpen(false);
   };
 
- 
   React.useEffect(() => {
     closestGarage().then((res) => {
       dispatch(getNearbyGarageSpaces(res));
@@ -125,12 +125,15 @@ const GarageCards = () => {
                     {garage.duration.slice(0, 6)} to destination
                   </p>
                 </div>
-                <Link to={`/checkout}`}>
+                <Link to={`/reservation`}>
                   <Button
                     onClick={() => {
                       const garageObj = garage;
-                      const price =
-                        garage.garage["pricePerHour"] * duration["hours"];
+                      const price = kCalculatePrice(
+                        duration,
+                        garage.garage["pricePerHour"]
+                      );
+                      // garage.garage["pricePerHour"] * duration["hours"];
                       dispatch(getSelectedGarage({ garageObj, price }));
                     }}
                     style={{
@@ -142,7 +145,7 @@ const GarageCards = () => {
                     variant="contained"
                   >
                     Reserve for{" "}
-                    {garage.garage["pricePerHour"] * duration["hours"]} L.E
+                    {kCalculatePrice(duration, garage.garage.pricePerHour)} EGP
                   </Button>
                 </Link>
               </CardContent>
@@ -214,16 +217,17 @@ const GarageCards = () => {
                 >
                   <div className="col-4 text-center border-right border-secondary px-2">
                     <p className="m-0" style={{ fontWeight: 600 }}>
-                      {duration["minutes"]
+                      {kFormatDuration(duration)}
+                      {/* {duration["minutes"]
                         ? duration["hours"] + ":" + duration["minutes"]
-                        : duration["hours"]}
-                      h
+                        : duration["hours"]} */}
                     </p>
                     <p className="m-0">Total duration</p>
                   </div>
                   <div className="col-4 text-center border-right border-secondary px-2">
                     <p className="m-0" style={{ fontWeight: 600 }}>
-                      {garage.garage["pricePerHour"] * duration["hours"]} L.E
+                      {kCalculatePrice(duration, garage.garage.pricePerHour)}{" "}
+                      EGP
                     </p>
                     <p className="m-0">Parking fee</p>
                   </div>
@@ -299,7 +303,7 @@ const GarageCards = () => {
                   variant="contained"
                 >
                   Reserve for{" "}
-                  {garage.garage["pricePerHour"] * duration["hours"]} L.E
+                  {kCalculatePrice(duration, garage.garage.pricePerHour)} EGP
                 </Button>
               </Link>
               <DialogActions></DialogActions>

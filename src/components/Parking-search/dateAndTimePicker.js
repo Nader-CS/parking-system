@@ -1,5 +1,9 @@
 import * as React from "react";
-import { setParkingFrom, setParkingUntil, setDuration } from "../../redux/slices/geoCodeSlice";
+import {
+  setParkingFrom,
+  setParkingUntil,
+  setDuration,
+} from "../../redux/slices/geoCodeSlice";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -16,7 +20,7 @@ const StyledDateTimePicker = styled(DateTimePicker)`
     font-weight: bold;
     font-size: 18px;
   }
-  
+
   & + & {
     margin-top: 8px;
   }
@@ -48,7 +52,10 @@ export default function DateTimePickerValue() {
     if (parkingFrom && parkingUntil) {
       const parsedParkingFrom = dayjs(parkingFrom);
       const parsedParkingUntil = dayjs(parkingUntil);
-      const difference = calculateDuration(parsedParkingFrom, parsedParkingUntil);
+      const difference = calculateDuration(
+        parsedParkingFrom,
+        parsedParkingUntil
+      );
       dispatch(setDuration(difference));
     }
   }, [parkingFrom, parkingUntil]);
@@ -77,23 +84,25 @@ export default function DateTimePickerValue() {
 
   const getMinimumTime = () => {
     if (dayjs(parkingFrom).isSame(dayjs(parkingUntil), "day")) {
-      return dayjs(parkingFrom).add(1, 'hour');
+      return dayjs(parkingFrom).add(1, "hour");
     }
     return null;
   };
-
+  const parkingFromValue = dayjs(parkingFrom);
+  const parkingUntilValue = dayjs(parkingUntil);
+  console.log(parkingFromValue);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DateTimePicker", "DateTimePicker"]}>
         <StyledDateTimePicker
           label="PARKING FROM"
-          value={parkingFrom}
+          value={parkingFrom == null ? null : parkingFromValue}
           onChange={handleParkingFromChange}
           disablePast
         />
         <StyledDateTimePicker
           label="PARKING UNTIL"
-          value={parkingUntil}
+          value={parkingUntil == null ? null : parkingUntilValue}
           onChange={handleParkingUntilChange}
           disablePast
           shouldDisableDate={disableDate}
