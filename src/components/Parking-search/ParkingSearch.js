@@ -14,6 +14,7 @@ import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 
 const ParkingSearch = () => {
+  const { duration } = useSelector((state) => state.dateGeocode);
   const dispatch = useDispatch();
   // const [locationInfo, setLocationInfo] = useState("");
   const [locationChosen, setLocationChosen] = useState(false);
@@ -197,6 +198,7 @@ const ParkingSearch = () => {
                 if (!isDisabled) {
                   navigate("/search");
                 }
+                localStorage.setItem(`duration`, `${duration['hours']}`)
               }}
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >

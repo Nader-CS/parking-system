@@ -1,10 +1,10 @@
 import { CalendarMonth, TimerOutlined } from "@mui/icons-material";
 import { Box, Button, Stack, styled, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import AuthCard from "./AuthCard";
 import BookingTimer from "./BookingTimer";
 import CardBox from "./CardBox";
-// import Payment from "./Payment-Stripe/Payment";
+import Payment from "./Payment-Stripe/Payment";
 import {
   isNotSigned,
   // isNotSigned,
@@ -23,6 +23,11 @@ export default function BookingDetails() {
   const [termsOpen, setTermsOpen] = React.useState(false);
   const data = useSelector((state) => state.dateGeocode);
   const garageData = useSelector((state) => state.selectedGarage);
+  const [selectedOption, setSelectedOption] = useState("cash");
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -57,8 +62,20 @@ export default function BookingDetails() {
       </CardBox>
       {isNotSigned && <AuthCard />}
 
-      <PaymentMethod isNotSigned={isNotSigned} />
-      {/* <Payment isDisabled={isNotSigned} /> */}
+      <PaymentMethod
+        isNotSigned={isNotSigned}
+        selectedOption={selectedOption}
+        handleOptionChange={handleOptionChange}
+      />
+      {selectedOption !== "cash" && (
+        <Payment
+          isDisabled={false}
+          amount={kCalculatePrice(
+            data.duration,
+            garageData.garage.garage.pricePerHour
+          )}
+        />
+      )}
       <Stack direction="row" justifyContent="center">
         <Typography fontSize={14}>
           Clicking below indicates that you have read and accept the
@@ -83,11 +100,16 @@ export default function BookingDetails() {
           setTermsOpen(false);
         }}
       />
-      <PayButton onClick={handleClickOpen} disabled={isNotSigned}>
-        EGP{" "}
-        {kCalculatePrice(data.duration, garageData.garage.garage.pricePerHour)}{" "}
-        - Reserve
-      </PayButton>
+      {selectedOption === "cash" && (
+        <PayButton onClick={handleClickOpen} disabled={isNotSigned}>
+          EGP{" "}
+          {kCalculatePrice(
+            data.duration,
+            garageData.garage.garage.pricePerHour
+          )}{" "}
+          - Reserve
+        </PayButton>
+      )}
 
       <ReserveDialog
         garage={garageData.garage.garage}

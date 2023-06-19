@@ -1,4 +1,12 @@
-
+.css-1t4ypzp-MuiDialog-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 1000px !important;
+    bottom: 1000px !important;
+    background: none;
+    z-index: -1;
+}
 .css-hz1bth-MuiDialog-container {
     width: 95% !important;
     height: 550px !important;

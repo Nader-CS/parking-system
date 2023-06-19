@@ -4,6 +4,7 @@ import style from "./pick.module.css";
 import "./pick.css";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 import { useEffect } from "react";
+import Map from "../../components/Map/map";
 const PickGarage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -38,10 +39,12 @@ const PickGarage = () => {
       </div>
 
       <div className="row">
-        <div className={`${style.height} col-4 p-0`}>
+        <div className={`${style.height} col-12 col-md-4 p-0`}>
           <GarageCards />
         </div>
-        <div className="col-8"></div>
+        <div className="col-8">
+            <Map />
+        </div>
       </div>
       <RemoveScrollBar></RemoveScrollBar>
     </div>

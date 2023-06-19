@@ -59,7 +59,7 @@ export default function CheckoutForm() {
           },
         }}
       >
-        {isProcessing ? "Processing ... " : "Save and Continue"}
+        {isProcessing ? "Processing ... " : "Pay Now"}
       </Button>
       {message && <div id="payment-message">{message}</div>}
     </form>
