@@ -3,7 +3,7 @@ import style from './garageowner.module.css'
 import { Formik, Field, Form } from 'formik'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createNewUser, signUpUser, createUserCollection } from '../../../redux/slices/signupSlice';
+import { signUpUser, createUserCollection } from '../../../redux/slices/signupSlice';
 import $ from 'jquery';
 
 

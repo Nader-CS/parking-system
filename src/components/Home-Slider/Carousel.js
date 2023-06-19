@@ -30,7 +30,7 @@ export default function Carousel() {
 
   return (
     <>
-      <Container align="center" style={{ marginTop: "7rem" }}>
+      <Container align="center" style={{ marginTop: "2rem"}}>
         <Typography
           variant="h6"
           sx={{ mt: "1rem", pb: "1rem" }}
