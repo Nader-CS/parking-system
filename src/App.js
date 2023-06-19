@@ -11,8 +11,16 @@ import { ThemeProvider } from "@mui/material";
 import { theme } from "./utilities/theme";
 import Footer from "./components/Footer/Footer";
 import PickGarage from "./screens/pick-garage/pickGarage";
+import CarOwner from "./screens/signup/CarOwner/CarOwner";
+import GarageOwner from "./screens/signup/GarageOwner/GarageOwner";
+import GarageOwnerTwo from "./screens/signup/GarageOwner/GarageOwnerTwo";
+import { useTranslation } from "react-i18next";
+import Reservation from "./screens/reservation/Reservation";
+import Completion from "./components/Reservation/Payment-Stripe/Completion";
 
 function App() {
+  const { i18n } = useTranslation();
+  document.body.dir = i18n.dir();
   return (
     <ThemeProvider theme={theme}>
       <Header />
@@ -23,8 +31,12 @@ function App() {
         <Route path="about-us" element={<AboutUs />}></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="signup" element={<SignUp />}></Route>
+        <Route path="signup/garageOwner" element={<GarageOwner />}></Route>
+        <Route path="signup/garageDetails" element={<GarageOwnerTwo />}></Route>
+        <Route path="signup/carOwner" element={<CarOwner />}></Route>
         <Route path="search" element={<PickGarage />}></Route>
-        {/* <Route path="checkout" element={<Checkout />}></Route> */}
+        <Route path="reservation" element={<Reservation />}></Route>
+        <Route path="completion" element={<Completion />} />
       </Routes>
       <Footer />
     </ThemeProvider>

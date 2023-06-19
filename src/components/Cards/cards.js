@@ -16,6 +16,7 @@ import closestGarage from "../../utilities/closestGarage";
 import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { Link } from "react-router-dom";
 import { getSelectedGarage } from "../../redux/slices/selectedGarage";
+import { kCalculatePrice, kFormatDuration } from "../../utilities/Constants";
 import Sheet from "./sheet";
 
 const GarageCards = () => {
@@ -31,6 +32,8 @@ const GarageCards = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+
   React.useEffect(() => {
     closestGarage().then((res) => {
       dispatch(getNearbyGarageSpaces(res));
@@ -108,12 +111,15 @@ const GarageCards = () => {
                     {garage.duration.slice(0, 6)} to destination
                   </p>
                 </div>
-                <Link to={`/checkout}`}>
+                <Link to={`/reservation`}>
                   <Button
                     onClick={() => {
                       const garageObj = garage;
-                      const price = duration * garage.garage["pricePerHour"];
-                      // duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"];
+                      const price = kCalculatePrice(
+                        duration,
+                        garage.garage["pricePerHour"]
+                      );
+                      // garage.garage["pricePerHour"] * duration["hours"];
                       dispatch(getSelectedGarage({ garageObj, price }));
                     }}
                     style={{
@@ -124,8 +130,8 @@ const GarageCards = () => {
                     }}
                     variant="contained"
                   >
-                    Reserve for {duration * garage.garage["pricePerHour"]}
-                    {/* {duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]} L.E */}
+                    Reserve for{" "}
+                    {kCalculatePrice(duration, garage.garage.pricePerHour)} EGP
                   </Button>
                 </Link>
               </CardContent>

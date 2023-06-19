@@ -6,6 +6,7 @@ import { ReactComponent as Vodafone } from "../../assets/icons/Vodafone_Logo_201
 import { ReactComponent as Logo } from "../../assets/icons/favicon.svg";
 import { ReactComponent as Ipark } from "../../assets/icons/logo-no-background.svg";
 import { BsFacebook, BsTwitter, BsInstagram, BsGoogle } from "react-icons/bs";
+import LanguageDropdown from "../Languages/LanguagesDropdown";
 const Footer = () => {
   return (
     <footer className={classes.container}>
@@ -35,7 +36,9 @@ const Footer = () => {
             <div className={classes.logoContainer}>
               <Ipark className={classes["logo-text"]} />
             </div>
+            <LanguageDropdown />
           </div>
+
           <div
             className={`${classes.icons} col d-flex align-items-center justify-content-around`}
           >
