@@ -131,7 +131,7 @@ const GarageCards = () => {
                     variant="contained"
                   >
                     Reserve for{" "}
-                    {kCalculatePrice(duration, garage.garage.pricePerHour)} EGP
+                    {duration * garage.garage["pricePerHour"]} LE
                   </Button>
                 </Link>
               </CardContent>
