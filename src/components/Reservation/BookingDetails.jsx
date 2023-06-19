@@ -100,7 +100,7 @@ export default function BookingDetails() {
           setTermsOpen(false);
         }}
       />
-      {selectedOption === "cash" && (
+      {selectedOption === "cash" && !isNotSigned && (
         <PayButton onClick={handleClickOpen} disabled={isNotSigned}>
           EGP{" "}
           {kCalculatePrice(

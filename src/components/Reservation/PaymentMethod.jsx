@@ -40,7 +40,7 @@ export default function PaymentMethod({
         />
         <FormControlLabel
           value="card"
-          // disabled={true}
+          disabled={isNotSigned}
           control={
             <Radio
               sx={{ color: "black", "&.Mui-checked": { color: "#AA23B6" } }}
