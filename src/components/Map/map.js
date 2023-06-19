@@ -10,7 +10,6 @@ function Map() {
     const [position, setPos] = useState([{}]);
     const [isPositionSet, setIsPositionSet] = useState(false);
     const [open, setOpen] = React.useState(false);
-    const duration = localStorage.getItem('duration')
     const handleClose = () => {
         setOpen(false);
       };
@@ -32,7 +31,7 @@ function Map() {
   const handleOnLoad = async(map) => {
    
         const bounds = new window.google.maps.LatLngBounds();
-    position.forEach((garage) => bounds.extend({lat:+garage["lat"], lng:+garage["lng"] }));
+    position.forEach((garage) => bounds.extend({lat:+garage["lng"], lng:+garage["lat"] }));
     map.fitBounds(bounds);
       
     
@@ -45,8 +44,8 @@ function Map() {
   
   return (
     <GoogleMap
-        center={{lat:31.22181733648843, lng: 30.075039276195568}}
-        zoom={13}
+        center={{lat:30.075039276195568, lng: 31.22181733648843}}
+        zoom={17}
       onLoad={position.length>0?handleOnLoad:null}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: "100%", height: "100%" }}
@@ -55,7 +54,7 @@ function Map() {
         <Marker
           key={garage.garage["id"]}
           
-          position={{lat:+garage.garage["lat"], lng:+garage.garage["lon"] }}
+          position={{lat:+garage.garage["lon"], lng:+garage.garage["lat"] }}
           onClick={() => {handleActiveMarker(garage.garage["id"])
           setOpen(true);
         }
@@ -77,7 +76,7 @@ function Map() {
               <div>{garage.garage["name"]}</div>
             </InfoWindow>
           ) : null}
-          <Sheet duration={duration} garage={garage} open={open} close={handleClose}></Sheet>
+          <Sheet garage={garage} open={open} close={handleClose}></Sheet>
         </Marker>
         
       ))}

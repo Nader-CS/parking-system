@@ -151,7 +151,7 @@ export default function PickedGarageDetails() {
             sx={{ borderTopWidth: 1, borderTopColor: "black", marginY: 4.5 }}
           />
           <Stack direction="row" justifyContent="space-between">
-            <Typography>Parking fee</Typography>
+            <Typography>Price per hour</Typography>
             <Typography fontWeight="bold">EGP {garage.pricePerHour}</Typography>
           </Stack>
           <Stack marginY={2} direction="row" justifyContent="space-between">
