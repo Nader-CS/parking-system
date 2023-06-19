@@ -191,7 +191,6 @@ const ParkingSearch = () => {
             </div>
             {/* <Link to="search"> */}
             <button
-            onClick={localStorage.setItem(`duration`, `${duration['hours']}`)}
               className="btn mt-2"
               disabled={isDisabled}
               onClick={() => {
@@ -199,6 +198,7 @@ const ParkingSearch = () => {
                 if (!isDisabled) {
                   navigate("/search");
                 }
+                localStorage.setItem(`duration`, `${duration['hours']}`)
               }}
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >
