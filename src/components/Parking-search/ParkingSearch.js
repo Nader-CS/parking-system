@@ -13,6 +13,7 @@ import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { Link } from "react-router-dom";
 
 const ParkingSearch = () => {
+  const { duration } = useSelector((state) => state.dateGeocode);
   const dispatch = useDispatch();
   const [locationInfo, setLocationInfo] = useState("");
   const [showModal, setShowModal] = useState(false); // State variable for modal
@@ -131,6 +132,7 @@ const ParkingSearch = () => {
             </div>
             <Link to="search">
             <button
+            onClick={localStorage.setItem(`duration`, `${duration['hours']}`)}
               className="btn mt-2"
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >
