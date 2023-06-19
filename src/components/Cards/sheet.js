@@ -22,16 +22,17 @@ import style from "./cards.module.css";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSelectedGarage } from "../../redux/slices/selectedGarage";
+import { kCalculatePrice, kFormatDuration } from "../../utilities/Constants";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
-const Sheet = ({duration , garage, open, close})=> {
+const Sheet = ({garage, open, close})=> {
     const dispatch = useDispatch();
-    
+    const { duration } = useSelector((state) => state.dateGeocode);
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -106,17 +107,21 @@ const Sheet = ({duration , garage, open, close})=> {
       >
         <div className="col-4 text-center border-end border-secondary px-2">
           <p className="m-0" style={{ fontWeight: 600 }}>
+            
             {/* {duration["minutes"]
               ? duration["hours"] + ":" + duration["minutes"]
               : duration["hours"]} */}
-              {duration}
-            h
+              {kFormatDuration(duration)}
+            
           </p>
           <p className="m-0">Total duration</p>
         </div>
         <div className="col-4 text-center border-end border-secondary px-2">
           <p className="m-0" style={{ fontWeight: 600 }}>
-          {duration * garage.garage["pricePerHour"]}
+          {kCalculatePrice(
+                        duration,
+                        garage.garage["pricePerHour"]
+                      )}
           {/* {duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]} L.E */}
           </p>
           <p className="m-0">Parking fee</p>
@@ -223,11 +228,14 @@ const Sheet = ({duration , garage, open, close})=> {
         </Box>
       </TabContext>
     </DialogContent>
-    <Link style={{ width: "80%", margin: "auto" }} to={`/checkout}`}>
+    <Link style={{ width: "80%", margin: "auto" }} to={`/reservation`}>
       <Button
         onClick={() => {
           const garageObj = garage;
-          const price = duration * garage.garage["pricePerHour"]
+          const price = kCalculatePrice(
+            duration,
+            garage.garage["pricePerHour"]
+          );
           // duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"];
           dispatch(getSelectedGarage({ garageObj, price }));
         }}
@@ -240,7 +248,10 @@ const Sheet = ({duration , garage, open, close})=> {
       >
         {/* {localStorage.setItem(`price`, `${duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]}`)} */}
         Reserve for{" "}
-        {duration * garage.garage["pricePerHour"]}
+        {kCalculatePrice(
+            duration,
+            garage.garage["pricePerHour"]
+          )}
         {/* {duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]} L.E */}
       </Button>
     </Link>

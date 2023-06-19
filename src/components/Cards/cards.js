@@ -22,7 +22,7 @@ import Sheet from "./sheet";
 const GarageCards = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.garageSpaces);
-  const duration = localStorage.getItem("duration");
+  const { duration } = useSelector((state) => state.dateGeocode);
   const { geocode } = useSelector((state) => state.dateGeocode);
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -131,13 +131,16 @@ const GarageCards = () => {
                     variant="contained"
                   >
                     Reserve for{" "}
-                    {duration * garage.garage["pricePerHour"]} LE
+                    {kCalculatePrice(
+                        duration,
+                        garage.garage["pricePerHour"]
+                      )} LE
                   </Button>
                 </Link>
               </CardContent>
             </CardActionArea>
             <Sheet
-              duration={duration}
+              
               garage={garage}
               open={open}
               close={handleClose}

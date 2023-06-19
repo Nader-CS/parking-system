@@ -10,7 +10,6 @@ function Map() {
     const [position, setPos] = useState([{}]);
     const [isPositionSet, setIsPositionSet] = useState(false);
     const [open, setOpen] = React.useState(false);
-    const duration = localStorage.getItem('duration')
     const handleClose = () => {
         setOpen(false);
       };
@@ -77,7 +76,7 @@ function Map() {
               <div>{garage.garage["name"]}</div>
             </InfoWindow>
           ) : null}
-          <Sheet duration={duration} garage={garage} open={open} close={handleClose}></Sheet>
+          <Sheet garage={garage} open={open} close={handleClose}></Sheet>
         </Marker>
         
       ))}
