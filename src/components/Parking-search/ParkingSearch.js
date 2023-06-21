@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 // import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import './ParkingSearch.css'
 const ParkingSearch = () => {
   const { duration } = useSelector((state) => state.dateGeocode);
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const ParkingSearch = () => {
         lat: lat(),
         lng: lng(),
       };
-
+      
       dispatch(setGeocode(geocode));
 
       // Set the locationInfo to the formatted address
@@ -114,7 +114,7 @@ const ParkingSearch = () => {
     // console.log("ParkingUntilBeforeParkingFrom: "+ParkingUntilBeforeParkingFrom)
     // console.log("isParkingFromNotChosen: "+isParkingFromNotChosen)
     // console.log("isParkingUntilNotChosen: "+isParkingUntilNotChosen)
-    console.log("isLocationNotChosen: " + isLocationNotChosen);
+    // console.log("isLocationNotChosen: " + isLocationNotChosen);
     // console.log("isFieldsValid: "+isFieldsValid)
 
     const isButtonDisabled =
@@ -127,7 +127,6 @@ const ParkingSearch = () => {
   const handleAutocompleteChange = () => {
     const place = autocompleteRef.current.value;
     const isValidPlace = place && place.place_id && place.geometry;
-    console.log("isValidPlace: " + isValidPlace);
     setLocationChosen(isValidPlace);
   };
 
@@ -167,11 +166,11 @@ const ParkingSearch = () => {
                 placeholder={t("auto-complete-placeholder")}
                 apiKey="AIzaSyDxE47Kh4gnM9Sh-Nj6vTjFzful_q7lZdY"
                 autocompletePlaceHolder
-                className={`${classes.autocompleteField} ${
+                className={`${`${classes.autocompleteField} ${
                   i18n.language === "ar"
                     ? classes.arautocompleteInputPlaceHolder
                     : classes.enautocompleteInputPlaceHolder
-                }`}
+                }`} ${classes.DateTimePicker}`}
                 ref={autocompleteRef}
                 onChange={handleAutocompleteChange}
                 style={{
@@ -214,7 +213,6 @@ const ParkingSearch = () => {
               className="btn mt-2"
               disabled={isDisabled}
               onClick={() => {
-                console.log(isDisabled);
                 if (!isDisabled) {
                   navigate("/search");
                 }
@@ -229,9 +227,8 @@ const ParkingSearch = () => {
 
           {/* Modal */}
           <div
-            className={`modal fade bd-example-modal-lg ${
-              showModal ? "show" : ""
-            }`}
+            className={`modal fade bd-example-modal-lg ${showModal ? "show" : ""
+              }`}
             tabIndex="-1"
             role="dialog"
             aria-labelledby="myLargeModalLabel"

@@ -10,7 +10,7 @@ import $ from 'jquery';
 
 const Login = () => {
 
-  const { userData, validUser } = useSelector(state => state.loginReducer)
+  const { userData, isLogged } = useSelector(state => state.loginReducer)
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
@@ -19,21 +19,21 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (validUser === true) {
+    if (isLogged === true) {
       $('.sucMsg').fadeIn(500, () => {
         setTimeout(() => {
           $('.sucMsg').fadeOut(500)
           navigate('/')
         }, 2000)
       })
-    } else if (validUser === false) {
+    } else if (isLogged === false) {
       $('.errMsg').fadeIn(500, () => {
         setTimeout(() => {
           $('.errMsg').fadeOut(500)
         }, 3000)
       })
     }
-  }, [validUser])
+  }, [isLogged])
 
   const validateEmail = (value) => {
     let error = ''

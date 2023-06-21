@@ -69,7 +69,12 @@ export default function DownloadSection() {
             <StoreButton text="Google Play" isGoogle={true} />
           </Stack>
         </Box>
-        <Box flex={1} order={{ xs: 1, md: 2 }} marginLeft={{ md: 2 }}>
+        <Box
+          sx={{ textAlign: "right" }}
+          flex={1}
+          order={{ xs: 1, md: 2 }}
+          marginLeft={{ md: 2 }}
+        >
           <Box
             component="img"
             sx={{
