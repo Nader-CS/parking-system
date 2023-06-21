@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -12,8 +12,12 @@ import style from "./carousel.module.css";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import Container from "@mui/material/Container";
+import { useTranslation } from "react-i18next";
 
 export default function Carousel() {
+  const { t, i18n } = useTranslation();
+  const [forceUpdate, setForceUpdate] = useState(false); //used to force re-render OwlCarousel component
+
   const options = {
     nav: false,
     items: 3,
@@ -27,7 +31,9 @@ export default function Carousel() {
     dotClass: `${style.dotClass}`,
     dotsClass: `${style.dotsClass}`,
   };
-
+  useEffect(() => {
+    setForceUpdate((prev) => !prev);
+  }, [t]);
   return (
     <>
       <Container align="center" style={{ marginTop: "7rem" }}>
@@ -35,22 +41,46 @@ export default function Carousel() {
           variant="h6"
           sx={{ mt: "1rem", pb: "1rem" }}
           className={`${style.headerLine}`}
+          fontFamily={
+            i18n.language === "ar"
+              ? "'Noto Kufi Arabic', sans-serif"
+              : "'Nunito', sans-serif"
+          }
         >
-          What<span className="fw-semibold"> users </span>are saying
+          {t("what")}
+          <span className="fw-semibold"> {t("users")} </span>
+          {t("are-saying")}
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mt: "1rem" }}>
-          Don’t just take our word for it – check out some of the latest
-          customer reviews for our London parking spaces
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mt: "1rem" }}
+          fontFamily={
+            i18n.language === "ar"
+              ? "'Noto Kufi Arabic', sans-serif"
+              : "'Nunito', sans-serif"
+          }
+          fontSize={15}
+        >
+          {t("don’t-just-take-our-word-for-it")}
         </Typography>
       </Container>
-      <OwlCarousel className="owl-theme" loop margin={0} {...options}>
+      <OwlCarousel className="owl-theme" loop margin={0} {...options} dir="ltr">
         <div className={`item`}>
           <Card className={`${style.crd}`}>
             <CardContent sx={{ height: 150 }}>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Simple and easy-to-use app, perfect for my commute into work.
-                Saves on stress of having to find a space in the morning in such
-                a difficult area to find parking.
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                align="center"
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("simple-and-easy-to-use-app")}
               </Typography>
             </CardContent>
             <CardContent
@@ -68,11 +98,30 @@ export default function Carousel() {
                   src={require("../../assets/images/Home~Slider/user_1.jpg")}
                 ></Avatar>
               </Container>
-              <Typography variant="body2" align="center" sx={{ mt: "1rem" }}>
-                Gemma T
+              <Typography
+                variant="body2"
+                align="center"
+                sx={{ mt: "1rem" }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("gemma-t")}
               </Typography>
-              <Typography align="center" sx={{ my: 1 }}>
-                Car park on Whiteladies Road, Bristol
+              <Typography
+                align="center"
+                sx={{ my: 1 }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("whiteladies-road")}
               </Typography>
               <Typography align="center">
                 <StarIcon sx={{ color: "gold" }} />
@@ -92,11 +141,14 @@ export default function Carousel() {
                 color="text.secondary"
                 align="center"
                 className={``}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
               >
-                The convenient parking made our stay all the more enjoyable.
-                Cheaper than the train and cheaper than other car parks too.
-                Easy booking system and pre-payment takes the stress out of
-                finding cash.
+                {t("sheaper-than-other-car-parks")}
               </Typography>
             </CardContent>
             <CardContent
@@ -114,11 +166,30 @@ export default function Carousel() {
                   src={require("../../assets/images/Home~Slider/user_2.jpg")}
                 ></Avatar>
               </Container>
-              <Typography variant="body2" align="center" sx={{ mt: "1rem" }}>
-                Richard B
+              <Typography
+                variant="body2"
+                align="center"
+                sx={{ mt: "1rem" }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("richard-b")}
               </Typography>
-              <Typography align="center" sx={{ my: 1 }}>
-                Car park on High Holborn, London
+              <Typography
+                align="center"
+                sx={{ my: 1 }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("high-holborn")}
               </Typography>
               <Typography align="center">
                 <StarIcon sx={{ color: "gold" }} />
@@ -138,11 +209,14 @@ export default function Carousel() {
                 color="text.secondary"
                 align="center"
                 className={``}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
               >
-                I used this space for a hospital appointment in London. The
-                whole JustPark experience has been great! So easy to find and
-                book a space - at a brilliant price too! Saved us a bundle of
-                money and stress.
+                {t("space-for-a-hospital-appointment-in-London")}
               </Typography>
             </CardContent>
             <CardContent
@@ -160,11 +234,30 @@ export default function Carousel() {
                   src={require("../../assets/images/Home~Slider/user_3.jpg")}
                 ></Avatar>
               </Container>
-              <Typography variant="body2" align="center" sx={{ mt: "1rem" }}>
-                Jennifier M
+              <Typography
+                variant="body2"
+                align="center"
+                sx={{ mt: "1rem" }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("jennifier-m")}
               </Typography>
-              <Typography align="center" sx={{ my: 1 }}>
-                Car park on Melton Street, London
+              <Typography
+                align="center"
+                sx={{ my: 1 }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("melton-street")}
               </Typography>
               <Typography align="center">
                 <StarIcon sx={{ color: "gold" }} />
@@ -184,10 +277,14 @@ export default function Carousel() {
                 color="text.secondary"
                 align="center"
                 className={``}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
               >
-                Not used to reviewing parking spaces, but have to say this one
-                was perfect! We used it as away supporters attending a Fulham
-                game. So much easier than the other alternatives.
+                {t("away-supporters-attending-a-fulham-game")}
               </Typography>
             </CardContent>
             <CardContent
@@ -205,11 +302,30 @@ export default function Carousel() {
                   src={require("../../assets/images/Home~Slider/user_4.jpg")}
                 ></Avatar>
               </Container>
-              <Typography variant="body2" align="center" sx={{ mt: "1rem" }}>
-                Marcus F
+              <Typography
+                variant="body2"
+                align="center"
+                sx={{ mt: "1rem" }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("marcus-f")}
               </Typography>
-              <Typography align="center" sx={{ my: 1 }}>
-                Driveway, Vicarage Road, Birmingham
+              <Typography
+                align="center"
+                sx={{ my: 1 }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("vicarage-road")}
               </Typography>
               <Typography align="center">
                 <StarIcon sx={{ color: "gold" }} />
@@ -224,11 +340,18 @@ export default function Carousel() {
         <div className={`item`}>
           <Card className={`${style.crd}`}>
             <CardContent sx={{ height: 150 }}>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Such a higher quality than other places nearby! Really easy to
-                find and the staff are very professional and friendly. It was
-                also very easy to book using the app, there are spaces all over
-                Bristol.
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                align="center"
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("higher quality")}
               </Typography>
             </CardContent>
             <CardContent
@@ -246,11 +369,30 @@ export default function Carousel() {
                   src={require("../../assets/images/Home~Slider/user_5.jpg")}
                 ></Avatar>
               </Container>
-              <Typography variant="body2" align="center" sx={{ mt: "1rem" }}>
-                Carol N
+              <Typography
+                variant="body2"
+                align="center"
+                sx={{ mt: "1rem" }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("carol-n")}
               </Typography>
-              <Typography align="center" sx={{ my: 1 }}>
-                Marriott Bristol Royal Car Park, Bristol
+              <Typography
+                align="center"
+                sx={{ my: 1 }}
+                fontFamily={
+                  i18n.language === "ar"
+                    ? "'Noto Kufi Arabic', sans-serif"
+                    : "'Nunito', sans-serif"
+                }
+                fontSize={15}
+              >
+                {t("royal-car-park")}
               </Typography>
               <Typography align="center">
                 <StarIcon sx={{ color: "gold" }} />

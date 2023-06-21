@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 const LanguageDropdown = () => {
   const { i18n } = useTranslation();
-  const [language, setLanguage] = useState(i18n.language);
+  const [language, setLanguage] = useState(i18n.language || "en");
   const handleLanguageChange = (selectedLanguage) => {
     i18n.changeLanguage(selectedLanguage);
     setLanguage(selectedLanguage);
@@ -16,7 +16,7 @@ const LanguageDropdown = () => {
 
   return (
     <Select
-      defaultValue={language}
+      value={language}
       onChange={handleChange}
       style={{
         height: "2.5rem",
