@@ -26,13 +26,12 @@
   color: #851fbf;
 }
 
-/* .autocompleteContainer .suggestion {
-  background-color: #851fbf;
-  font-size: 18px;
-} */
-
 .DateTimePicker {
-  border: 01px solid #851fbf !important;
+  border: 02px solid #851fbf !important;
+}
+
+.DateTimePicker:focus {
+  outline: 02px solid #851fbf;
 }
 
 .DateTimePicker::selection {
@@ -40,7 +39,7 @@
   background: #851fbf;
 }
 
-.DateTimePicker:focus-visible {
-  border: 01px solid #851fbf !important;
-  outline: 02px solid #851fbf !important;
-}
+/* .autocompleteContainer .suggestion {
+  background-color: #851fbf;
+  font-size: 18px;
+} */

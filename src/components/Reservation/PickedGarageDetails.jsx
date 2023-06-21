@@ -1,18 +1,5 @@
-import {
-  CameraAlt,
-  InfoOutlined,
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-} from "@mui/icons-material";
-import {
-  Box,
-  ButtonBase,
-  Divider,
-  Rating,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { CameraAlt, InfoOutlined, KeyboardArrowLeft, KeyboardArrowRight} from "@mui/icons-material";
+import { Box, ButtonBase, Divider, Rating, Stack, Tooltip, Typography, } from "@mui/material";
 import React, { useState } from "react";
 import CardBox from "./CardBox";
 // import { garage } from "../../utilities/Constants";

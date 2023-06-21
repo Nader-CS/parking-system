@@ -1,8 +1,14 @@
 {
   "home": "الرئيسية",
-  "how-it-works": "How it works",
-  "plan": "Plan",
-  "about-us": "About Us",
-  "login": "تسجيل دخول",
-  "signup": "تسجيل"
+  "how-it-works": "كيف تعمل",
+  "plan": "خطط اسعارنا",
+  "about-us": "من نحن ؟",
+  "login": "تسجيل الدخول",
+  "signup": "إنشاء حساب",
+  "find-parking-in-seconds": "إحصل علي موقف سيارات في اقل من ثواني",
+  "choose-from-millions": "اختر من بين ملايين المساحات المتاحة ، أو احجز مساحتك مسبقًا. انضم إلى أكثر من 10 ملايين سائق يستمتعون بركن السيارة بسهولة.",
+  "auto-complete-placeholder": "ادخل المكان الذي تريد البحث حولة",
+  "parking-from": "الأنتظار يبدأ من",
+  "parking-until": "الأنتظار حتي",
+  "show-parking-spaces": "أبحث عن مواقف السيارات القريبة"
 }

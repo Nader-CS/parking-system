@@ -23,8 +23,7 @@ const loginData = createSlice({
     },
     reducers: {
         userValid: (state) => {
-            console.log(localStorage.getItem('token'));
-            if (localStorage.getItem('token' !== null)) {
+            if (localStorage.getItem('token') !== null) {
                 state.validUser = true;
                 console.log('true');
             } else {

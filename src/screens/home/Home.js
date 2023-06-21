@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(userValid())
   }, [])

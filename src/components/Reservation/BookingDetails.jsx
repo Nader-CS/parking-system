@@ -56,7 +56,7 @@ export default function BookingDetails() {
           isUnderLine={false}
         />
       </CardBox>
-      {validUser && <AuthCard />}
+      {!validUser && <AuthCard />}
 
       <PaymentMethod
         isNotSigned={validUser}
@@ -97,7 +97,7 @@ export default function BookingDetails() {
         }}
       />
       {selectedOption === "cash" && !validUser && (
-        <PayButton onClick={handleClickOpen} disabled={!validUser}>
+        <PayButton onClick={handleClickOpen} disabled={validUser}>
           EGP{" "}
           {kCalculatePrice(
             data.duration,

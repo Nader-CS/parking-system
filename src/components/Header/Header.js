@@ -21,7 +21,6 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import classes from "./Header.module.css";
 import { Link } from "react-router-dom";
-import { isNotSigned } from "../../utilities/Constants";
 import LanguageDropdown from "../Languages/LanguagesDropdown";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -38,11 +37,14 @@ const icons = [
 ];
 
 function Header(props) {
-  const { validUser } = useSelector(state => state.loginReducer);
-
-  const { t } = useTranslation();
-  let navItems = !validUser ? [t("home"), "How it works", "Plan", "AboutUs", "Login", "Signup"] : [t("home"), "How it works", "Plan", "AboutUs", "Profile", "Sign Out"];
-  let pages = !validUser ? ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"] : ["/", "/how-it-works", "/plan", "/about-us", "/"];
+  const { validUser } = useSelector(state => state.loginReducer)
+  const { t, i18n } = useTranslation();
+  const navItems = validUser
+  ? [t("home"), t("how-it-works"), t("plan"), t("about-us"), "Profile"]
+  : [t("home"), t("how-it-works"), t("plan"), t("about-us"), t("login"), t("signup"),];
+  const pages = validUser
+  ? ["/", "/how-it-works", "/plan", "/about-us", "/"]
+  : ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"]
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -86,7 +88,12 @@ function Header(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={{
+        display: "flex",
+      }}
+      className={classes.box}
+    >
       <CssBaseline />
       <AppBar component="nav" sx={{ backgroundColor: "#F8F9FB" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -114,11 +121,14 @@ function Header(props) {
                   sx={{
                     color:
                       item.toLowerCase() === "login" ||
-                        item.toLowerCase() === "signup"
+                        item.toLowerCase() === "signup" ||
+                        item.toLowerCase() === "تسجيل الدخول" ||
+                        item.toLowerCase() === "إنشاء حساب"
                         ? "rgb(122, 38, 193)"
                         : "#999",
                     border:
-                      item.toLowerCase() === "signup"
+                      item.toLowerCase() === "signup" ||
+                        item.toLowerCase() === "إنشاء حساب"
                         ? "1.5px solid rgb(122, 38, 193)"
                         : "none",
                     borderRadius:
