@@ -1,9 +1,6 @@
 import * as React from "react";
-import {
-  setParkingFrom,
-  setParkingUntil,
-  setDuration,
-} from "../../redux/slices/geoCodeSlice";
+import { setParkingFrom, setParkingUntil, setDuration,} 
+from "../../redux/slices/geoCodeSlice";
 import { useEffect } from "react";
 import classes from "./dateAndTimePicker.module.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,6 +13,8 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import "dayjs/locale/ar";
 import { useTranslation } from "react-i18next";
+import style from './ParkingSearch.module.css'
+import './ParkingSearch.css'
 
 const StyledDateTimePicker = styled(DateTimePicker)`
   label.Mui-focused {
@@ -82,7 +81,6 @@ export default function DateTimePickerValue() {
       return false;
     }
     const selectedDate = dayjs(parkingFrom).startOf("day");
-    console.log(date.isBefore(selectedDate, "day"));
     return date.isBefore(selectedDate, "day");
   };
 
@@ -94,7 +92,6 @@ export default function DateTimePickerValue() {
   };
   const parkingFromValue = dayjs(parkingFrom);
   const parkingUntilValue = dayjs(parkingUntil);
-  console.log(parkingFromValue);
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
@@ -102,28 +99,20 @@ export default function DateTimePickerValue() {
     >
       <DemoContainer components={["DateTimePicker", "DateTimePicker"]}>
         <StyledDateTimePicker
-          className={
-            i18n.language === "ar"
-              ? classes["ar-custom-styled-date-time-picker"]
-              : ""
-          }
-          label={t("parking-from")}
+          label="PARKING FROM"
           value={parkingFrom == null ? null : parkingFromValue}
           onChange={handleParkingFromChange}
           disablePast
+          className={`${style.DateTimePicker}`}
         />
         <StyledDateTimePicker
-          className={
-            i18n.language === "ar"
-              ? classes["ar-custom-styled-date-time-picker"]
-              : ""
-          }
-          label={t("parking-until")}
+          label="PARKING UNTIL"
           value={parkingUntil == null ? null : parkingUntilValue}
           onChange={handleParkingUntilChange}
           disablePast
           shouldDisableDate={disableDate}
           minTime={getMinimumTime()}
+          className={`${style.DateTimePicker}`}
         />
       </DemoContainer>
     </LocalizationProvider>

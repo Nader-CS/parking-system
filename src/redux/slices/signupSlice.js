@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, storage } from '../../services/firebase/firebase-config'
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 import axios from "axios";
 
 const _baseURL = `https://parking-system-eaece-default-rtdb.firebaseio.com/`;
@@ -18,11 +18,25 @@ export const createUserCollection = createAsyncThunk('user/collection', async (u
 })
 
 export const createGarageCollection = createAsyncThunk('garage/collection', async (gMainData) => {
-    const response = await axios.post(`${_baseURL}garage-collection.json`, gMainData)
-    gMainData.images.map((image) => {
-        const imageRef = ref(storage, `${response.data.name}/${image.name}`)
-        uploadBytes(imageRef, image)
-    })
+    await axios.post(`${_baseURL}garage-collection.json`, gMainData)
+        .then((response) => {
+            const imagesURL = [];
+            const imagesListRef = response.data.name;
+            gMainData.images.map(async (image) => {
+                const imageRef = ref(storage, `${imagesListRef}/${image.name}`)
+                await uploadBytes(imageRef, image)
+                    .then(async () => {
+                        await listAll(ref(storage, `${imagesListRef}/`)).then(async (collection) => {
+                            const arr = collection.items
+                            const lastIdx = arr.length - 1
+                            await getDownloadURL(arr[lastIdx]).then(async (url) => {
+                                imagesURL.push(url);
+                                await axios.patch(`${_baseURL}garage-collection/${imagesListRef}.json`, { ...gMainData, imagesURL: imagesURL })
+                            })
+                        })
+                    })
+            })
+        })
 })
 
 const signUpData = createSlice({
@@ -42,14 +56,21 @@ const signUpData = createSlice({
             address: '',
             pricePerHour: '',
             availableSpots: '',
-            lat: '30.043959',
-            lon: '31.227157',
+            lat: '',
+            lon: '',
             images: ['', '', '', '']
         },
         usedEmail: false,
         uIsCreated: false,
         uCollection: null,
         gCollection: null,
+    },
+    reducers: {
+        getLanLon: (state, action) => {
+            const geoLoc = action.payload;
+            state.garageDetails.lat = geoLoc.lat;
+            state.garageDetails.lon = geoLoc.lng;
+        }
     },
     extraReducers: {
         [signUpUser.fulfilled]: (state, action) => {
@@ -72,7 +93,7 @@ const signUpData = createSlice({
 })
 
 
-export const { createNewGarage, createNewUser } = signUpData.actions;
+export const { getLanLon } = signUpData.actions;
 export default signUpData.reducer;
 
 

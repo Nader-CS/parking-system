@@ -5,12 +5,8 @@ import AppImage from "../../assets/images/Download/IPark-app.png";
 
 export default function DownloadSection() {
   return (
-    <Box style={{ marginTop: "7rem" }}>
-      <Stack
-        direction={{ xs: "column", md: "row" }}
-        justifyContent="space-between"
-        alignItems="center"
-      >
+    <Box style={{ marginTop: "2rem" }}>
+      <Stack sx={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }} direction={{ xs: "column", md: "row" }}>
         <Box
           flex={{ md: 2, lg: 1 }}
           order={{ xs: 2, md: 1 }}
@@ -47,7 +43,7 @@ export default function DownloadSection() {
             <StoreButton text="Google Play" isGoogle={true} />
           </Stack>
         </Box>
-        <Box flex={1} order={{ xs: 1, md: 2 }} marginLeft={{ md: 2 }}>
+        <Box sx={{textAlign: 'right'}} flex={1} order={{ xs: 1, md: 2 }} marginLeft={{ md: 2 }}>
           <Box
             component="img"
             sx={{

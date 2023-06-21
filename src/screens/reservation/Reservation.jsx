@@ -1,16 +1,23 @@
 import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import BookingDetails from "../../components/Reservation/BookingDetails";
 import PickedGarageDetails from "../../components/Reservation/PickedGarageDetails";
 import { toast } from "react-toastify";
+import { userValid } from "../../redux/slices/loginSlice";
 
 export default function Reservation() {
+  const dispatch = useDispatch();
+  
   const garageData = useSelector((state) => state.selectedGarage);
   const reservation = useSelector((state) => state.reservation);
   const isGarageEmpty = Object.keys(garageData.garage).length === 0;
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    dispatch(userValid())
+  }, [])
 
   useEffect(() => {
     if (reservation.successMessage !== null) {
@@ -28,7 +35,8 @@ export default function Reservation() {
       toast.error(reservation.errorMessage);
     }
   }, [reservation.successMessage, reservation.errorMessage, navigate]);
-  // console.log(`garage ${isGarageEmpty}`);
+
+
   if (isGarageEmpty) {
     console.log("null");
     return (
@@ -42,7 +50,8 @@ export default function Reservation() {
         sx={{ backgroundColor: "#f3f7f9" }}
       >
         <Typography variant="body1" fontWeight="bold" align="center">
-          You Cannot Access This Page. GET OUT!
+          {/* You Cannot Access This Page. GET OUT! */}
+          Please Pick Location, Date and Time for Parking Service
         </Typography>
       </Box>
     );
