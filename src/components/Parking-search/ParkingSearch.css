@@ -1,0 +1,23 @@
+.MuiSvgIcon-root {
+    color: #851fbf;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border: 0 solid transparent !important;
+
+}
+
+.MuiInputBase-input::selection {
+    color: white;
+    background: #851fbf;
+}
+
+.MuiFormLabel-root {
+    background-color: white !important;
+    padding: 1px !important;
+    border-radius: 2px;
+}
+
+.MuiFormControl-root {
+    margin: 8px 0px !important;
+}

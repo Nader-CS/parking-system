@@ -17,7 +17,7 @@ const MadeEasy = () => {
     });
   }, []);
   return (
-    <section>
+    <section className="pt-2 pb-5">
       <h1 className={style.header}>Parking made easy</h1>
       <OwlCarousel
         className={`${style.carousel} owl-theme`}

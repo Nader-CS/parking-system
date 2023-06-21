@@ -22,11 +22,25 @@
 }
 
 .autocompleteContainer {
- font-size: 18px;
- color: #851fbf;
+  font-size: 18px;
+  color: #851fbf;
 }
 
 /* .autocompleteContainer .suggestion {
   background-color: #851fbf;
   font-size: 18px;
 } */
+
+.DateTimePicker {
+  border: 01px solid #851fbf !important;
+}
+
+.DateTimePicker::selection {
+  color: white;
+  background: #851fbf;
+}
+
+.DateTimePicker:focus-visible {
+  border: 01px solid #851fbf !important;
+  outline: 02px solid #851fbf !important;
+}

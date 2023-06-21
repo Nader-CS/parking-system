@@ -69,16 +69,18 @@ export default function GarageOwner() {
         else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&_])[A-Za-z\d!@#$%&_]{8,16}$/i.test(value)) error = 'Password must be between 8 to 16, contains at least  uppercase, lowercase, number and special character (! @ # $ % & _)'
         return error;
     }
-    const validateRePassword = (value) => {
+    const validateRePassword = (value, values) => {
+        console.log(value);
         let error = ''
         if (!value) error = 'Re-Password is Required'
-        // else if (value !== ownerDetails.ownerDetails.password) error = 'Password and rePassword must be matching';
+        else if (value !== values.password) error = 'Password and Re-Password must be matching';
         return error;
     }
 
     return <>
         <div>
-            <h2 className='container my-4 me-4'>Sign Up</h2>
+            <h3 className='container my-4 me-4'>Sign Up - User Details</h3>
+
             <div style={{ 'display': 'none' }} className='errMsg alert alert-danger w-50 mx-auto text-center'>Email already in use, Please sing in or register with another email</div>
             <div style={{ 'display': 'none' }} className='sucMsg alert alert-success w-50 mx-auto text-center'>User has been created, Please fill you garage details!</div>
 
@@ -86,7 +88,7 @@ export default function GarageOwner() {
                 initialValues={{ ...ownerDetails, garageOwner: true }}
                 onSubmit={(values) => { submitForm(values) }}
             >
-                {({ errors, touched }) => (
+                {({ errors, touched, values }) => (
                     <Form className={`w-50 mx-auto`}>
                         <div className={`container`}>
                             <div className={`row`}>
@@ -107,7 +109,7 @@ export default function GarageOwner() {
                                     {errors.password && touched.password ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.password}</div> : ''}
                                 </div>
                                 <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
-                                    <Field type="password" id='rePassword' validate={validateRePassword} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Confirm Password' name="rePassword" />
+                                    <Field type="password" id='rePassword' validate={(value) => { return validateRePassword(value, values) }} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Confirm Password' name="rePassword" />
                                     {errors.rePassword && touched.rePassword ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.rePassword}</div> : ''}
                                 </div>
                             </div>

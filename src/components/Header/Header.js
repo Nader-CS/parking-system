@@ -24,10 +24,10 @@ import { Link } from "react-router-dom";
 import { isNotSigned } from "../../utilities/Constants";
 import LanguageDropdown from "../Languages/LanguagesDropdown";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+
 
 const drawerWidth = 240;
-//should write all navItems in lowercase
-
 const icons = [
   HouseIcon,
   LightbulbOutlinedIcon,
@@ -38,13 +38,11 @@ const icons = [
 ];
 
 function Header(props) {
+  const { validUser } = useSelector(state => state.loginReducer);
+
   const { t } = useTranslation();
-  const navItems = isNotSigned
-    ? [t("home"), "How it works", "Plan", "AboutUs", "Login", "Signup"]
-    : [t("home"), "How it works", "Plan", "AboutUs", "Profile"];
-  const pages = isNotSigned
-    ? ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"]
-    : ["/", "/how-it-works", "/plan", "/about-us", "/"];
+  let navItems = !validUser ? [t("home"), "How it works", "Plan", "AboutUs", "Login", "Signup"] : [t("home"), "How it works", "Plan", "AboutUs", "Profile", "Sign Out"];
+  let pages = !validUser ? ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"] : ["/", "/how-it-works", "/plan", "/about-us", "/"];
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -116,7 +114,7 @@ function Header(props) {
                   sx={{
                     color:
                       item.toLowerCase() === "login" ||
-                      item.toLowerCase() === "signup"
+                        item.toLowerCase() === "signup"
                         ? "rgb(122, 38, 193)"
                         : "#999",
                     border:

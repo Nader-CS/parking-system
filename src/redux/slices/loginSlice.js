@@ -18,22 +18,39 @@ const loginData = createSlice({
             userEmail: '',
             userPassword: '',
         },
-        validUser: null,
+        validUser: false,
+        isLogged: null,
+    },
+    reducers: {
+        userValid: (state) => {
+            console.log(localStorage.getItem('token'));
+            if (localStorage.getItem('token' !== null)) {
+                state.validUser = true;
+                console.log('true');
+            } else {
+                state.validUser = false;
+                console.log('false');
+            }
+        },
     },
     extraReducers: {
         [logUserIn.fulfilled]: (state, action) => {
-        
             if (action.payload.operationType === "signIn") {
                 state.validUser = true;
+                state.isLogged = true;
                 localStorage.setItem('token', action.payload.token)
                 localStorage.setItem('uid', action.payload.uid)
             }
         },
         [logUserIn.rejected]: (state, action) => {
-            if (action.type === 'user/login/rejected') state.validUser = false
+            if (action.type === 'user/login/rejected') {
+                state.validUser = false
+                state.isLogged = false
+            }
         }
     }
 })
+export const { userValid } = loginData.actions;
 export default loginData.reducer;
 
 

@@ -1,9 +1,6 @@
 import * as React from "react";
-import {
-  setParkingFrom,
-  setParkingUntil,
-  setDuration,
-} from "../../redux/slices/geoCodeSlice";
+import { setParkingFrom, setParkingUntil, setDuration,} 
+from "../../redux/slices/geoCodeSlice";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -13,6 +10,8 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { styled } from "@mui/system";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import style from './ParkingSearch.module.css'
+import './ParkingSearch.css'
 
 const StyledDateTimePicker = styled(DateTimePicker)`
   label.Mui-focused {
@@ -78,7 +77,6 @@ export default function DateTimePickerValue() {
       return false;
     }
     const selectedDate = dayjs(parkingFrom).startOf("day");
-    console.log(date.isBefore(selectedDate, "day"));
     return date.isBefore(selectedDate, "day");
   };
 
@@ -90,23 +88,24 @@ export default function DateTimePickerValue() {
   };
   const parkingFromValue = dayjs(parkingFrom);
   const parkingUntilValue = dayjs(parkingUntil);
-  console.log(parkingFromValue);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DateTimePicker", "DateTimePicker"]}>
         <StyledDateTimePicker
-          label="PARKING FROM"
+          label="Parking From"
           value={parkingFrom == null ? null : parkingFromValue}
           onChange={handleParkingFromChange}
           disablePast
+          className={`${style.DateTimePicker}`}
         />
         <StyledDateTimePicker
-          label="PARKING UNTIL"
+          label="Parking Until"
           value={parkingUntil == null ? null : parkingUntilValue}
           onChange={handleParkingUntilChange}
           disablePast
           shouldDisableDate={disableDate}
           minTime={getMinimumTime()}
+          className={`${style.DateTimePicker}`}
         />
       </DemoContainer>
     </LocalizationProvider>
