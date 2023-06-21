@@ -4,5 +4,11 @@
   "plan": "Plan",
   "about-us": "About Us",
   "login": "Login",
-  "signup": "Signup"
+  "signup": "Signup",
+  "find-parking-in-seconds": "Find parking in seconds",
+  "choose-from-millions": "Choose from millions of available spaces, or reserve your spacein advance. Join over 10 million drivers enjoying easy parking.",
+  "auto-complete-placeholder": "Enter a valid location",
+  "parking-from": "PARKING FROM",
+  "parking-until": "PARKING UNTIL",
+  "show-parking-spaces": "Show parking spaces"
 }

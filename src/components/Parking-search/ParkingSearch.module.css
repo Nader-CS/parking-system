@@ -22,11 +22,20 @@
 }
 
 .autocompleteContainer {
- font-size: 18px;
- color: #851fbf;
+  font-size: 18px;
+  color: #851fbf;
 }
 
 /* .autocompleteContainer .suggestion {
   background-color: #851fbf;
   font-size: 18px;
 } */
+
+.arautocompleteInputPlaceHolder {
+  padding: 0 2.3rem 0 0.5rem !important;
+  text-align: center;
+}
+
+.enautocompleteInputPlaceHolder {
+  padding: 0 2.3rem 0 0.5rem !important;
+}

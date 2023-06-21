@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 // import closestGarage from "../../utilities/closestGarage";
 // import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ParkingSearch = () => {
   const { duration } = useSelector((state) => state.dateGeocode);
@@ -23,6 +24,7 @@ const ParkingSearch = () => {
   const [isDisabled, setIsDisabled] = useState(true); //state variable for button
   const parkingFrom = useSelector((state) => state.dateGeocode.parkingFrom);
   const parkingUntil = useSelector((state) => state.dateGeocode.parkingUntil);
+  const { t, i18n } = useTranslation();
 
   const handlePlaceSelect = (place) => {
     if (place && place.geometry) {
@@ -133,25 +135,43 @@ const ParkingSearch = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={`d-flex align-items-center ${classes["image-holder"]}`}>
+    <div
+      className={`d-flex align-items-center ${classes["image-holder"]}`}
+      style={{
+        fontFamily:
+          i18n.language === "ar"
+            ? "'Noto Kufi Arabic', sans-serif"
+            : "'Nunito', sans-serif",
+      }}
+    >
       <div className="container">
-        <div className="row justify-content-center justify-content-md-start">
-          <div className="col col-lg-5 col-10" style={{ zIndex: "1" }}>
+        <div
+          className={`row justify-content-center justify-content-md-start ${
+            i18n.language === "ar" ? "justify-content-md-center" : undefined
+          } `}
+        >
+          <div
+            className="col col-lg-5 col-10"
+            style={{ zIndex: "1", textAlign: "center" }}
+          >
             <div className="pb-4">
               <h1 className={`${classes.White} my-3`}>
-                Find parking in seconds
+                {t("find-parking-in-seconds")}
               </h1>
-              <p className={classes.White}>
-                Choose from millions of available spaces, or reserve your space
-                in advance. Join over 10 million drivers enjoying easy parking.
-              </p>
+              <p className={classes.White}>{t("choose-from-millions")}</p>
             </div>
 
             {/* input field to search for location */}
             <div className={classes.autocompleteContainer}>
               <AutoComplete
+                placeholder={t("auto-complete-placeholder")}
                 apiKey="AIzaSyDxE47Kh4gnM9Sh-Nj6vTjFzful_q7lZdY"
-                className={classes.autocompleteField}
+                autocompletePlaceHolder
+                className={`${classes.autocompleteField} ${
+                  i18n.language === "ar"
+                    ? classes.arautocompleteInputPlaceHolder
+                    : classes.enautocompleteInputPlaceHolder
+                }`}
                 ref={autocompleteRef}
                 onChange={handleAutocompleteChange}
                 style={{
@@ -198,11 +218,11 @@ const ParkingSearch = () => {
                 if (!isDisabled) {
                   navigate("/search");
                 }
-                localStorage.setItem(`duration`, `${duration['hours']}`)
+                localStorage.setItem(`duration`, `${duration["hours"]}`);
               }}
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >
-              Show parking spaces
+              {t("show-parking-spaces")}
             </button>
             {/* </Link> */}
           </div>

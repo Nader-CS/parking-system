@@ -5,6 +5,7 @@ import {
   setDuration,
 } from "../../redux/slices/geoCodeSlice";
 import { useEffect } from "react";
+import classes from "./dateAndTimePicker.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -13,6 +14,8 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { styled } from "@mui/system";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import "dayjs/locale/ar";
+import { useTranslation } from "react-i18next";
 
 const StyledDateTimePicker = styled(DateTimePicker)`
   label.Mui-focused {
@@ -34,6 +37,7 @@ const StyledDateTimePicker = styled(DateTimePicker)`
 dayjs.extend(duration);
 
 export default function DateTimePickerValue() {
+  const { t, i18n } = useTranslation();
   const parkingFrom = useSelector((state) => state.dateGeocode.parkingFrom);
   const parkingUntil = useSelector((state) => state.dateGeocode.parkingUntil);
   const dispatch = useDispatch();
@@ -92,16 +96,29 @@ export default function DateTimePickerValue() {
   const parkingUntilValue = dayjs(parkingUntil);
   console.log(parkingFromValue);
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider
+      dateAdapter={AdapterDayjs}
+      adapterLocale={i18n.language === "ar" ? "ar" : "en"}
+    >
       <DemoContainer components={["DateTimePicker", "DateTimePicker"]}>
         <StyledDateTimePicker
-          label="PARKING FROM"
+          className={
+            i18n.language === "ar"
+              ? classes["ar-custom-styled-date-time-picker"]
+              : ""
+          }
+          label={t("parking-from")}
           value={parkingFrom == null ? null : parkingFromValue}
           onChange={handleParkingFromChange}
           disablePast
         />
         <StyledDateTimePicker
-          label="PARKING UNTIL"
+          className={
+            i18n.language === "ar"
+              ? classes["ar-custom-styled-date-time-picker"]
+              : ""
+          }
+          label={t("parking-until")}
           value={parkingUntil == null ? null : parkingUntilValue}
           onChange={handleParkingUntilChange}
           disablePast

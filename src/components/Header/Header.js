@@ -38,10 +38,17 @@ const icons = [
 ];
 
 function Header(props) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navItems = isNotSigned
-    ? [t("home"), "How it works", "Plan", "AboutUs", "Login", "Signup"]
-    : [t("home"), "How it works", "Plan", "AboutUs", "Profile"];
+    ? [
+        t("home"),
+        t("how-it-works"),
+        t("plan"),
+        t("about-us"),
+        t("login"),
+        t("signup"),
+      ]
+    : [t("home"), t("how-it-works"), t("plan"), t("about-us"), "Profile"];
   const pages = isNotSigned
     ? ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"]
     : ["/", "/how-it-works", "/plan", "/about-us", "/"];
@@ -88,7 +95,12 @@ function Header(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={{
+        display: "flex",
+      }}
+      className={classes.box}
+    >
       <CssBaseline />
       <AppBar component="nav" sx={{ backgroundColor: "#F8F9FB" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -116,11 +128,14 @@ function Header(props) {
                   sx={{
                     color:
                       item.toLowerCase() === "login" ||
-                      item.toLowerCase() === "signup"
+                      item.toLowerCase() === "signup" ||
+                      item.toLowerCase() === "تسجيل الدخول" ||
+                      item.toLowerCase() === "إنشاء حساب"
                         ? "rgb(122, 38, 193)"
                         : "#999",
                     border:
-                      item.toLowerCase() === "signup"
+                      item.toLowerCase() === "signup" ||
+                      item.toLowerCase() === "إنشاء حساب"
                         ? "1.5px solid rgb(122, 38, 193)"
                         : "none",
                     borderRadius:
