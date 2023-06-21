@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 const LanguageDropdown = () => {
   const { i18n } = useTranslation();
-  const [language, setLanguage] = useState(i18n.language || "en");
+  const [language, setLanguage] = useState(i18n.language);
   const handleLanguageChange = (selectedLanguage) => {
     i18n.changeLanguage(selectedLanguage);
     setLanguage(selectedLanguage);
@@ -26,7 +26,7 @@ const LanguageDropdown = () => {
         alignSelf: "end",
       }}
     >
-      <MenuItem value="en">English</MenuItem>
+      <MenuItem value="en-US">English</MenuItem>
       <MenuItem value="ar">Arabic</MenuItem>
     </Select>
   );

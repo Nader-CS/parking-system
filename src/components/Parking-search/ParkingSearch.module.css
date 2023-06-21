@@ -26,20 +26,16 @@
   color: #851fbf;
 }
 
-.DateTimePicker {
-  border: 02px solid #851fbf !important;
-}
-
-.DateTimePicker:focus {
-  outline: 02px solid #851fbf;
-}
-
-.DateTimePicker::selection {
-  color: white;
-  background: #851fbf;
-}
-
 /* .autocompleteContainer .suggestion {
   background-color: #851fbf;
   font-size: 18px;
 } */
+
+.arautocompleteInputPlaceHolder {
+  padding: 0 2.3rem 0 0.5rem !important;
+  text-align: center;
+}
+
+.enautocompleteInputPlaceHolder {
+  padding: 0 2.3rem 0 0.5rem !important;
+}

@@ -1,13 +1,21 @@
 import { CreditCard, Money } from "@mui/icons-material";
-import { FormControlLabel, Radio, RadioGroup, Stack, Typography, } from "@mui/material";
+import {
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import CardBox from "./CardBox";
 import { useSelector } from "react-redux";
 
-
-export default function PaymentMethod({ isNotSigned, selectedOption, handleOptionChange }) {
-
-  const { validUser } = useSelector(state => state.loginReducer)
+export default function PaymentMethod({
+  isNotSigned,
+  selectedOption,
+  handleOptionChange,
+}) {
+  const { validUser } = useSelector((state) => state.loginReducer);
   return (
     <CardBox backgroundColor={!validUser ? "#e3e3e3" : "white"}>
       <Typography fontSize={22} marginBottom={3} fontWeight="bold">
