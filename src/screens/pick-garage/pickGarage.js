@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import Map from "../../components/Map/map";
 const PickGarage = () => {
     useEffect(() => {
-        window.scrollTo(0, 0);
-      }, []);
+      window.scrollTo(0, 0);
+    }, []);
   return (
     <div className={`${style.pick_container}`}>
       <div className="row shadow-sm p-3" style={{ height: 70 }}>

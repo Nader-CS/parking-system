@@ -14,7 +14,7 @@ function Payment({ isDisabled, amount }) {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5252/create-payment-intent", {
+    fetch("https://stripe-20s9.onrender.com/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ function Payment({ isDisabled, amount }) {
         throw new Error(`Failed to fetch client secret: ${errorData}`);
       }
     });
-  }, [clientSecret]);
+  }, []);
 
   return (
     <CardBox backgroundColor={isDisabled ? "#e3e3e3" : "white"}>

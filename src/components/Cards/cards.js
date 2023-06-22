@@ -25,6 +25,7 @@ const GarageCards = () => {
   const { duration } = useSelector((state) => state.dateGeocode);
   const { geocode } = useSelector((state) => state.dateGeocode);
   const [open, setOpen] = React.useState(false);
+  console.log(data);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -32,7 +33,6 @@ const GarageCards = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
 
   React.useEffect(() => {
     closestGarage().then((res) => {
@@ -60,34 +60,45 @@ const GarageCards = () => {
                 style={{ width: "30%" }}
                 component="img"
                 height="140"
-                image={garage.garage["images"][0]}
+                image={garage.garage["imagesURL"][0]}
                 alt="green iguana"
               />
               <CardContent style={{ width: "70%" }}>
-                <Typography gutterBottom variant="h5" component="div">
-                  {garage.garage["name"]}
+                <Typography
+                  gutterBottom
+                  fontSize={16}
+                  fontWeight="bold"
+                  component="div"
+                >
+                  {garage.garage["address"]}
                 </Typography>
                 <div className="d-flex align-items-center mb-2">
-                  <div className="d-flex align-items-center">
-                    <Rating
-                      className={`${style.stars_size} p-0 m-0`}
-                      name="half-rating-read"
-                      defaultValue={
-                        garage.garage["reviews"].reduce(
-                          (total, next) => total + next.rating,
-                          0
-                        ) / garage.garage["reviews"].length
-                      }
-                      precision={0.5}
-                      readOnly
-                    />
-                    <p
-                      className="ps-1 pe-5 m-0"
-                      style={{ fontSize: "12px", color: "rgba(0, 0, 0, 0.6)" }}
-                    >
-                      ({garage.garage["reviews"].length})
-                    </p>
-                  </div>
+                  {garage.garage["reviews"] && (
+                    <div className="d-flex align-items-center">
+                      <Rating
+                        className={`${style.stars_size} p-0 m-0`}
+                        name="half-rating-read"
+                        defaultValue={
+                          garage.garage["reviews"].reduce(
+                            (total, next) => total + next.rating,
+                            0
+                          ) / garage.garage["reviews"].length
+                        }
+                        precision={0.5}
+                        readOnly
+                      />
+
+                      <p
+                        className="ps-1 pe-5 m-0"
+                        style={{
+                          fontSize: "12px",
+                          color: "rgba(0, 0, 0, 0.6)",
+                        }}
+                      >
+                        ({garage.garage["reviews"].length})
+                      </p>
+                    </div>
+                  )}
                   <div className="d-flex align-items-center">
                     <DirectionsCarIcon
                       style={{ fontSize: "18px" }}
@@ -131,20 +142,13 @@ const GarageCards = () => {
                     variant="contained"
                   >
                     Reserve for{" "}
-                    {kCalculatePrice(
-                        duration,
-                        garage.garage["pricePerHour"]
-                      )} LE
+                    {kCalculatePrice(duration, garage.garage["pricePerHour"])}{" "}
+                    LE
                   </Button>
                 </Link>
               </CardContent>
             </CardActionArea>
-            <Sheet
-              
-              garage={garage}
-              open={open}
-              close={handleClose}
-            ></Sheet>
+            <Sheet garage={garage} open={open} close={handleClose}></Sheet>
           </Card>
         </div>
       ))}

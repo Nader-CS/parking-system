@@ -40,143 +40,146 @@ const Sheet = ({garage, open, close})=> {
   
 
   
-    return <Dialog
-    open={open}
-    TransitionComponent={Transition}
-    keepMounted
-    sx={{
-      width: 530,
-      top: 0,
-    }}
-    style={{ width: 450 }}
-    onClose={close}
-    BackdropComponent={CustomBackdrop}
-    aria-describedby="alert-dialog-slide-description"
-  >
-    <DialogTitle>
-      <div className="d-flex justify-content-between">
-        <p className="m-0"> {garage.garage["name"]}</p>
-        <Button onClick={close}>
-          <CloseIcon />
-        </Button>
-      </div>
-    </DialogTitle>
-    <DialogContent style={{ padding: 0, margin: 0 }}>
-      <DialogContentText
-        className="px-3 mb-5"
-        id="alert-dialog-slide-description"
+    return (
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        sx={{
+          width: 530,
+          top: 0,
+        }}
+        style={{ width: 450 }}
+        onClose={close}
+        BackdropComponent={CustomBackdrop}
+        aria-describedby="alert-dialog-slide-description"
       >
-        <div className="d-flex align-items-center mb-2">
-          <div className="d-flex align-items-center">
-            <Rating
-              className={`${style.stars_size} p-0 m-0`}
-              name="half-rating-read"
-              defaultValue={garage.garage["reviews"].reduce((total, next) => total + next.rating, 0) / garage.garage["reviews"].length}
-              precision={0.5}
-              readOnly
-            />
-            <p
-              className="ps-1 pe-2 m-0"
-              style={{
-                fontSize: "12px",
-                color: "rgba(0, 0, 0, 0.6)",
-              }}
-            >
-              ({garage.garage["reviews"].length})
-            </p>
+        <DialogTitle>
+          <div className="d-flex justify-content-between">
+            <p className="m-0"> {garage.garage["address"]}</p>
+            <Button onClick={close}>
+              <CloseIcon />
+            </Button>
           </div>
-          <div className="d-flex align-items-center">
-            <DirectionsCarIcon
-              style={{ fontSize: "18px" }}
-            ></DirectionsCarIcon>
-            <p
-              className="ps-1 m-0"
-              style={{
-                fontSize: "12px",
-                color: "rgba(0, 0, 0, 0.6)",
-              }}
-            >
-              +100 bookings
-            </p>
-          </div>
-        </div>
-      </DialogContentText>
-      <div
-        className="row px-0 mx-0 mb-3 py-3"
-        style={{ backgroundColor: "#bfbcbc38" }}
-      >
-        <div className="col-4 text-center border-end border-secondary px-2">
-          <p className="m-0" style={{ fontWeight: 600 }}>
-            
-            {/* {duration["minutes"]
+        </DialogTitle>
+        <DialogContent style={{ padding: 0, margin: 0 }}>
+          <DialogContentText
+            className="px-3 mb-5"
+            id="alert-dialog-slide-description"
+          >
+            <div className="d-flex align-items-center mb-2">
+              {garage.garage["reviews"] &&
+                <div className="d-flex align-items-center">
+                  <Rating
+                    className={`${style.stars_size} p-0 m-0`}
+                    name="half-rating-read"
+                    defaultValue={
+                      garage.garage["reviews"].reduce(
+                        (total, next) => total + next.rating,
+                        0
+                      ) / garage.garage["reviews"].length
+                    }
+                    precision={0.5}
+                    readOnly
+                  />
+                  <p
+                    className="ps-1 pe-2 m-0"
+                    style={{
+                      fontSize: "12px",
+                      color: "rgba(0, 0, 0, 0.6)",
+                    }}
+                  >
+                    ({garage.garage["reviews"].length})
+                  </p>
+                </div>
+              }
+              <div className="d-flex align-items-center">
+                <DirectionsCarIcon
+                  style={{ fontSize: "18px" }}
+                ></DirectionsCarIcon>
+                <p
+                  className="ps-1 m-0"
+                  style={{
+                    fontSize: "12px",
+                    color: "rgba(0, 0, 0, 0.6)",
+                  }}
+                >
+                  +100 bookings
+                </p>
+              </div>
+            </div>
+          </DialogContentText>
+          <div
+            className="row px-0 mx-0 mb-3 py-3"
+            style={{ backgroundColor: "#bfbcbc38" }}
+          >
+            <div className="col-4 text-center border-end border-secondary px-2">
+              <p className="m-0" style={{ fontWeight: 600 }}>
+                {/* {duration["minutes"]
               ? duration["hours"] + ":" + duration["minutes"]
               : duration["hours"]} */}
-              {kFormatDuration(duration)}
-            
-          </p>
-          <p className="m-0">Total duration</p>
-        </div>
-        <div className="col-4 text-center border-end border-secondary px-2">
-          <p className="m-0" style={{ fontWeight: 600 }}>
-          {kCalculatePrice(
-                        duration,
-                        garage.garage["pricePerHour"]
-                      )}
-          {/* {duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]} L.E */}
-          </p>
-          <p className="m-0">Parking fee</p>
-        </div>
-        <div className="col-4 text-center px-2">
-          <p className="m-0" style={{ fontWeight: 600 }}>
-            <DirectionsWalkIcon
-              style={{ fontSize: "18px" }}
-            ></DirectionsWalkIcon>
-            {garage.duration.slice(0, 6)}
-          </p>
-          <p className="m-0">To destination</p>
-        </div>
-      </div>
-      <TabContext value={value}>
-        <Box sx={{ width: "100%", typography: "body1" }}>
+                {kFormatDuration(duration)}
+              </p>
+              <p className="m-0">Total duration</p>
+            </div>
+            <div className="col-4 text-center border-end border-secondary px-2">
+              <p className="m-0" style={{ fontWeight: 600 }}>
+                {kCalculatePrice(duration, garage.garage["pricePerHour"])}
+                {/* {duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]} L.E */}
+              </p>
+              <p className="m-0">Parking fee</p>
+            </div>
+            <div className="col-4 text-center px-2">
+              <p className="m-0" style={{ fontWeight: 600 }}>
+                <DirectionsWalkIcon
+                  style={{ fontSize: "18px" }}
+                ></DirectionsWalkIcon>
+                {garage.duration.slice(0, 6)}
+              </p>
+              <p className="m-0">To destination</p>
+            </div>
+          </div>
           <TabContext value={value}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <TabList
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-              >
-                <Tab label="Information" value="1" />
-                <Tab label="Reviews" value="2" />
-                <Tab label="How to park" value="3" />
-              </TabList>
-            </Box>
-            <TabPanel value="1">
-              <p
-                className="p-2 mb-3 border border-seconary w-50 rounded"
-                style={{ backgroundColor: "#bfbcbc38" }}
-              >
-                Suitable for tall vehicles
-              </p>
-              <p
-                className="p-2 border border-seconary w-50 rounded"
-                style={{ backgroundColor: "#bfbcbc38" }}
-              >
-                Overnight parking allowed
-              </p>
-              <p>{garage.garage["description"]}</p>
-              <div className="row">
-                <img
+            <Box sx={{ width: "100%", typography: "body1" }}>
+              <TabContext value={value}>
+                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                  <TabList
+                    onChange={handleChange}
+                    aria-label="lab API tabs example"
+                  >
+                    <Tab label="Information" value="1" />
+                    <Tab label="Reviews" value="2" />
+                    <Tab label="How to park" value="3" />
+                  </TabList>
+                </Box>
+                <TabPanel value="1">
+                  <p
+                    className="p-2 mb-3 border border-seconary w-50 rounded"
+                    style={{ backgroundColor: "#bfbcbc38" }}
+                  >
+                    Suitable for tall vehicles
+                  </p>
+                  <p
+                    className="p-2 border border-seconary w-50 rounded"
+                    style={{ backgroundColor: "#bfbcbc38" }}
+                  >
+                    Overnight parking allowed
+                  </p>
+                  <p>{garage.garage["description"]}</p>
+                  <div className="row">
+                    {/* <img
                   className="col-6"
                   src={garage.garage["images"][0]}
                   alt="garage pic1"
-                ></img>
-                <img
+                ></img> */}
+                    {/* <img
                   className="col-6"
                   src={garage.garage["images"][1]}
                   alt="garage pic2"
-                ></img>
-              </div>
-            </TabPanel>
-            <TabPanel value="2">
+                ></img> */}
+                  </div>
+                </TabPanel>
+                {/* <TabPanel value="2">
               {garage.garage["reviews"].map(rev=>(
 
                 <div key={rev.id} className="border-bottom py-2 mb-2">
@@ -199,64 +202,69 @@ const Sheet = ({garage, open, close})=> {
               </div>
               ))}
               
-            </TabPanel>
-            <TabPanel value="3">
-              <div className="d-flex flex-column">
-              <div className="d-flex mb-3">
-                <img src={svg1} alt="img1"></img>
-                <div className="ms-4">
-                  <p className="fw-bold mb-2">Once you've paid</p>
-                  <p>You'll receive directions to the space and information on how to access it</p>
-                </div>
-              </div>
-              <div className="d-flex mb-4">
-                
-                <img src={svg2} alt="img2"></img>
-                <div className="ms-4">
-                  <p>The space owner/car park is notified of your booking</p>
-                </div>
-              </div>
-              <div className="d-flex">
-                <img src={svg3} alt="img3"></img>
-                <div className="ms-4">
-                  <p>Just turn up, park your vehicle and get on with your day!</p>
-                </div>
-              </div>
-              </div>
-            </TabPanel>
+            </TabPanel> */}
+                <TabPanel value="3">
+                  <div className="d-flex flex-column">
+                    <div className="d-flex mb-3">
+                      <img src={svg1} alt="img1"></img>
+                      <div className="ms-4">
+                        <p className="fw-bold mb-2">Once you've paid</p>
+                        <p>
+                          You'll receive directions to the space and information
+                          on how to access it
+                        </p>
+                      </div>
+                    </div>
+                    <div className="d-flex mb-4">
+                      <img src={svg2} alt="img2"></img>
+                      <div className="ms-4">
+                        <p>
+                          The space owner/car park is notified of your booking
+                        </p>
+                      </div>
+                    </div>
+                    <div className="d-flex">
+                      <img src={svg3} alt="img3"></img>
+                      <div className="ms-4">
+                        <p>
+                          Just turn up, park your vehicle and get on with your
+                          day!
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </TabPanel>
+              </TabContext>
+            </Box>
           </TabContext>
-        </Box>
-      </TabContext>
-    </DialogContent>
-    <Link style={{ width: "80%", margin: "auto" }} to={`/reservation`}>
-      <Button
-        onClick={() => {
-          const garageObj = garage;
-          const price = kCalculatePrice(
-            duration,
-            garage.garage["pricePerHour"]
-          );
-          // duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"];
-          dispatch(getSelectedGarage({ garageObj, price }));
-        }}
-        style={{
-          backgroundColor: "#AA23B6",
-          width: "100%",
-          margin: "10px auto",
-        }}
-        variant="contained"
-      >
-        {/* {localStorage.setItem(`price`, `${duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]}`)} */}
-        Reserve for{" "}
-        {kCalculatePrice(
-            duration,
-            garage.garage["pricePerHour"]
-          )}
-        {/* {duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]} L.E */}
-      </Button>
-    </Link>
-    <DialogActions></DialogActions>
-  </Dialog>
+        </DialogContent>
+        <Link style={{ width: "80%", margin: "auto" }} to={`/reservation`}>
+          <Button
+            onClick={() => {
+              const garageObj = garage;
+              const price = kCalculatePrice(
+                duration,
+                garage.garage["pricePerHour"]
+              );
+              // duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"];
+              dispatch(getSelectedGarage({ garageObj, price }));
+            }}
+            style={{
+              backgroundColor: "#AA23B6",
+              width: "100%",
+              margin: "10px auto",
+            }}
+            variant="contained"
+          >
+            {/* {localStorage.setItem(`price`, `${duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]}`)} */}
+            Reserve for{" "}
+            {kCalculatePrice(duration, garage.garage["pricePerHour"])}
+            {/* {duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]} L.E */}
+          </Button>
+        </Link>
+        <DialogActions></DialogActions>
+      </Dialog>
+    );
 }
 const CustomBackdrop = styled("div")({
     position: "fixed",

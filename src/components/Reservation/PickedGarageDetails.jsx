@@ -11,9 +11,11 @@ export default function PickedGarageDetails() {
   const duration = useSelector((state) => state.dateGeocode);
   const garage = data.garage.garage;
   const [image, setImage] = useState({
-    img: garage.images[0],
+    img: garage.imagesURL[0],
     index: 0,
   });
+  console.log(garage);
+  console.log(localStorage.getItem("uid"));
   return (
     <Box flex={1} marginLeft={{ md: 2 }} order={{ xs: 1, md: 2 }}>
       <CardBox p={0}>
@@ -55,7 +57,7 @@ export default function PickedGarageDetails() {
               onClick={() => {
                 if (image.index !== 0) {
                   setImage({
-                    img: garage.images[image.index - 1],
+                    img: garage.imagesURL[image.index - 1],
                     index: image.index - 1,
                   });
                 }
@@ -91,16 +93,12 @@ export default function PickedGarageDetails() {
                 //   img: garage.images[0],
                 //   index: 0,
                 // });
-                if (image.index < garage.images.length - 1) {
+                if (image.index < garage.imagesURL.length - 1) {
                   setImage({
-                    img: garage.images[image.index + 1],
+                    img: garage.imagesURL[image.index + 1],
                     index: image.index + 1,
                   });
                 }
-                // var index = garage.images.findIndex((img) => img === image);
-                // if (index < garage.images.length - 1) {
-                //   setImage(garage.images[index + 1]);
-                // }
               }}
             >
               <KeyboardArrowRight />
@@ -119,15 +117,15 @@ export default function PickedGarageDetails() {
           >
             <CameraAlt />
             <Typography variant="caption" sx={{ ml: 1 }}>
-              {image.index + 1}/{garage.images.length}
+              {image.index + 1}/{garage.imagesURL.length}
             </Typography>
           </Box>
         </Box>
         <Box p={4}>
           <Typography fontSize={18} fontWeight="bold">
-            {garage.name} on {garage.address}
+            {garage.address}
           </Typography>
-          {garage.reviews.length > 0 && (
+          {garage.reviews && (
             <Stack marginY={1} direction="row">
               <Rating name="rating" value={4.5} precision={0.5} readOnly />
 

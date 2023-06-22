@@ -96,8 +96,8 @@ export default function BookingDetails() {
           setTermsOpen(false);
         }}
       />
-      {selectedOption === "cash" && !validUser && (
-        <PayButton onClick={handleClickOpen} disabled={validUser}>
+      {selectedOption === "cash" && (
+        <PayButton onClick={handleClickOpen}>
           EGP{" "}
           {kCalculatePrice(
             data.duration,
@@ -108,7 +108,6 @@ export default function BookingDetails() {
       )}
 
       <ReserveDialog
-        garage={garageData.garage.garage}
         additionalData={data}
         open={open}
         handleClose={handleClose}
