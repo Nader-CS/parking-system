@@ -7,6 +7,7 @@ const dateGeocodeSlice = createSlice({
     parkingUntil: null,
     geocode: {},
     duration: {},
+    name: "",
   },
   reducers: {
     setGeocode: (state, action) => {
@@ -23,10 +24,19 @@ const dateGeocodeSlice = createSlice({
       state.duration = action.payload;
       console.log(state.duration);
     },
+    setName: (state, action) => {
+      state.name = action.payload;
+      window.sessionStorage.setItem("place", action.payload);
+    },
   },
 });
 
-export const { setParkingFrom, setParkingUntil, setGeocode, setDuration } =
-  dateGeocodeSlice.actions;
+export const {
+  setParkingFrom,
+  setParkingUntil,
+  setGeocode,
+  setDuration,
+  setName,
+} = dateGeocodeSlice.actions;
 
 export default dateGeocodeSlice.reducer;

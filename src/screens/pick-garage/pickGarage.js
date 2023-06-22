@@ -3,12 +3,14 @@ import GarageCards from "../../components/Cards/cards";
 import style from "./pick.module.css";
 import "./pick.css";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Map from "../../components/Map/map";
+import { useSelector } from "react-redux";
 const PickGarage = () => {
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  let data = useSelector((state) => state.dateGeocode);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className={`${style.pick_container}`}>
       <div className="row shadow-sm p-3" style={{ height: 70 }}>
@@ -18,6 +20,8 @@ const PickGarage = () => {
             id="outlined-basic"
             label="Parking at"
             variant="outlined"
+            value={data.name || sessionStorage.getItem("place")}
+            disabled
           />
         </div>
         <div className="col-2">
@@ -43,7 +47,7 @@ const PickGarage = () => {
           <GarageCards />
         </div>
         <div className="col-8">
-            <Map />
+          <Map />
         </div>
       </div>
       <RemoveScrollBar></RemoveScrollBar>

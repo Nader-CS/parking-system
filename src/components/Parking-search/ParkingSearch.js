@@ -4,6 +4,7 @@ import classes from "./ParkingSearch.module.css";
 import AutoComplete from "react-google-autocomplete";
 import { useDispatch, useSelector } from "react-redux";
 import { setGeocode } from "../../redux/slices/geoCodeSlice";
+import { setName } from "../../redux/slices/geoCodeSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -36,7 +37,7 @@ const ParkingSearch = () => {
         lat: lat(),
         lng: lng(),
       };
-
+      dispatch(setName(place.formatted_address));
       dispatch(setGeocode(geocode));
 
       // Set the locationInfo to the formatted address
