@@ -57,5 +57,7 @@
   "contact": "Contact",
   "payment-partners": "Payment partners",
   "copyright": "© 2023 Copyright:",
-  "doesnot-exist": "The page you’re looking for doesn’t exist."
+  "doesnot-exist": "The page you’re looking for doesn’t exist.",
+  "logout": "Logout",
+  "profile": "Profile"
 }

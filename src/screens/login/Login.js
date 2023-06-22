@@ -20,7 +20,7 @@ const Login = () => {
       $(".sucMsg").fadeIn(500, () => {
         setTimeout(() => {
           $(".sucMsg").fadeOut(500);
-          navigate("/");
+          navigate(-1);
         }, 2000);
       });
     } else if (isLogged === false) {

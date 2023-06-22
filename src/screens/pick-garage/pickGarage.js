@@ -15,7 +15,7 @@ const PickGarage = () => {
   return (
     <div className={`${style.pick_container}`}>
       <div className="row shadow-sm p-3" style={{ height: 70 }}>
-        <div className="col-8">
+        <div className="col-5">
           <TextField
             fullWidth
             id="outlined-basic"
@@ -25,7 +25,7 @@ const PickGarage = () => {
             disabled
           />
         </div>
-        <div className="col-2">
+        <div className="col-3 flex-grow-1">
           <TextField
             fullWidth
             id="outlined-basic"
@@ -35,7 +35,7 @@ const PickGarage = () => {
             disabled
           />
         </div>
-        <div className="col-2">
+        <div className="col-3 flex-grow-1">
           <TextField
             fullWidth
             id="outlined-basic"
@@ -51,7 +51,7 @@ const PickGarage = () => {
         <div className={`${style.height} col-12 col-md-4 p-0`}>
           <GarageCards />
         </div>
-        <div className="col-8">
+        <div className="col-12 col-md-8">
           <Map />
         </div>
       </div>

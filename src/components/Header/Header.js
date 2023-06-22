@@ -23,7 +23,8 @@ import classes from "./Header.module.css";
 import { Link } from "react-router-dom";
 import LanguageDropdown from "../Languages/LanguagesDropdown";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logUserOut } from "../../redux/slices/loginSlice";
 
 const drawerWidth = 240;
 const icons = [
@@ -35,21 +36,23 @@ const icons = [
   LogoutOutlinedIcon,
 ];
 
-const logoutHandler = () => {
-  console.log("Hello world");
-};
-
 function Header(props) {
   const { validUser } = useSelector((state) => state.loginReducer);
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logUserOut());
+  };
+
   const navItems = validUser
     ? [
         t("home"),
         t("how-it-works"),
         t("plan"),
         t("about-us"),
-        "Profile",
-        "Logout",
+        t("profile"),
+        t("logout"),
       ]
     : [
         t("home"),
@@ -136,7 +139,10 @@ function Header(props) {
               <Link to={pages[index]} key={item}>
                 <Button
                   onClick={
-                    item.toLowerCase() === "logout" ? logoutHandler : undefined
+                    item.toLowerCase() === "logout" ||
+                    item.toLowerCase() === "تسجيل الخروج"
+                      ? logoutHandler
+                      : undefined
                   }
                   sx={{
                     color:

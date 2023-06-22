@@ -98,7 +98,7 @@ export default function BookingDetails() {
           setTermsOpen(false);
         }}
       />
-      {selectedOption === "cash" && (
+      {selectedOption === "cash" && localStorage.getItem('uid') && (
         <PayButton onClick={handleClickOpen}>
           EGP{" "}
           {kCalculatePrice(

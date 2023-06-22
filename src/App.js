@@ -22,10 +22,20 @@ import { useEffect } from "react";
 import { off, onValue, ref } from "firebase/database";
 import { realDb } from "./services/firebase/firebase-config";
 import { listenToValueChange } from "./services/reservationServices";
+import { useDispatch } from "react-redux";
+import { userValid } from "./redux/slices/loginSlice";
+
+
+
 
 function App() {
+  const dispatch = useDispatch();
   const { i18n } = useTranslation();
   document.body.dir = i18n.dir();
+
+  useEffect(() => {
+    dispatch(userValid());
+  }, []);
 
   useEffect(() => {
     const databaseRef = ref(realDb, "user-collection");
