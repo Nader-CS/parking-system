@@ -6,10 +6,11 @@ import { kCalculatePrice } from "../../utilities/Constants";
 import Sheet from "../Cards/sheet";
 import marker from '../../assets/icons/marker.PNG'
 import markerPurple from '../../assets/icons/marker-purple.png'
+import { CircularProgress } from "@mui/material";
 function Map() {
   const [activeMarker, setActiveMarker] = useState(null);
   const { data } = useSelector((state) => state.garageSpaces);
-//   const { geocode } = useSelector((state) => state.dateGeocode);
+  const { geocode } = useSelector((state) => state.dateGeocode);
 const dutrationString = sessionStorage.getItem('duration');
   const duration = JSON.parse(dutrationString);
     const [position, setPos] = useState([{}]);
@@ -34,22 +35,16 @@ const dutrationString = sessionStorage.getItem('duration');
       })})
       setPos(newPos);
   },[data])
-  const handleOnLoad = async(map) => {
-        const bounds = new window.google.maps.LatLngBounds();
-    position.forEach((garage) => bounds.extend({lat:+garage["lng"], lng:+garage["lat"] }));
-    map.fitBounds(bounds);
-  };
-  if (data.length<= 0) return <div>Loading...</div>
+  if (data.length<= 0) return <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}><CircularProgress /></div>
   return (
     <GoogleMap
       center={{ lat: 30.0505454, lng: 31.2486498 }}
       zoom={17}
-      onLoad={position.length>0?handleOnLoad:null}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: "100%", height: "100%" }}
     >
       <Marker
-          position={{lat:30.075039276195568, lng:31.22181733648843 }}
+          position={{lat:30.0505454, lng:31.2486498 }}
           icon={{        
             url: markerPurple,
             scaledSize: new window.google.maps.Size(70, 50)
@@ -58,7 +53,7 @@ const dutrationString = sessionStorage.getItem('duration');
       {data.map((garage) => (
         <Marker
           key={garage.garage["id"]}
-          position={{lat:+garage.garage["lon"], lng:+garage.garage["lat"] }}
+          position={{lat:+garage.garage["lat"], lng:+garage.garage["lon"] }}
           onClick={() => {handleActiveMarker(garage.garage["id"])
           setOpen(true);
           setID(garage.garage["id"])
@@ -76,7 +71,7 @@ const dutrationString = sessionStorage.getItem('duration');
           <ChatBubbleRoundedIcon />
           {activeMarker === garage.garage["id"] ? (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{garage.garage["name"]}</div>
+              <div>{garage.garage["garageName"]}</div>
             </InfoWindow>
           ) : null}
           <Sheet id={id} open={open} close={handleClose}></Sheet>

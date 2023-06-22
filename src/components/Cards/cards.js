@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,9 +14,10 @@ import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import { useDispatch, useSelector } from "react-redux";
 import closestGarage from "../../utilities/closestGarage";
 import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
-import { Link, json } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getSelectedGarage } from "../../redux/slices/selectedGarage";
 import { kCalculatePrice, kFormatDuration } from "../../utilities/Constants";
+import Skeleton from '@mui/material/Skeleton';
 import Sheet from "./sheet";
 
 const GarageCards = () => {
@@ -42,7 +43,14 @@ const GarageCards = () => {
       dispatch(getNearbyGarageSpaces(res));
     });
   }, [dispatch]);
-  return data ? (
+  if (data.length <= 0) return  <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', marginTop:'20px'}}>
+    <Stack spacing={1}>
+    <Skeleton style={{margin:'20 auto'}}  variant="rounded" width={400} height={120} />
+    <Skeleton variant="rounded" width={400} height={120} />
+    <Skeleton variant="rounded" width={400} height={120} />
+  </Stack>
+  </div> 
+  return (
     <div
       style={{
         display: "flex",
@@ -160,9 +168,7 @@ const GarageCards = () => {
         </div>
       ))}
     </div>
-  ) : (
-    <div>Loading</div>
-  );
+  )
 };
 
 export default GarageCards;

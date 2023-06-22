@@ -43,8 +43,6 @@ const Sheet = ({id, open, close})=> {
   
   React.useEffect(()=>{
     setGarage(data.filter(g=>g.garage["id"] === id))
-    console.log(id);
-    
   },[data, id])
   
   if (garage.length === 0) return ""
@@ -64,7 +62,7 @@ const Sheet = ({id, open, close})=> {
     
     <DialogTitle>
       <div className="d-flex justify-content-between">
-        <p className="m-0"> {garage[0].garage["name"]}</p>
+        <p className="m-0"> {garage[0].garage["address"]}</p>
         <Button onClick={close}>
           <CloseIcon />
         </Button>
@@ -76,7 +74,7 @@ const Sheet = ({id, open, close})=> {
         id="alert-dialog-slide-description"
       >
         <div className="d-flex align-items-center mb-2">
-          <div className="d-flex align-items-center">
+          {garage[0].garage["reviews"] && (<div className="d-flex align-items-center">
             <Rating
               className={`${style.stars_size} p-0 m-0`}
               name="half-rating-read"
@@ -93,7 +91,8 @@ const Sheet = ({id, open, close})=> {
             >
               ({garage[0].garage["reviews"].length})
             </p>
-          </div>
+          </div>)}
+          
           <div className="d-flex align-items-center">
             <DirectionsCarIcon
               style={{ fontSize: "18px" }}
@@ -170,18 +169,18 @@ const Sheet = ({id, open, close})=> {
               <div className="row">
                 <img
                   className="col-6"
-                  src={garage[0].garage["images"][0]}
+                  src={garage[0].garage["imagesURL"][0]}
                   alt="garage pic1"
                 ></img>
                      <img
                   className="col-6"
-                  src={garage[0].garage["images"][1]}
+                  src={garage[0].garage["imagesURL"][1]}
                   alt="garage pic2"
                 ></img>
               </div>
             </TabPanel>
             <TabPanel value="2">
-              {garage.garage["reviews"].map(rev=>(
+              {garage[0].garage["reviews"]?garage.garage["reviews"].map(rev=>(
 
                 <div key={rev.id} className="border-bottom py-2 mb-2">
                 <div className="d-flex align-items-center">
@@ -201,7 +200,7 @@ const Sheet = ({id, open, close})=> {
           />
           <p>{rev.review}</p>
               </div>
-              ))}
+              )):<p>There are no reviews</p>}
               
             </TabPanel>
             <TabPanel value="3">
@@ -235,10 +234,10 @@ const Sheet = ({id, open, close})=> {
     <Link style={{ width: "80%", margin: "auto" }} to={`/reservation`}>
       <Button
         onClick={() => {
-          const garageObj = garage;
+          const garageObj = garage[0];
           const price = kCalculatePrice(
             duration,
-            garage.garage["pricePerHour"]
+            garage[0].garage["pricePerHour"]
           );
           dispatch(getSelectedGarage({ garageObj, price }));
         }}
@@ -252,7 +251,7 @@ const Sheet = ({id, open, close})=> {
         Reserve for{" "}
         {kCalculatePrice(
             duration,
-            garage.garage["pricePerHour"]
+            garage[0].garage["pricePerHour"]
           )}
       </Button>
     </Link>

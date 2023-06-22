@@ -28,6 +28,8 @@ export default function ReserveDialog({
   const garage = data.garage.garage;
   const garageId = garage.id;
   const availableSpots = garage.availableSpots;
+  const dutrationString = sessionStorage.getItem('duration');
+  const duration = JSON.parse(dutrationString);
   return (
     <Dialog
       open={open}
@@ -84,7 +86,7 @@ export default function ReserveDialog({
             Price:
           </Typography>
           <Typography variant="subtitle2" fontWeight="bold">
-            EGP {kCalculatePrice(additionalData.duration, garage.pricePerHour)}
+            EGP {kCalculatePrice(duration, garage.pricePerHour)}
           </Typography>
         </Stack>
       </DialogContent>
