@@ -51,7 +51,7 @@ const PickGarage = () => {
         <div className={`${style.height} col-12 col-md-4 p-0`}>
           <GarageCards />
         </div>
-        <div className="col-12 col-md-8 vh-100">
+        <div className="col-12 col-md-8">
           <Map />
         </div>
       </div>
