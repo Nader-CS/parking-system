@@ -73,7 +73,7 @@ const ParkingSearch = () => {
           const address = results[0].formatted_address;
           // setLocationInfo(address); // Update the location with the address
           autocompleteRef.current.value = address; // Update the autocomplete field value
-
+          dispatch(setName(address));
           const geocode = {
             lat: latitude,
             lng: longitude,
