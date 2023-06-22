@@ -1,0 +1,78 @@
+.mainBG {
+    background-color: #aa23b611 !important;
+}
+
+.underLine {
+    width: fit-content;
+    position: relative;
+}
+
+.underLine::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    background-color: #aa23b67e;
+    left: 0px;
+    bottom: 2px;
+    z-index: -1;
+}
+
+.svg {
+    color: #aa23b67e;
+}
+
+.crdBtm {
+    position: relative;
+}
+
+.crdBtm::after {
+    content: '';
+    position: absolute;
+    height: 5.5rem;
+    background-color: #aa23b611 !important;
+    left: 0px;
+    right: 0px;
+    bottom: -30px;
+    z-index: -1;
+    border-radius: 8px;
+}
+
+.crd_1 {
+    width: 100% !important;
+    height: 10rem !important;
+    background-image: url(../../assets/images/AboutUs/a1.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.crd_1:hover {
+    background-image: url(../../assets/images/AboutUs/a2.png);
+}
+
+.crd_2 {
+    width: 100% !important;
+    height: 10rem !important;
+    background-image: url(../../assets/images/AboutUs/b1.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.crd_2:hover {
+    background-image: url(../../assets/images/AboutUs/b2.png);
+}
+
+.crd_3 {
+    width: 100% !important;
+    height: 10rem !important;
+    background-image: url(../../assets/images/AboutUs/c1.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.crd_3:hover {
+    background-image: url(../../assets/images/AboutUs/c2.png);
+}

@@ -1,0 +1,51 @@
+.mainBG {
+    background-color: #aa23b611 !important;
+}
+
+.crdBg {
+    background-color: #aa23b611 !important;
+}
+
+.underLine {
+    width: fit-content;
+    position: relative;
+}
+
+.underLine::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    background-color: #aa23b67e;
+    left: 0px;
+    bottom: 2px;
+    z-index: -1;
+}
+
+.crdBtm {
+    position: relative;
+}
+
+.crdBtm::after {
+    content: '';
+    position: absolute;
+    height: 5.5rem;
+    background-color: #aa23b611 !important;
+    left: 0px;
+    right: 0px;
+    bottom: -30px;
+    z-index: -1;
+    border-radius: 8px;
+}
+
+.svg {
+    width: 1.2rem;
+    color: #AA23B6;
+}
+
+.collBtn {
+    background-color: white !important;
+    border: 0px !important;
+    border-bottom: 02px solid #AA23B6 !important;
+    border-radius: 0px !important;
+}
