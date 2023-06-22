@@ -6,7 +6,7 @@ import { kCalculatePrice } from "../../utilities/Constants";
 import Sheet from "../Cards/sheet";
 import marker from '../../assets/icons/marker.PNG'
 import markerPurple from '../../assets/icons/marker-purple.png'
-import { CircularProgress } from "@mui/material";import { Link } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 function Map() {
   const [activeMarker, setActiveMarker] = useState(null);
@@ -36,7 +36,8 @@ const dutrationString = sessionStorage.getItem('duration');
       })})
       setPos(newPos);
   },[data])
-  if (data.length<= 0) return <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}><CircularProgress /></div>
+  if (data.length<= 0) return <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}>
+    <CircularProgress /></div>
   return (
     <GoogleMap
       center={{ lat: 30.0505454, lng: 31.2486498 }}

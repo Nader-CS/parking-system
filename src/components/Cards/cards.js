@@ -16,7 +16,7 @@ import closestGarage from "../../utilities/closestGarage";
 import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { Link } from "react-router-dom";
 import { getSelectedGarage } from "../../redux/slices/selectedGarage";
-import { kCalculatePrice, kFormatDuration } from "../../utilities/Constants";
+import { kCalculatePrice } from "../../utilities/Constants";
 import Skeleton from '@mui/material/Skeleton';
 import Sheet from "./sheet";
 
