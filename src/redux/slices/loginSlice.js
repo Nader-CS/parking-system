@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../../services/firebase/firebase-config'
 
 export const logUserIn = createAsyncThunk('user/login', async (uMainData) => {
@@ -9,6 +9,11 @@ export const logUserIn = createAsyncThunk('user/login', async (uMainData) => {
         uid: response.user.uid,
         operationType: response.operationType
     }
+})
+
+export const logUserOut = createAsyncThunk('user/logout', async () => {
+    const response = await signOut(auth);
+    return response;
 })
 
 const loginData = createSlice({
@@ -25,10 +30,8 @@ const loginData = createSlice({
         userValid: (state) => {
             if (localStorage.getItem('token') !== null) {
                 state.validUser = true;
-                console.log('true');
             } else {
                 state.validUser = false;
-                console.log('false');
             }
         },
     },
@@ -46,6 +49,12 @@ const loginData = createSlice({
                 state.validUser = false
                 state.isLogged = false
             }
+        },
+        [logUserOut.fulfilled]: (state, action) => {
+            state.validUser = false;
+            state.isLogged = null;
+            localStorage.removeItem('token')
+            localStorage.removeItem('uid')
         }
     }
 })
