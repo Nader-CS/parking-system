@@ -56,5 +56,6 @@
   "complaint-inquiry": "Complaint / Inquiry",
   "contact": "Contact",
   "payment-partners": "Payment partners",
-  "copyright": "© 2023 Copyright:"
+  "copyright": "© 2023 Copyright:",
+  "doesnot-exist": "The page you’re looking for doesn’t exist."
 }
