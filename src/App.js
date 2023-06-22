@@ -27,18 +27,18 @@ function App() {
   const { i18n } = useTranslation();
   document.body.dir = i18n.dir();
 
-useEffect(() => {
-  const databaseRef = ref(realDb, "user-collection");
-  console.log(databaseRef);
-  const listener = onValue(databaseRef, (snapshot) => {
-    listenToValueChange(snapshot);
-  });
+  useEffect(() => {
+    const databaseRef = ref(realDb, "user-collection");
+    console.log(databaseRef);
+    const listener = onValue(databaseRef, (snapshot) => {
+      listenToValueChange(snapshot);
+    });
 
-  // Clean up the listener when the component unmounts
-  return () => {
-    off(databaseRef, listener);
-  };
-}, []);
+    // Clean up the listener when the component unmounts
+    return () => {
+      off(databaseRef, listener);
+    };
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <Header />
