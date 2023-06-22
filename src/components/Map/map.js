@@ -2,14 +2,19 @@ import React, { useEffect, useState } from "react";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
+import { kCalculatePrice } from "../../utilities/Constants";
 import Sheet from "../Cards/sheet";
+import marker from '../../assets/icons/marker.PNG'
+import markerPurple from '../../assets/icons/marker-purple.png'
 function Map() {
   const [activeMarker, setActiveMarker] = useState(null);
   const { data } = useSelector((state) => state.garageSpaces);
 //   const { geocode } = useSelector((state) => state.dateGeocode);
+const dutrationString = sessionStorage.getItem('duration');
+  const duration = JSON.parse(dutrationString);
     const [position, setPos] = useState([{}]);
-    const [isPositionSet, setIsPositionSet] = useState(false);
     const [open, setOpen] = React.useState(false);
+    const [id, setID] = React.useState('');
     const handleClose = () => {
         setOpen(false);
       };
@@ -26,22 +31,14 @@ function Map() {
         lng: +garage.garage["lon"],
       }));
       setPos(newPos);
-      setIsPositionSet(true);    
   },[data])
   const handleOnLoad = async(map) => {
    
         const bounds = new window.google.maps.LatLngBounds();
     position.forEach((garage) => bounds.extend({lat:+garage["lng"], lng:+garage["lat"] }));
     map.fitBounds(bounds);
-      
-    
-    // data.forEach((garage) => console.log({lat:garage.garage["lat"], lng:garage.garage["lon"]}));
-
   };
   if (data.length<= 0) return <div>Loading...</div>
-//   if (position.length <= 0) return <div>Loading...</div>
-  
-  
   return (
     <GoogleMap
         center={{lat:30.075039276195568, lng: 31.22181733648843}}
@@ -50,25 +47,30 @@ function Map() {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: "100%", height: "100%" }}
     >
+      <Marker
+          position={{lat:30.075039276195568, lng:31.22181733648843 }}
+          icon={{        
+            url: markerPurple,
+            scaledSize: new window.google.maps.Size(70, 50)
+            }}
+        ></Marker>
       {data.map((garage) => (
         <Marker
           key={garage.garage["id"]}
-          
           position={{lat:+garage.garage["lon"], lng:+garage.garage["lat"] }}
           onClick={() => {handleActiveMarker(garage.garage["id"])
           setOpen(true);
-        }
-         
-        }
-        //   icon={{
+          setID(garage.garage["id"])
+        }}
+          icon={{        
+            url: marker,
+            scaledSize: new window.google.maps.Size(85, 50)
+            }}
+            label={`${kCalculatePrice(
+              duration,
+              garage.garage["pricePerHour"]
+            ).toString()} EGP`}
             
-        //     url: '/custom_marker_pin.svg',
-            
-        //     anchor: new window.google.maps.Point(17, 46),
-            
-        //     scaledSize: new window.google.maps.Size(37, 37)
-            
-        //     }}
         >
             <ChatBubbleRoundedIcon />
           {activeMarker === garage.garage["id"] ? (
@@ -76,7 +78,7 @@ function Map() {
               <div>{garage.garage["name"]}</div>
             </InfoWindow>
           ) : null}
-          <Sheet garage={garage} open={open} close={handleClose}></Sheet>
+          <Sheet id={id} open={open} close={handleClose}></Sheet>
         </Marker>
         
       ))}

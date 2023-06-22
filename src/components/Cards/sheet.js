@@ -30,17 +30,25 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
-const Sheet = ({garage, open, close})=> {
+const Sheet = ({id, open, close})=> {
     const dispatch = useDispatch();
-    const { duration } = useSelector((state) => state.dateGeocode);
+    const dutrationString = sessionStorage.getItem('duration');
+    const { data } = useSelector((state) => state.garageSpaces);
+    const [garage, setGarage] = React.useState([]);
+  const duration = JSON.parse(dutrationString);
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   
-
+  React.useEffect(()=>{
+    setGarage(data.filter(g=>g.garage["id"] === id))
+    console.log(id);
+    
+  },[data, id])
   
-    return <Dialog
+  if (garage.length === 0) return ""
+   else return <Dialog
     open={open}
     TransitionComponent={Transition}
     keepMounted
@@ -53,9 +61,10 @@ const Sheet = ({garage, open, close})=> {
     BackdropComponent={CustomBackdrop}
     aria-describedby="alert-dialog-slide-description"
   >
+    
     <DialogTitle>
       <div className="d-flex justify-content-between">
-        <p className="m-0"> {garage.garage["name"]}</p>
+        <p className="m-0"> {garage[0].garage["name"]}</p>
         <Button onClick={close}>
           <CloseIcon />
         </Button>
@@ -71,7 +80,7 @@ const Sheet = ({garage, open, close})=> {
             <Rating
               className={`${style.stars_size} p-0 m-0`}
               name="half-rating-read"
-              defaultValue={garage.garage["reviews"].reduce((total, next) => total + next.rating, 0) / garage.garage["reviews"].length}
+              defaultValue={garage[0].garage["reviews"].reduce((total, next) => total + next.rating, 0) / garage[0].garage["reviews"].length}
               precision={0.5}
               readOnly
             />
@@ -82,7 +91,7 @@ const Sheet = ({garage, open, close})=> {
                 color: "rgba(0, 0, 0, 0.6)",
               }}
             >
-              ({garage.garage["reviews"].length})
+              ({garage[0].garage["reviews"].length})
             </p>
           </div>
           <div className="d-flex align-items-center">
@@ -107,10 +116,6 @@ const Sheet = ({garage, open, close})=> {
       >
         <div className="col-4 text-center border-end border-secondary px-2">
           <p className="m-0" style={{ fontWeight: 600 }}>
-            
-            {/* {duration["minutes"]
-              ? duration["hours"] + ":" + duration["minutes"]
-              : duration["hours"]} */}
               {kFormatDuration(duration)}
             
           </p>
@@ -120,9 +125,9 @@ const Sheet = ({garage, open, close})=> {
           <p className="m-0" style={{ fontWeight: 600 }}>
           {kCalculatePrice(
                         duration,
-                        garage.garage["pricePerHour"]
+                        garage[0].garage["pricePerHour"]
                       )}
-          {/* {duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]} L.E */}
+          {/* {duration["days"]?garage[0].garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage[0].garage["pricePerHour"] * duration["hours"]} L.E */}
           </p>
           <p className="m-0">Parking fee</p>
         </div>
@@ -131,7 +136,7 @@ const Sheet = ({garage, open, close})=> {
             <DirectionsWalkIcon
               style={{ fontSize: "18px" }}
             ></DirectionsWalkIcon>
-            {garage.duration.slice(0, 6)}
+            {garage[0].duration.slice(0, 6)}
           </p>
           <p className="m-0">To destination</p>
         </div>
@@ -162,22 +167,22 @@ const Sheet = ({garage, open, close})=> {
               >
                 Overnight parking allowed
               </p>
-              <p>{garage.garage["description"]}</p>
+              <p>{garage[0].garage["description"]}</p>
               <div className="row">
                 <img
                   className="col-6"
-                  src={garage.garage["images"][0]}
+                  src={garage[0].garage["images"][0]}
                   alt="garage pic1"
                 ></img>
                 <img
                   className="col-6"
-                  src={garage.garage["images"][1]}
+                  src={garage[0].garage["images"][1]}
                   alt="garage pic2"
                 ></img>
               </div>
             </TabPanel>
             <TabPanel value="2">
-              {garage.garage["reviews"].map(rev=>(
+              {garage[0].garage["reviews"].map(rev=>(
 
                 <div key={rev.id} className="border-bottom py-2 mb-2">
                 <div className="d-flex align-items-center">
@@ -231,12 +236,11 @@ const Sheet = ({garage, open, close})=> {
     <Link style={{ width: "80%", margin: "auto" }} to={`/reservation`}>
       <Button
         onClick={() => {
-          const garageObj = garage;
+          const garageObj = garage[0];
           const price = kCalculatePrice(
             duration,
-            garage.garage["pricePerHour"]
+            garage[0].garage["pricePerHour"]
           );
-          // duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"];
           dispatch(getSelectedGarage({ garageObj, price }));
         }}
         style={{
@@ -246,13 +250,11 @@ const Sheet = ({garage, open, close})=> {
         }}
         variant="contained"
       >
-        {/* {localStorage.setItem(`price`, `${duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]}`)} */}
         Reserve for{" "}
         {kCalculatePrice(
             duration,
-            garage.garage["pricePerHour"]
+            garage[0].garage["pricePerHour"]
           )}
-        {/* {duration["days"]?garage.garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage.garage["pricePerHour"] * duration["hours"]} L.E */}
       </Button>
     </Link>
     <DialogActions></DialogActions>

@@ -198,7 +198,8 @@ const ParkingSearch = () => {
                 if (!isDisabled) {
                   navigate("/search");
                 }
-                localStorage.setItem(`duration`, `${duration['hours']}`)
+                const dutrationString = JSON.stringify(duration)
+                sessionStorage.setItem(`duration`, `${dutrationString}`)
               }}
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >

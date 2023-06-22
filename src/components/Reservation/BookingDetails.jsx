@@ -22,6 +22,8 @@ export default function BookingDetails() {
   const [open, setOpen] = React.useState(false);
   const [termsOpen, setTermsOpen] = React.useState(false);
   const data = useSelector((state) => state.dateGeocode);
+  const dutrationString = sessionStorage.getItem('duration');
+  const duration = JSON.parse(dutrationString);
   const garageData = useSelector((state) => state.selectedGarage);
   const [selectedOption, setSelectedOption] = useState("cash");
 
@@ -56,7 +58,7 @@ export default function BookingDetails() {
         <BookingTimer
           icon={<TimerOutlined />}
           text="Duration"
-          value={kFormatDuration(data.duration)}
+          value={kFormatDuration(duration)}
           isUnderLine={false}
         />
       </CardBox>
@@ -71,7 +73,7 @@ export default function BookingDetails() {
         <Payment
           isDisabled={false}
           amount={kCalculatePrice(
-            data.duration,
+            duration,
             garageData.garage.garage.pricePerHour
           )}
         />
@@ -104,7 +106,7 @@ export default function BookingDetails() {
         <PayButton onClick={handleClickOpen} disabled={isNotSigned}>
           EGP{" "}
           {kCalculatePrice(
-            data.duration,
+            duration,
             garageData.garage.garage.pricePerHour
           )}{" "}
           - Reserve

@@ -14,7 +14,7 @@ import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import { useDispatch, useSelector } from "react-redux";
 import closestGarage from "../../utilities/closestGarage";
 import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import { getSelectedGarage } from "../../redux/slices/selectedGarage";
 import { kCalculatePrice, kFormatDuration } from "../../utilities/Constants";
 import Sheet from "./sheet";
@@ -22,11 +22,15 @@ import Sheet from "./sheet";
 const GarageCards = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.garageSpaces);
-  const { duration } = useSelector((state) => state.dateGeocode);
+  // const { duration } = useSelector((state) => state.dateGeocode);
+  const dutrationString = sessionStorage.getItem('duration');
+  const duration = JSON.parse(dutrationString);
   const { geocode } = useSelector((state) => state.dateGeocode);
   const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
+  const [id, setID] = React.useState('');
+  const handleClickOpen = (id) => {
     setOpen(true);
+    setID(id)
   };
 
   const handleClose = () => {
@@ -44,7 +48,6 @@ const GarageCards = () => {
       style={{
         display: "flex",
         justifyContent: "flex-start",
-        gap: "20px",
         flexWrap: "wrap",
       }}
     >
@@ -52,7 +55,9 @@ const GarageCards = () => {
         <div style={{ padding: "2%" }} key={garage.garage["id"]}>
           <Card sx={{ maxWidth: 450 }} className={style.card}>
             <CardActionArea
-              onClick={handleClickOpen}
+              onClick={()=>{
+                handleClickOpen(garage.garage["id"])
+              }}
               className="d-flex ps-2"
               style={{ height: "150px" }}
             >
@@ -119,7 +124,6 @@ const GarageCards = () => {
                         duration,
                         garage.garage["pricePerHour"]
                       );
-                      // garage.garage["pricePerHour"] * duration["hours"];
                       dispatch(getSelectedGarage({ garageObj, price }));
                     }}
                     style={{
@@ -140,8 +144,7 @@ const GarageCards = () => {
               </CardContent>
             </CardActionArea>
             <Sheet
-              
-              garage={garage}
+              id={id}
               open={open}
               close={handleClose}
             ></Sheet>

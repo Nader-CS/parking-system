@@ -21,7 +21,8 @@ import { kCalculatePrice } from "../../utilities/Constants";
 
 export default function PickedGarageDetails() {
   const data = useSelector((state) => state.selectedGarage);
-  const duration = useSelector((state) => state.dateGeocode);
+  const dutrationString = sessionStorage.getItem('duration');
+  const duration = JSON.parse(dutrationString);
   const garage = data.garage.garage;
   const [image, setImage] = useState({
     img: garage.images[0],
@@ -178,7 +179,7 @@ export default function PickedGarageDetails() {
               Final price
             </Typography>
             <Typography fontWeight="bold">
-              EGP {kCalculatePrice(duration.duration, garage.pricePerHour)}
+              EGP {kCalculatePrice(duration, garage.pricePerHour)}
             </Typography>
           </Stack>
         </Box>
