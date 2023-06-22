@@ -3,7 +3,7 @@ import axios from "axios";
 import { FirebaseCollections } from "../../utilities/FirebaseCollections";
 export const reserveGarage = createAsyncThunk(
   "reservation/reserve",
-  async ({ garageId, availableSpots }) => {
+  async ({ garageId, availableSpots , leavingOn }) => {
     console.log(`garageId ${garageId} availableSpots ${availableSpots}`);
     try {
       // const uid = "lWiGmixRQQNmfC3LsnBsBBQjDhD2";
@@ -30,9 +30,11 @@ export const reserveGarage = createAsyncThunk(
         if (filteredUser) {
           const [id, userData] = filteredUser;
           console.log(`user ${id} ${userData}`);
-          const patchUrl = `${FirebaseCollections.baseURL}/user-collection/${id}/${FirebaseCollections.reservedGarages}`;
-          await axios.post(patchUrl, {
+          const postUrl = `${FirebaseCollections.baseURL}/user-collection/${id}/${FirebaseCollections.reservedGarages}`;
+          await axios.post(postUrl, {
             garageId: garageId,
+            leavingOn: leavingOn,
+            isUpdated: false
           });
           console.log("done user");
         }

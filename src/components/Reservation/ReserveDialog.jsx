@@ -30,6 +30,7 @@ export default function ReserveDialog({
   const availableSpots = garage.availableSpots;
   const dutrationString = sessionStorage.getItem('duration');
   const duration = JSON.parse(dutrationString);
+  const leavingOn = additionalData.parkingUntil;
   return (
     <Dialog
       open={open}
@@ -115,7 +116,7 @@ export default function ReserveDialog({
           onClick={() => {
             handleClose();
             console.log(garageId, availableSpots);
-            dispatch(reserveGarage({ garageId, availableSpots }));
+            dispatch(reserveGarage({ garageId, availableSpots, leavingOn}));
             // navigate("/signup");
             console.log(reservation);
             // if (reservation.successMessage) {

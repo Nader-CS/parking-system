@@ -25,7 +25,6 @@ import LanguageDropdown from "../Languages/LanguagesDropdown";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
-
 const drawerWidth = 240;
 const icons = [
   HouseIcon,
@@ -36,15 +35,33 @@ const icons = [
   LogoutOutlinedIcon,
 ];
 
+const logoutHandler = () => {
+  console.log("Hello world");
+};
+
 function Header(props) {
-  const { validUser } = useSelector(state => state.loginReducer)
+  const { validUser } = useSelector((state) => state.loginReducer);
   const { t, i18n } = useTranslation();
   const navItems = validUser
-  ? [t("home"), t("how-it-works"), t("plan"), t("about-us"), "Profile"]
-  : [t("home"), t("how-it-works"), t("plan"), t("about-us"), t("login"), t("signup"),];
+    ? [
+        t("home"),
+        t("how-it-works"),
+        t("plan"),
+        t("about-us"),
+        "Profile",
+        "Logout",
+      ]
+    : [
+        t("home"),
+        t("how-it-works"),
+        t("plan"),
+        t("about-us"),
+        t("login"),
+        t("signup"),
+      ];
   const pages = validUser
-  ? ["/", "/how-it-works", "/plan", "/about-us", "/"]
-  : ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"]
+    ? ["/", "/how-it-works", "/plan", "/about-us", "/"]
+    : ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"];
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -118,17 +135,20 @@ function Header(props) {
             {navItems.map((item, index) => (
               <Link to={pages[index]} key={item}>
                 <Button
+                  onClick={
+                    item.toLowerCase() === "logout" ? logoutHandler : undefined
+                  }
                   sx={{
                     color:
                       item.toLowerCase() === "login" ||
-                        item.toLowerCase() === "signup" ||
-                        item.toLowerCase() === "تسجيل الدخول" ||
-                        item.toLowerCase() === "إنشاء حساب"
+                      item.toLowerCase() === "signup" ||
+                      item.toLowerCase() === "تسجيل الدخول" ||
+                      item.toLowerCase() === "إنشاء حساب"
                         ? "rgb(122, 38, 193)"
                         : "#999",
                     border:
                       item.toLowerCase() === "signup" ||
-                        item.toLowerCase() === "إنشاء حساب"
+                      item.toLowerCase() === "إنشاء حساب"
                         ? "1.5px solid rgb(122, 38, 193)"
                         : "none",
                     borderRadius:

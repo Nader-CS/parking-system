@@ -6,7 +6,8 @@ import { kCalculatePrice } from "../../utilities/Constants";
 import Sheet from "../Cards/sheet";
 import marker from '../../assets/icons/marker.PNG'
 import markerPurple from '../../assets/icons/marker-purple.png'
-import { CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";import { Link } from "react-router-dom";
+
 function Map() {
   const [activeMarker, setActiveMarker] = useState(null);
   const { data } = useSelector((state) => state.garageSpaces);

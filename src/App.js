@@ -18,10 +18,27 @@ import { useTranslation } from "react-i18next";
 import Reservation from "./screens/reservation/Reservation";
 import Completion from "./components/Reservation/Payment-Stripe/Completion";
 import NotFound from "./components/Not-found/NotFound";
+import { useEffect } from "react";
+import { off, onValue, ref } from "firebase/database";
+import { realDb } from "./services/firebase/firebase-config";
+import { listenToValueChange } from "./services/reservationServices";
 
 function App() {
   const { i18n } = useTranslation();
   document.body.dir = i18n.dir();
+
+  useEffect(() => {
+    const databaseRef = ref(realDb, "user-collection");
+    console.log(databaseRef);
+    const listener = onValue(databaseRef, (snapshot) => {
+      listenToValueChange(snapshot);
+    });
+
+    // Clean up the listener when the component unmounts
+    return () => {
+      off(databaseRef, listener);
+    };
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <Header />
