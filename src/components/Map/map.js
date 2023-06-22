@@ -3,6 +3,7 @@ import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
 import Sheet from "../Cards/sheet";
+import { Link } from "react-router-dom";
 
 function Map() {
   const [activeMarker, setActiveMarker] = useState(null);
@@ -25,16 +26,48 @@ function Map() {
   useEffect(() => {
     const newPos = data.map((garage) => {
       console.log(`map ${garage.garage.lat} ${garage.garage.lon}`);
-      return ({
+      return {
         lat: +garage.garage["lat"],
         lng: +garage.garage["lon"],
-      });
+      };
     });
     setPos(newPos);
     setIsPositionSet(true);
   }, [data]);
 
-  if (data.length <= 0) return <div>Loading...</div>;
+  if (data.length <= 0)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <div class="card">
+          <div
+            class="card-header"
+            style={{ textAlign: "center", fontSize: "1.2rem" }}
+          >
+            Sorry &#128528;
+          </div>
+          <div class="card-body">
+            <p class="alert alert-danger" role="alert">
+              We working to provide more garages in this place
+            </p>
+            <div style={{ textAlign: "center" }}>
+              <a href="#" class="btn btn-primary">
+                <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                  Back to Home
+                </Link>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <GoogleMap

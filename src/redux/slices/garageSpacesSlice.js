@@ -1,17 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const garageSpacesSlice = createSlice({
-    name: "garageSpaces",
-    initialState: {
-        data: []
+  name: "garageSpaces",
+  initialState: {
+    data: [],
+  },
+  reducers: {
+    getNearbyGarageSpaces: (state, { payload }) => {
+      state.data = payload.filter((item) => {
+        return item.garage.availableSpots >= 1;
+      });
     },
-    reducers:{
-        getNearbyGarageSpaces: (state, {payload}) => {
-            state.data = [...payload];
-            
-        }
-    }
-})
+  },
+});
 
-export const {getNearbyGarageSpaces} = garageSpacesSlice.actions;
+export const { getNearbyGarageSpaces } = garageSpacesSlice.actions;
 export default garageSpacesSlice.reducer;
