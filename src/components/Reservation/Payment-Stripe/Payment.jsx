@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import CardBox from "../CardBox";
 import Visa from "../../../assets/icons/visa.svg";
 import MasterCard from "../../../assets/icons/master-card.svg";
@@ -68,10 +68,12 @@ function Payment({ isDisabled, amount }) {
           All payments are secure and encrypted
         </Typography>
       </Stack>
-      {!isDisabled && clientSecret && (
+      {!isDisabled && clientSecret ? (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm />
         </Elements>
+      ) : (
+        <CircularProgress />
       )}
     </CardBox>
   );
