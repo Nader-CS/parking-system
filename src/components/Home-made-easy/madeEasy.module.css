@@ -2,20 +2,21 @@ section {
   width: 90%;
   margin: auto;
 }
+.ar {
+  direction: ltr !important;
+}
 .header {
-  margin: 120px auto 40px auto;
+  margin: 60px auto 40px;
   text-align: center;
   color: #aa23b6;
   font-size: 35px;
-  font-family: "Nunito";
 }
 .sub_head {
-  font-family: "Nunito";
   color: #aa23b6;
   font-size: 27px;
 }
 .sub_par {
-  font-family: "Nunito";
+  /* font-family: "Nunito"; */
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

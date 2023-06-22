@@ -127,7 +127,6 @@ const Sheet = ({id, open, close})=> {
                         duration,
                         garage[0].garage["pricePerHour"]
                       )}
-          {/* {duration["days"]?garage[0].garage["pricePerHour"] * ((duration["days"] * 24) + duration["hours"]) :garage[0].garage["pricePerHour"] * duration["hours"]} L.E */}
           </p>
           <p className="m-0">Parking fee</p>
         </div>
@@ -174,7 +173,7 @@ const Sheet = ({id, open, close})=> {
                   src={garage[0].garage["images"][0]}
                   alt="garage pic1"
                 ></img>
-                <img
+                     <img
                   className="col-6"
                   src={garage[0].garage["images"][1]}
                   alt="garage pic2"
@@ -182,7 +181,7 @@ const Sheet = ({id, open, close})=> {
               </div>
             </TabPanel>
             <TabPanel value="2">
-              {garage[0].garage["reviews"].map(rev=>(
+              {garage.garage["reviews"].map(rev=>(
 
                 <div key={rev.id} className="border-bottom py-2 mb-2">
                 <div className="d-flex align-items-center">
@@ -236,10 +235,10 @@ const Sheet = ({id, open, close})=> {
     <Link style={{ width: "80%", margin: "auto" }} to={`/reservation`}>
       <Button
         onClick={() => {
-          const garageObj = garage[0];
+          const garageObj = garage;
           const price = kCalculatePrice(
             duration,
-            garage[0].garage["pricePerHour"]
+            garage.garage["pricePerHour"]
           );
           dispatch(getSelectedGarage({ garageObj, price }));
         }}
@@ -253,7 +252,7 @@ const Sheet = ({id, open, close})=> {
         Reserve for{" "}
         {kCalculatePrice(
             duration,
-            garage[0].garage["pricePerHour"]
+            garage.garage["pricePerHour"]
           )}
       </Button>
     </Link>

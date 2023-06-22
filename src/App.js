@@ -17,6 +17,7 @@ import GarageOwnerTwo from "./screens/signup/GarageOwner/GarageOwnerTwo";
 import { useTranslation } from "react-i18next";
 import Reservation from "./screens/reservation/Reservation";
 import Completion from "./components/Reservation/Payment-Stripe/Completion";
+import NotFound from "./components/Not-found/NotFound";
 
 function App() {
   const { i18n } = useTranslation();
@@ -37,6 +38,7 @@ function App() {
         <Route path="search" element={<PickGarage />}></Route>
         <Route path="reservation" element={<Reservation />}></Route>
         <Route path="completion" element={<Completion />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </ThemeProvider>

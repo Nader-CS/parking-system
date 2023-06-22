@@ -19,3 +19,6 @@
     margin-bottom: 0.95rem;
   }
 }
+.box nav a button {
+  font-family: "Noto Kufi Arabic", sans-serif !important;
+}

@@ -1,0 +1,26 @@
+.ar-custom-styled-date-time-picker {
+  direction: ltr;
+}
+.ar-custom-styled-date-time-picker input {
+  text-align: center;
+  padding: 26.5px 0px 1px 0px;
+  margin-bottom: 0.3rem;
+  flex-grow: 1;
+  padding-left: 4rem;
+  font-weight: bold;
+}
+.ar-custom-styled-date-time-picker button {
+  color: #7a26c1;
+}
+.ar-custom-styled-date-time-picker label {
+  transform-origin: 50% 50%;
+  text-align: center;
+  padding-top: 0.6rem;
+  width: 100%;
+  font-size: 1rem;
+  font-family: "Noto Kufi Arabic" !important;
+}
+
+.ar-custom-styled-date-time-picker fieldset {
+  visibility: hidden;
+}

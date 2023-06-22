@@ -5,13 +5,7 @@ import AuthCard from "./AuthCard";
 import BookingTimer from "./BookingTimer";
 import CardBox from "./CardBox";
 import Payment from "./Payment-Stripe/Payment";
-import {
-  isNotSigned,
-  // isNotSigned,
-  kCalculatePrice,
-  kFormatDate,
-  kFormatDuration,
-} from "../../utilities/Constants";
+import { kCalculatePrice, kFormatDate, kFormatDuration, } from "../../utilities/Constants";
 import PaymentMethod from "./PaymentMethod";
 import ReserveDialog from "./ReserveDialog";
 import { useSelector } from "react-redux";
@@ -19,6 +13,8 @@ import TermsDialog from "./TermsDialog";
 // import Payment from "./Payment-Stripe/Payment";
 
 export default function BookingDetails() {
+  const { validUser } = useSelector(state => state.loginReducer)
+
   const [open, setOpen] = React.useState(false);
   const [termsOpen, setTermsOpen] = React.useState(false);
   const data = useSelector((state) => state.dateGeocode);
@@ -62,10 +58,10 @@ export default function BookingDetails() {
           isUnderLine={false}
         />
       </CardBox>
-      {isNotSigned && <AuthCard />}
+      {!validUser && <AuthCard />}
 
       <PaymentMethod
-        isNotSigned={isNotSigned}
+        isNotSigned={validUser}
         selectedOption={selectedOption}
         handleOptionChange={handleOptionChange}
       />
@@ -102,8 +98,8 @@ export default function BookingDetails() {
           setTermsOpen(false);
         }}
       />
-      {selectedOption === "cash" && !isNotSigned && (
-        <PayButton onClick={handleClickOpen} disabled={isNotSigned}>
+      {selectedOption === "cash" && (
+        <PayButton onClick={handleClickOpen}>
           EGP{" "}
           {kCalculatePrice(
             duration,
@@ -114,7 +110,6 @@ export default function BookingDetails() {
       )}
 
       <ReserveDialog
-        garage={garageData.garage.garage}
         additionalData={data}
         open={open}
         handleClose={handleClose}

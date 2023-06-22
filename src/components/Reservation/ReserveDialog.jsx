@@ -17,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 // import { toast, ToastContainer } from "react-toastify";
 
 export default function ReserveDialog({
-  garage,
   additionalData,
   open,
   handleClose,
@@ -25,6 +24,10 @@ export default function ReserveDialog({
   const reservation = useSelector((state) => state.reservation);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const data = useSelector((state) => state.selectedGarage);
+  const garage = data.garage.garage;
+  const garageId = garage.id;
+  const availableSpots = garage.availableSpots;
   return (
     <Dialog
       open={open}
@@ -32,7 +35,7 @@ export default function ReserveDialog({
       PaperProps={{
         sx: {
           width: { xs: "90%", md: "60%" },
-          height: "35%",
+          height: "42%",
           position: "fixed",
           top: "20%",
           left: { xs: "5%", md: "25%" },
@@ -47,9 +50,9 @@ export default function ReserveDialog({
       </DialogTitle>
       <DialogContent>
         <Typography fontSize={16} fontWeight="bold">
-          {garage.title}
+          {garage.address}
         </Typography>
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" justifyContent="space-between" mt={2}>
           <Typography variant="subtitle2" fontWeight="bold">
             Arriving on:
           </Typography>
@@ -109,8 +112,8 @@ export default function ReserveDialog({
           autoFocus
           onClick={() => {
             handleClose();
-            console.log(garage);
-            dispatch(reserveGarage(garage.id, garage.availableSpots));
+            console.log(garageId, availableSpots);
+            dispatch(reserveGarage({ garageId, availableSpots }));
             // navigate("/signup");
             console.log(reservation);
             // if (reservation.successMessage) {

@@ -8,8 +8,8 @@
 }
 
 .crdIcon {
-    width: 4rem;
-    height: 4rem;
+    width: 4rem !important;
+    height: 4rem !important;
 }
 
 .crdI {

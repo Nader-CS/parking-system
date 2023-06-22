@@ -2,16 +2,24 @@ import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { reserveGarage } from "../../../redux/slices/reservationSlice";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+    const data = useSelector((state) => state.selectedGarage);
+    const garage = data.garage.garage;
+    const garageId = garage.id;
+  const availableSpots = garage.availableSpots;
+  const dispatch = useDispatch();
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
 
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
@@ -20,6 +28,7 @@ export default function CheckoutForm() {
     }
 
     setIsProcessing(true);
+    
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -29,6 +38,7 @@ export default function CheckoutForm() {
         // return_url: "https://example.com/success",
       },
     });
+    dispatch(reserveGarage({ garageId, availableSpots }));
 
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
