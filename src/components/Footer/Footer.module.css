@@ -21,6 +21,10 @@
 .partner-info {
   font-size: 1.2rem;
   font-weight: bold;
+  margin-bottom: 1rem;
+}
+.partner-info p {
+  margin-bottom: 0;
 }
 .partner {
   width: 17%;
@@ -75,43 +79,4 @@
   .icons {
     justify-content: flex-end !important;
   }
-}
-
-.facebook {
-  color: #4267b2;
-}
-.twitter {
-  color: #1da1f2;
-}
-.instagram {
-  background: #f09433;
-  background: -moz-linear-gradient(
-    45deg,
-    #f09433 0%,
-    #e6683c 25%,
-    #dc2743 50%,
-    #cc2366 75%,
-    #bc1888 100%
-  );
-  background: -webkit-linear-gradient(
-    45deg,
-    #f09433 0%,
-    #e6683c 25%,
-    #dc2743 50%,
-    #cc2366 75%,
-    #bc1888 100%
-  );
-  background: linear-gradient(
-    45deg,
-    #f09433 0%,
-    #e6683c 25%,
-    #dc2743 50%,
-    #cc2366 75%,
-    #bc1888 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
-  border-radius: 10px;
-}
-.google {
-  color: #db4a39;
 }

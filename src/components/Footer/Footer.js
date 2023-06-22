@@ -12,7 +12,9 @@ import { ReactComponent as Visa } from "../../assets/icons/visa-10.svg";
 import { ReactComponent as Vodafone } from "../../assets/icons/Vodafone_Logo_2017.svg";
 import classes from "./Footer.module.css";
 import LanguageDropdown from "../Languages/LanguagesDropdown";
+import { useTranslation } from "react-i18next";
 const Footer = () => {
+  const { t, i18n } = useTranslation();
   return (
     <MDBFooter
       className="text-md-center text-lg-start text-sm-start pt-2 mt-5"
@@ -22,16 +24,23 @@ const Footer = () => {
         className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom align-items-baseline"
         style={{ fontSize: "1.3rem" }}
       >
-        <div className="me-5 d-none d-lg-block">
-          <span>Get connected with us on social networks:</span>
+        <div
+          className="me-5 d-none d-lg-block"
+          style={{
+            fontFamily:
+              i18n.language === "ar"
+                ? "'Noto Kufi Arabic', sans-serif"
+                : "'Nunito', sans-serif",
+          }}
+        >
+          <span>{t("get-connected")}</span>
         </div>
 
         <div>
           <a
             href="#"
-            className="me-4 "
+            className="me-4"
             style={{
-              color: "#4267B2",
               fontSize: "1.5rem",
             }}
           >
@@ -90,8 +99,8 @@ const Footer = () => {
         </div>
       </section>
 
-      <section>
-        <MDBContainer className=" text-sm-start text-md-start mt-5 ">
+      <section style={{ textAlign: i18n.language === "ar" ? "right" : "left" }}>
+        <MDBContainer className="  mt-5 ">
           <MDBRow className="mt-3">
             <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
@@ -100,58 +109,150 @@ const Footer = () => {
                   icon="gem"
                   className="me-3"
                 />
-                Ipark
+                {i18n.language === "ar" && "\u00A0\u00A0\u00A0\u00A0"}Ipark
               </h6>
-              <p style={{ fontSize: "1.1rem" }}>
-                Ipark is one of the best platforms that guarantees you access at
-                any time and anywhere in Egypt to a garage and other services
-                for the vehicle while it parking.
+              <p
+                style={{
+                  fontSize: "1.1rem",
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                {t("ipark-is-one-of-the-best")}
               </p>
             </MDBCol>
 
             <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Helpful Links</h6>
-              <p>
-                <Link to="/">Home</Link>
+              <h6
+                className="text-uppercase fw-bold mb-4"
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                {t("helpful-links")}
+              </h6>
+              <p
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                <Link to="/">{t("home")}</Link>
               </p>
-              <p>
-                <Link to="/how-it-works">How it works</Link>
+              <p
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                <Link to="/how-it-works">{t("how-it-works")}</Link>
               </p>
-              <p>
-                <Link to="/plan">Pricing</Link>
+              <p
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                <Link to="/plan">{t("plan")}</Link>
               </p>
-              <p>
-                <Link to="/about-us">About us</Link>
+              <p
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                <Link to="/about-us">{t("about-us")}</Link>
               </p>
             </MDBCol>
 
             <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Other links</h6>
-              <p>
-                <a href="https://www.google.com/maps/">Google maps</a>
+              <h6
+                className="text-uppercase fw-bold mb-4"
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                {t("other-links")}
+              </h6>
+              <p
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                <a href="https://www.google.com/maps/">{t("google-maps")}</a>
               </p>
-              <p>
+              <p
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
                 <a href="https://www.chevroletarabia.com/eg-ar">
-                  Chevrolet Egypt
+                  {t("chevrolet-egypt")}
                 </a>
               </p>
-              <p>
+              <p
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
                 <a href="https://www.mercedes-benz.com.eg/en/passengercars.html">
-                  Mercedes Egypt
+                  {t("mercedes-egypt")}
                 </a>
               </p>
-              <p>
-                <a href="#!">Complaint / Inquiry</a>
+              <p
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                <a href="#!">{t("complaint-inquiry")}</a>
               </p>
             </MDBCol>
 
             <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0 mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
+              <h6
+                className="text-uppercase fw-bold mb-4"
+                style={{
+                  fontFamily:
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif",
+                }}
+              >
+                {t("contact")}
+              </h6>
               <p>
                 <MDBIcon
                   style={{ color: "#C146D4" }}
                   icon="home"
-                  className="me-2"
+                  className={`${i18n.language === "ar" ? "ms-2" : "me-2"}`}
                 />
                 ITI Cairo University, Dokki
               </p>
@@ -159,7 +260,7 @@ const Footer = () => {
                 <MDBIcon
                   style={{ color: "#C146D4" }}
                   icon="envelope"
-                  className="me-3"
+                  className={`${i18n.language === "ar" ? "ms-2" : "me-2"}`}
                 />
                 ITIinfo@iti.gov.eg
               </p>
@@ -167,17 +268,31 @@ const Footer = () => {
                 <MDBIcon
                   style={{ color: "#C146D4" }}
                   icon="phone"
-                  className="me-3"
+                  className={`${i18n.language === "ar" ? "ms-2" : "me-2"}`}
                 />
-                (+202) 353-55656
+                <span
+                  style={{
+                    display: "inline-block",
+                    direction: "ltr",
+                  }}
+                >
+                  (+202) 353-55656
+                </span>
               </p>
               <p>
                 <MDBIcon
                   style={{ color: "#C146D4" }}
                   icon="print"
-                  className="me-3"
+                  className={`${i18n.language === "ar" ? "ms-2" : "me-2"}`}
                 />
-                (+202) 353-55656
+                <span
+                  style={{
+                    display: "inline-block",
+                    direction: "ltr",
+                  }}
+                >
+                  (+202) 353-55656
+                </span>
               </p>
             </MDBCol>
           </MDBRow>
@@ -188,7 +303,24 @@ const Footer = () => {
           <div className="col text-center">
             <div className={classes["partner-container"]}>
               <div className={classes["partner-info"]}>
-                <p>payment partners</p>
+                <p
+                  style={{
+                    fontFamily:
+                      i18n.language === "ar"
+                        ? "'Noto Kufi Arabic', sans-serif"
+                        : "'Nunito', sans-serif",
+                  }}
+                >
+                  {t("payment-partners")}
+                </p>
+                <div
+                  style={{
+                    height: "0.3rem",
+                    background: "#7A26C1",
+                    width: "4rem",
+                    margin: "0.2rem auto 0 auto",
+                  }}
+                ></div>
               </div>
               <div className={classes["partner-icons"]}>
                 <MasterCard className={classes.partner} />
@@ -206,15 +338,21 @@ const Footer = () => {
       </div>
       <div
         className="text-center p-4"
-        style={{ backgroundColor: "#0978BD", fontSize: "1.3rem" }}
+        style={{
+          backgroundColor: "#0978BD",
+          fontSize: "1.3rem",
+          fontFamily:
+            i18n.language === "ar"
+              ? "'Noto Kufi Arabic', sans-serif"
+              : "'Nunito', sans-serif",
+        }}
       >
-        © 2023 Copyright:
+        {t("copyright")}
         <span
           className="text-reset fw-bold"
           style={{ letterSpacing: "0.3rem" }}
         >
-          {" "}
-          Ipark
+          &nbsp;Ipark
         </span>
       </div>
     </MDBFooter>

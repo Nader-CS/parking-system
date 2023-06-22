@@ -2,24 +2,43 @@ import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import StoreButton from "./StoreButton";
 import AppImage from "../../assets/images/Download/IPark-app.png";
+import { useTranslation } from "react-i18next";
 
 export default function DownloadSection() {
+  const { t, i18n } = useTranslation();
   return (
-    <Box style={{ marginTop: "2rem" }}>
-      <Stack sx={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }} direction={{ xs: "column", md: "row" }}>
+    <Box
+      style={{
+        marginTop: "7rem",
+      }}
+    >
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Box
           flex={{ md: 2, lg: 1 }}
           order={{ xs: 2, md: 1 }}
           marginTop={{ xs: 1, md: 5 }}
           marginLeft={{ xs: 1, md: 4.5 }}
+          style={{ paddingRight: i18n.language === "ar" ? "1rem" : "0" }}
         >
-          <Typography component="span" fontSize={32}>
-            Download
+          <Typography
+            component="span"
+            fontSize={32}
+            fontFamily={
+              i18n.language === "ar"
+                ? "'Noto Kufi Arabic', sans-serif"
+                : "'Nunito', sans-serif"
+            }
+          >
+            {t("download")}
             <Box component="span" style={{ fontWeight: "bold" }}>
               {" "}
-              Egypt's first{" "}
+              {t("egypts-first")}{" "}
             </Box>
-            parking app
+            {t("parking-app")}
           </Typography>
           <Box
             marginY={2}
@@ -32,18 +51,30 @@ export default function DownloadSection() {
             color="#999999"
             lineHeight={1.5}
             fontSize={16}
+            fontFamily={
+              i18n.language === "ar"
+                ? "'Noto Kufi Arabic', sans-serif"
+                : "'Nunito', sans-serif"
+            }
           >
-            Rated 5 stars with an average satisfaction rating of 96%, IPark is
-            Egypt’s first parking service. But don’t just take our word for it –
-            check out some of the latest customer reviews below for our Cairo
-            parking spaces.
+            {t("rated-5-stars")}
           </Typography>
-          <Stack direction="row" gap={2} marginTop={3}>
+          <Stack
+            direction="row"
+            gap={2}
+            marginTop={3}
+            justifyContent={i18n.language === "ar" ? "space-evenly" : ""}
+          >
             <StoreButton text="App Store" />
             <StoreButton text="Google Play" isGoogle={true} />
           </Stack>
         </Box>
-        <Box sx={{textAlign: 'right'}} flex={1} order={{ xs: 1, md: 2 }} marginLeft={{ md: 2 }}>
+        <Box
+          sx={{ textAlign: "right" }}
+          flex={1}
+          order={{ xs: 1, md: 2 }}
+          marginLeft={{ md: 2 }}
+        >
           <Box
             component="img"
             sx={{

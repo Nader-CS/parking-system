@@ -16,7 +16,7 @@ const LanguageDropdown = () => {
 
   return (
     <Select
-      defaultValue={language}
+      value={language}
       onChange={handleChange}
       style={{
         height: "2.5rem",
@@ -26,7 +26,7 @@ const LanguageDropdown = () => {
         alignSelf: "end",
       }}
     >
-      <MenuItem value="en">English</MenuItem>
+      <MenuItem value="en-US">English</MenuItem>
       <MenuItem value="ar">Arabic</MenuItem>
     </Select>
   );

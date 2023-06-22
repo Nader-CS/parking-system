@@ -2,8 +2,10 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import appleSvg from "../../assets/icons/apple.svg";
 import googlePlaySvg from "../../assets/icons/google-play.svg";
+import { useTranslation } from "react-i18next";
 
 export default function StoreButton({ text, isGoogle = false }) {
+  const { t, i18n } = useTranslation();
   return (
     <Button
       size={"small"}
@@ -39,8 +41,17 @@ export default function StoreButton({ text, isGoogle = false }) {
         />
       )}
       <Stack direction="column" marginLeft={1} alignItems="start">
-        <Typography fontSize={9} lineHeight={1} marginTop={0.5}>
-          {isGoogle ? "GET IT ON" : "Download on the"}
+        <Typography
+          fontSize={9}
+          lineHeight={1}
+          marginTop={0.5}
+          fontFamily={
+            i18n.language === "ar"
+              ? "'Noto Kufi Arabic', sans-serif"
+              : "'Nunito', sans-serif"
+          }
+        >
+          {isGoogle ? t("GET-IT-ON") : t("download-on-the")}
         </Typography>
         <Typography fontSize={17} fontWeight="bold">
           {text}
