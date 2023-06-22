@@ -12,9 +12,6 @@ const Home = () => {
   useEffect(() => {
     dispatch(userValid());
   }, []);
-  // useEffect(() => {
-  //   dispatch(userValid());
-  // }, [])
 
   return (
     <Fragment>
