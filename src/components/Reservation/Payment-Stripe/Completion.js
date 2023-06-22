@@ -7,6 +7,7 @@ function Completion() {
 
   useEffect(() => {
     // Redirect to the main page after a delay of 3 seconds
+
     const redirectTimeout = setTimeout(() => {
       navigate("/");
     }, 3000);
