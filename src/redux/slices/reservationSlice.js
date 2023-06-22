@@ -4,26 +4,38 @@ import { FirebaseCollections } from "../../utilities/FirebaseCollections";
 export const reserveGarage = createAsyncThunk(
   "reservation/reserve",
   async ({ garageId, availableSpots }) => {
+    console.log(`garageId ${garageId} availableSpots ${availableSpots}`);
     try {
-      // const id = "-NYCeLtaLIe5RwfhvGbF";
-      const id = localStorage.getItem("uid");
-      if (availableSpots) {
+      const uid = "lWiGmixRQQNmfC3LsnBsBBQjDhD2";
+      // const id = localStorage.getItem("uid");
+      if (availableSpots && garageId) {
         console.log(`availableSpots ${availableSpots}`);
-        const body = { availableSpots: 30 };
+        const body = { availableSpots: availableSpots - 1 };
 
         // const url = `https://parking-system-eaece-default-rtdb.firebaseio.com/Garages/0.json`;
         const url = `${FirebaseCollections.baseURL}/${FirebaseCollections.garagesCollection}/${garageId}.json`;
-        const res = await axios.patch(url, body);
-        console.log(res);
+        await axios.patch(url, body);
+        console.log('done garage');
       }
 
-      if (id && garageId) {
-        const url = `${FirebaseCollections.baseURL}/${FirebaseCollections.userCollection}/${id}/${FirebaseCollections.reservedGarages}.json`;
-        console.log(url);
-        const res = await axios.post(url, {
-          garageId: garageId,
-        });
-        console.log(res);
+      if (uid && garageId) {
+        const url = `${FirebaseCollections.baseURL}/${FirebaseCollections.userCollection}`;
+        const res = await axios.get(url);
+        const data = res.data;
+        console.log(data);
+        const filteredUser = Object.entries(data).find(
+          ([key, value]) => value.ownerId === uid
+        );
+        console.log(`filteredUser ${filteredUser}`);
+        if (filteredUser) {
+          const [id, userData] = filteredUser;
+          console.log(`user ${id} ${userData}`);
+          const patchUrl = `${FirebaseCollections.baseURL}/user-collection/${id}/${FirebaseCollections.reservedGarages}`;
+          await axios.post(patchUrl, {
+            garageId: garageId,
+          });
+          console.log("done user");
+        }
       }
     } catch (error) {
       console.log(error);

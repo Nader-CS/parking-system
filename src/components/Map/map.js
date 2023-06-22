@@ -23,10 +23,13 @@ function Map() {
   };
 
   useEffect(() => {
-    const newPos = data.map((garage) => ({
-      lat: +garage.garage["lat"],
-      lng: +garage.garage["lon"],
-    }));
+    const newPos = data.map((garage) => {
+      console.log(`map ${garage.garage.lat} ${garage.garage.lon}`);
+      return ({
+        lat: +garage.garage["lat"],
+        lng: +garage.garage["lon"],
+      });
+    });
     setPos(newPos);
     setIsPositionSet(true);
   }, [data]);
@@ -35,7 +38,7 @@ function Map() {
 
   return (
     <GoogleMap
-      center={{ lat: 30.075039276195568, lng: 31.22181733648843 }}
+      center={{ lat: 30.0505454, lng: 31.2486498 }}
       zoom={17}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: "100%", height: "100%" }}
@@ -43,7 +46,7 @@ function Map() {
       {data.map((garage) => (
         <Marker
           key={garage.garage["id"]}
-          position={{ lat: +garage.garage["lon"], lng: +garage.garage["lat"] }}
+          position={{ lat: +garage.garage["lat"], lng: +garage.garage["lon"] }}
           onClick={() => {
             handleActiveMarker(garage.garage["id"]);
             setOpen(true);

@@ -7,8 +7,8 @@
 //  * @author	"Nader"
 //  */
 export default async function closestGarage(
-  originLong = 30.075039276195568,
-  originLati = 31.22181733648843,
+  originLong = 31.2486498,
+  originLati = 30.0505454,
   distance = 500
 ) {
   const NearestGarages = [];
@@ -18,12 +18,15 @@ export default async function closestGarage(
 
   try {
     const response = await fetch(
-      `https://parking-system-eaece-default-rtdb.firebaseio.com/Garages.json`
+      `https://parking-system-eaece-default-rtdb.firebaseio.com/garage-collection.json`
     );
     const garages = await response.json();
-
+    const data = await garages;
     const travelMode = google.maps.TravelMode.DRIVING;
-    const requests = garages.map((garage) => {
+    // this
+    const requests = Object.keys(data).map((key) => {
+      let garage = { id: key, ...data[key] };
+      //
       return new Promise((resolve) => {
         const destination = new google.maps.LatLng(garage.lon, garage.lat);
         const request = {
@@ -35,13 +38,18 @@ export default async function closestGarage(
 
         service.getDistanceMatrix(request, (response, status) => {
           if (status === google.maps.DistanceMatrixStatus.OK) {
-            const distanceValue = response.rows[0].elements[0].distance.value;
+            //
+            const distanceValue = response.rows[0].elements[0].distance
+              ? response.rows[0].elements[0].distance.value
+              : 1000;
+            //
             if (distanceValue <= distance) {
               NearestGarages.push({
                 garage: garage,
                 distance: `${distanceValue} Meter`,
                 duration: `${response.rows[0].elements[0].duration.text} in ${travelMode}`,
               });
+              console.log(NearestGarages);
             }
           } else {
             console.error("Error:", status);
@@ -53,9 +61,9 @@ export default async function closestGarage(
 
     await Promise.all(requests);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
-
+  console.log(`return ${NearestGarages}`);
   return NearestGarages;
 }
 
