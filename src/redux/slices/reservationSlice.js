@@ -6,8 +6,8 @@ export const reserveGarage = createAsyncThunk(
   async ({ garageId, availableSpots }) => {
     console.log(`garageId ${garageId} availableSpots ${availableSpots}`);
     try {
-      const uid = "lWiGmixRQQNmfC3LsnBsBBQjDhD2";
-      // const id = localStorage.getItem("uid");
+      // const uid = "lWiGmixRQQNmfC3LsnBsBBQjDhD2";
+      const uid = localStorage.getItem("uid");
       if (availableSpots && garageId) {
         console.log(`availableSpots ${availableSpots}`);
         const body = { availableSpots: availableSpots - 1 };
