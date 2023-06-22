@@ -7,13 +7,14 @@ import { userValid } from "../../redux/slices/loginSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-
 const Home = () => {
   const dispatch = useDispatch();
-  
   useEffect(() => {
-    dispatch(userValid())
-  }, [])
+    dispatch(userValid());
+  }, []);
+  // useEffect(() => {
+  //   dispatch(userValid());
+  // }, [])
 
   return (
     <Fragment>
