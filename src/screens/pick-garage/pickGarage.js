@@ -8,6 +8,7 @@ import Map from "../../components/Map/map";
 import { useSelector } from "react-redux";
 const PickGarage = () => {
   let data = useSelector((state) => state.dateGeocode);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -30,6 +31,8 @@ const PickGarage = () => {
             id="outlined-basic"
             label="Parking from"
             variant="outlined"
+            value={data.parkingFrom || sessionStorage.getItem("parkingFrom")}
+            disabled
           />
         </div>
         <div className="col-2">
@@ -38,6 +41,8 @@ const PickGarage = () => {
             id="outlined-basic"
             label="Parking until"
             variant="outlined"
+            value={data.parkingUntil || sessionStorage.getItem("parkingUntil")}
+            disabled
           />
         </div>
       </div>
@@ -50,7 +55,6 @@ const PickGarage = () => {
           <Map />
         </div>
       </div>
-      <RemoveScrollBar></RemoveScrollBar>
     </div>
   );
 };

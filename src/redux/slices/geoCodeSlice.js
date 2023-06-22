@@ -16,9 +16,11 @@ const dateGeocodeSlice = createSlice({
     },
     setParkingFrom: (state, action) => {
       state.parkingFrom = action.payload;
+      window.sessionStorage.setItem("parkingFrom", action.payload);
     },
     setParkingUntil: (state, action) => {
       state.parkingUntil = action.payload;
+      window.sessionStorage.setItem("parkingUntil", action.payload);
     },
     setDuration: (state, action) => {
       state.duration = action.payload;
