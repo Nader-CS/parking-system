@@ -8,10 +8,12 @@ import { reserveGarage } from "../../../redux/slices/reservationSlice";
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
-    const data = useSelector((state) => state.selectedGarage);
+  const data = useSelector((state) => state.selectedGarage);
+  const timeData = useSelector((state) => state.dateGeocode);
     const garage = data.garage.garage;
     const garageId = garage.id;
   const availableSpots = garage.availableSpots;
+  const leavingOn = timeData.parkingUntil;
   const dispatch = useDispatch();
 
   const [message, setMessage] = useState(null);
@@ -38,7 +40,7 @@ export default function CheckoutForm() {
         // return_url: "https://example.com/success",
       },
     });
-    dispatch(reserveGarage({ garageId, availableSpots }));
+    dispatch(reserveGarage({ garageId, availableSpots, leavingOn }));
 
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
