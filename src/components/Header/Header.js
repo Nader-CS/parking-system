@@ -27,42 +27,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { logUserOut } from "../../redux/slices/loginSlice";
 
 const drawerWidth = 240;
-const icons = [HouseIcon, LightbulbOutlinedIcon, CurrencyPoundOutlinedIcon, GroupsIcon, LoginOutlinedIcon, LogoutOutlinedIcon,];
-
+const icons = [
+  HouseIcon,
+  LightbulbOutlinedIcon,
+  CurrencyPoundOutlinedIcon,
+  GroupsIcon,
+  LoginOutlinedIcon,
+  LogoutOutlinedIcon,
+];
 
 function Header(props) {
-
-
-
-
   const { validUser } = useSelector((state) => state.loginReducer);
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
-
   const logoutHandler = () => {
-    dispatch(logUserOut())
+    dispatch(logUserOut());
   };
-
-
 
   const navItems = validUser
     ? [
-      t("home"),
-      t("how-it-works"),
-      t("plan"),
-      t("about-us"),
-      "Profile",
-      "Logout",
-    ]
+        t("home"),
+        t("how-it-works"),
+        t("plan"),
+        t("about-us"),
+        t("profile"),
+        t("logout"),
+      ]
     : [
-      t("home"),
-      t("how-it-works"),
-      t("plan"),
-      t("about-us"),
-      t("login"),
-      t("signup"),
-    ];
+        t("home"),
+        t("how-it-works"),
+        t("plan"),
+        t("about-us"),
+        t("login"),
+        t("signup"),
+      ];
   const pages = validUser
     ? ["/", "/how-it-works", "/plan", "/about-us", "/"]
     : ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"];
@@ -140,19 +139,22 @@ function Header(props) {
               <Link to={pages[index]} key={item}>
                 <Button
                   onClick={
-                    item.toLowerCase() === "logout" ? logoutHandler : undefined
+                    item.toLowerCase() === "logout" ||
+                    item.toLowerCase() === "تسجيل الخروج"
+                      ? logoutHandler
+                      : undefined
                   }
                   sx={{
                     color:
                       item.toLowerCase() === "login" ||
-                        item.toLowerCase() === "signup" ||
-                        item.toLowerCase() === "تسجيل الدخول" ||
-                        item.toLowerCase() === "إنشاء حساب"
+                      item.toLowerCase() === "signup" ||
+                      item.toLowerCase() === "تسجيل الدخول" ||
+                      item.toLowerCase() === "إنشاء حساب"
                         ? "rgb(122, 38, 193)"
                         : "#999",
                     border:
                       item.toLowerCase() === "signup" ||
-                        item.toLowerCase() === "إنشاء حساب"
+                      item.toLowerCase() === "إنشاء حساب"
                         ? "1.5px solid rgb(122, 38, 193)"
                         : "none",
                     borderRadius:
