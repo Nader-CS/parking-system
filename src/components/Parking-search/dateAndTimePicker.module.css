@@ -24,3 +24,7 @@
 .ar-custom-styled-date-time-picker fieldset {
   visibility: hidden;
 }
+
+div button {
+  z-index: 100;
+}
