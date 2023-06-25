@@ -49,7 +49,7 @@ export default async function closestGarage(
                 distance: `${distanceValue} Meter`,
                 duration: `${response.rows[0].elements[0].duration.text} in ${travelMode}`,
               });
-              console.log(NearestGarages);
+              
             }
           } else {
             console.error("Error:", status);

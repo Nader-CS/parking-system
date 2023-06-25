@@ -26,3 +26,8 @@
 .css-heg063-MuiTabs-flexContainer { 
     justify-content: space-around;
 }
+@media (max-width: 768px) {
+    .css-18vhgb8-MuiModal-root-MuiDialog-root  {
+        left: 13% !important;
+    }
+}

@@ -6,3 +6,16 @@
     height: 490px;
     overflow-y: scroll;
 }
+
+@media (max-width: 768px) {
+    .pick_container {
+        height: 900px !important;
+    }
+    .row_height {
+        height: 900px !important;
+        margin-right: 0 !important;
+    }
+    .map_height {
+        height: 350px !important;
+    }
+}

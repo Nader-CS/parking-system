@@ -8,13 +8,22 @@ import Map from "../../components/Map/map";
 import { useSelector } from "react-redux";
 const PickGarage = () => {
   let data = useSelector((state) => state.dateGeocode);
+  const [isMediumScreen, setIsMediumScreen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const handleResize = () => {
+      setIsMediumScreen(window.innerWidth >= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
   return (
     <div className={`${style.pick_container}`}>
-      <div className="row shadow-sm p-3" style={{ height: 70 }}>
+      <div className="row shadow-sm p-3 w-md-75 m-md-auto" style={{ height: 70 }}>
         <div className="col-5">
           <TextField
             fullWidth
@@ -47,15 +56,24 @@ const PickGarage = () => {
         </div>
       </div>
 
-      <div className="row">
-        <div className={`${style.height} col-12 col-md-4 p-0`}>
+      <div className={`${style.row_height} row`}>
+        <div className={`${style.height} col-12 col-md-6 col-lg-4 p-0`}>
           <GarageCards />
         </div>
-        <div className="col-12 col-md-8">
+        <div className={`col-12 col-md-6 col-lg-8 ${style.map_height}`}>
           <Map />
         </div>
       </div>
+      {
+        isMediumScreen && (
+          <RemoveScrollBar></RemoveScrollBar>
+          
+        )
+        
+      }
+      
     </div>
+
   );
 };
 export default PickGarage;
