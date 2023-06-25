@@ -1,6 +1,5 @@
 .ar-custom-styled-date-time-picker {
   direction: ltr;
-
 }
 
 .ar-custom-styled-date-time-picker input {
@@ -18,7 +17,7 @@
   transform-origin: 50% 50%;
   text-align: center;
   padding-top: 0.6rem;
-  /* width: 100%; */
+  width: 100%;
   font-size: 1rem;
   font-family: "Noto Kufi Arabic" !important;
 }
