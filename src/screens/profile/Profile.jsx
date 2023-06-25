@@ -112,7 +112,7 @@ export default function Profile() {
                     {adminData.isAdmin && <p>User Type: Admin</p>}
                   </div>
                   <div className="ps-5">
-                    <Link to="/dashboard">Admin Dashboard</Link>
+                    <Link to="/admin">Admin Dashboard</Link>
                   </div>
                 </Col>
               </Row>
