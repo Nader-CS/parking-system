@@ -21,33 +21,47 @@ export default function Contact() {
         window.scrollTo(0, 0);
     }, [])
 
-    useEffect(() => {
-        if (messageStatus === true) {
-            setUserMessage({ name: "", email: "", subject: "", message: "" })
-            $(".sucMsg").fadeIn(500, () => {
-                setTimeout(() => {
-                    $(".sucMsg").fadeOut(500);
-                    setMessageStatus(null)
-                    console.log(userMessage);
-                }, 3000);
-            });
-        } else if (messageStatus === false) {
-            $(".errMsg").fadeIn(500, () => {
-                setTimeout(() => {
-                    $(".errMsg").fadeOut(500);
-                    setMessageStatus(null)
-                }, 3000);
-            });
-        }
-    }, [messageStatus]);
+    // useEffect(() => {
+    //     if (messageStatus === true) {
+    //         setUserMessage({ name: "", email: "", subject: "", message: "" })
+    //         $(".sucMsg").fadeIn(500, () => {
+    //             setTimeout(() => {
+    //                 $(".sucMsg").fadeOut(500);
+    //                 setMessageStatus(null)
+    //                 console.log(userMessage);
+    //             }, 3000);
+    //         });
+    //     } else if (messageStatus === false) {
+    //         $(".errMsg").fadeIn(500, () => {
+    //             setTimeout(() => {
+    //                 $(".errMsg").fadeOut(500);
+    //                 setMessageStatus(null)
+    //             }, 3000);
+    //         });
+    //     }
+    // }, [messageStatus]);
 
     const sendEmail = (event) => {
         // event.preventDefault();
         emailjs.sendForm('service_vujzn4e', 'template_qr9o07c', form.current, '-BNdkFXEOMys51fhZ')
             .then((result) => {
                 setMessageStatus(true)
+                setUserMessage({ name: "", email: "", subject: "", message: "" })
+                $(".sucMsg").fadeIn(500, () => {
+                    setTimeout(() => {
+                        $(".sucMsg").fadeOut(500);
+                        setMessageStatus(null)
+                        console.log(userMessage);
+                    }, 3000);
+                });
             }, (error) => {
                 setMessageStatus(false)
+                $(".errMsg").fadeIn(500, () => {
+                    setTimeout(() => {
+                        $(".errMsg").fadeOut(500);
+                        setMessageStatus(null)
+                    }, 3000);
+                });
             });
     };
 
@@ -112,7 +126,13 @@ export default function Contact() {
                         <h3>Get in Touch</h3>
                         <Formik
                             initialValues={userMessage}
-                            onSubmit={sendEmail}
+                            onSubmit={(values, { resetForm }) => {
+                                sendEmail();
+                                setTimeout(() => {
+                                    resetForm();
+                                }, 1000)
+                            }}
+
                         >
                             {({ errors, touched }) => (
                                 <Form ref={form} className={`mx-auto`}>

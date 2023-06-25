@@ -20,7 +20,9 @@
     background-color: white !important;
     padding: 1px !important;
     border-radius: 2px;
+    /* width: 8rem !important; */
 }
+
 
 .MuiFormControl-root {
     margin: 8px 0px !important;
