@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './about-us.module.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -16,14 +16,19 @@ export default function AboutUs() {
   const [_3open, set_3Open] = useState(false);
   const [_4open, set_4Open] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
+
   return <>
     <Container fluid className={` ${style.mainBG} py-5`}>
       <Container>
         <Row>
-          <Col>
+          <Col xs={12} md={6}>
             <Image className={`w-100`} rounded src={require('../../assets/images/AboutUs/1.jpg')} />
           </Col>
-          <Col>
+          <Col xs={12} md={6}>
             <div className='fs-1 fw-bolder'>
               Simplifying journeys so we can all breathe easier.
             </div>
@@ -34,10 +39,10 @@ export default function AboutUs() {
     <StatisticsBar />
     <Container className={`${style.crdBg} my-5 p-4 rounded-4`}>
       <Row>
-        <Col>
-          <Image className={`w-100 rounded-4`} src={require('../../assets/images/AboutUs/2.png')}></Image>
+        <Col xs={12} md={6}>
+          <Image className={`w-100 rounded-4 my-4 my-md-0`} src={require('../../assets/images/AboutUs/2.png')}></Image>
         </Col>
-        <Col>
+        <Col xs={12} md={6}>
           <div>
             <h3 className={`${style.underLine} fw-bolder`}>Your parking & charging community</h3>
             <p>
@@ -53,7 +58,7 @@ export default function AboutUs() {
     </Container>
     <Container className={`${style.crdBtm} pt-5`}>
       <Row>
-        <Col xs={7}>
+        <Col xs={12} md={7}>
           <div className='d-flex flex-column align-items-start justify-content-between pb-2 px-4 h-100'>
             <h3 className={`fw-bold`}>What is IPark?</h3>
             <p>
@@ -66,17 +71,16 @@ export default function AboutUs() {
               And, it’s the countless little moments shared, thanks to the thousands of minutes saved not looking for a parking space.
             </p>
             <p className='fw-bolder'>
-              IPark
-              <p className='m-0'>Your parking & charging community.</p>
+              IPark <span className='m-0'>Your parking & charging community.</span>
             </p>
           </div>
         </Col>
-        <Col xs={5}>
+        <Col xs={12} md={5}>
           <Image className={`w-100`} src={require('../../assets/images/AboutUs/3.png')} />
         </Col>
       </Row>
     </Container>
-    <Container className='mt-5'>
+    <Container className='my-5'>
       <Container className='pt-5 px-5'>
         <Row className='w-75 mx-auto'>
           <div>
@@ -90,7 +94,7 @@ export default function AboutUs() {
             aria-expanded={_1open}
             className={`${style.collBtn} text-end d-flex justify-content-between align-items-center`}
           >
-            <p className='text-black my-2 fw-semibold'>How do I book a parking space?</p>
+            <p className='text-black my-2 fw-semibold text-start'>How do I book a parking space?</p>
             <svg className={`${style.svg} m-2`} id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" fill="currentColor">
               <path d="M20.68,13.2h-7.56v7.76H7.84v-7.76H.28v-4.88H7.84V.56h5.28v7.76h7.56v4.88Z"></path>
             </svg>
@@ -116,7 +120,7 @@ export default function AboutUs() {
             aria-expanded={_2open}
             className={`${style.collBtn} text-end d-flex justify-content-between align-items-center`}
           >
-            <p className='text-black my-2 fw-semibold'>How do I make a long-term booking?</p>
+            <p className='text-black my-2 fw-semibold text-start'>How do I make a long-term booking?</p>
             <svg className={`${style.svg} m-2`} id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" fill="currentColor">
               <path d="M20.68,13.2h-7.56v7.76H7.84v-7.76H.28v-4.88H7.84V.56h5.28v7.76h7.56v4.88Z"></path>
             </svg>
@@ -142,7 +146,7 @@ export default function AboutUs() {
             aria-expanded={_3open}
             className={`${style.collBtn} text-end d-flex justify-content-between align-items-center`}
           >
-            <p className='text-black my-2 fw-semibold'>Can I extend my session if I needed more time?</p>
+            <p className='text-black my-2 fw-semibold text-start'>Can I extend my session if I needed more time?</p>
             <svg className={`${style.svg} m-2`} id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" fill="currentColor">
               <path d="M20.68,13.2h-7.56v7.76H7.84v-7.76H.28v-4.88H7.84V.56h5.28v7.76h7.56v4.88Z"></path>
             </svg>
@@ -169,7 +173,7 @@ export default function AboutUs() {
             aria-expanded={_4open}
             className={`${style.collBtn} text-end d-flex justify-content-between align-items-center`}
           >
-            <p className='text-black my-2 fw-semibold'>What if I have to cancel my booking?</p>
+            <p className='text-black my-2 fw-semibold text-start'>What if I have to cancel my booking?</p>
             <svg className={`${style.svg} m-2`} id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" fill="currentColor">
               <path d="M20.68,13.2h-7.56v7.76H7.84v-7.76H.28v-4.88H7.84V.56h5.28v7.76h7.56v4.88Z"></path>
             </svg>

@@ -45,6 +45,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
+    transition: .4s ease;
 }
 
 .crd_1:hover {
@@ -58,6 +59,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
+    transition: .4s ease;
 }
 
 .crd_2:hover {
@@ -71,6 +73,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
+    transition: .4s ease;
 }
 
 .crd_3:hover {

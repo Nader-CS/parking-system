@@ -9,19 +9,19 @@ export default function StatisticsBar() {
         <Container fluid className={`${style.barBg} text-white text-center py-2`}>
             <Container>
                 <Row>
-                    <Col>
+                    <Col xs={6} md={3} className={`my-2 my-0`} >
                         <p className={`mb-0 my-1 fs-5 fw-semibold`}>96%</p>
                         <p className={`mb-0 my-1 fs-5 fw-semibold`}>satisfaction rate</p>
                     </Col>
-                    <Col>
+                    <Col xs={6} md={3} className={`my-2 my-0`} >
                         <p className={`mb-0 my-1 fs-5 fw-semibold`}>200K+</p>
                         <p className={`mb-0 my-1 fs-5 fw-semibold`}>drivers</p>
                     </Col>
-                    <Col>
+                    <Col xs={6} md={3} className={`my-2 my-0`} >
                         <p className={`mb-0 my-1 fs-5 fw-semibold`}>10K+</p>
                         <p className={`mb-0 my-1 fs-5 fw-semibold`}>space owners</p>
                     </Col>
-                    <Col>
+                    <Col xs={6} md={3} className={`my-2 my-0`} >
                         <p className={`mb-0 my-1 fs-5 fw-semibold`}>500K+</p>
                         <p className={`mb-0 my-1 fs-5 fw-semibold`}>bookings per year</p>
                     </Col>
