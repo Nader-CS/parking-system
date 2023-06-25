@@ -20,7 +20,7 @@ import CurrencyPoundOutlinedIcon from "@mui/icons-material/CurrencyPoundOutlined
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import classes from "./Header.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LanguageDropdown from "../Languages/LanguagesDropdown";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,26 +45,14 @@ function Header(props) {
     dispatch(logUserOut());
   };
 
-  const navItems = validUser
-    ? [
-        t("home"),
-        t("how-it-works"),
-        t("plan"),
-        t("about-us"),
-        t("profile"),
-        t("logout"),
-      ]
-    : [
-        t("home"),
-        t("how-it-works"),
-        t("plan"),
-        t("about-us"),
-        t("login"),
-        t("signup"),
-      ];
+
+
+  const navItems = validUser 
+    ? [ t("home"), t("how-it-works"), t("contact"), t("about-us"), t("Profile"), "Logout", ] 
+    : [ t("home"), t("how-it-works"), t("contact"), t("about-us"), t("login"), t("signup"), ];
   const pages = validUser
-    ? ["/", "/how-it-works", "/plan", "/about-us", "/"]
-    : ["/", "/how-it-works", "/plan", "/about-us", "/login", "/signup"];
+    ? ["/", "/how-it-works", "/contact", "/about-us", "/profile"]
+    : ["/", "/how-it-works", "/contact", "/about-us", "/login", "/signup"];
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 

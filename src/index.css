@@ -11,3 +11,7 @@
 .MuiList-root .Mui-selected {
   background-color: #aa23b6 !important;
 }
+
+.warning {
+  font-size: .9rem;
+}

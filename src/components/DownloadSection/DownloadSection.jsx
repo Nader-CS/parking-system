@@ -9,7 +9,8 @@ export default function DownloadSection() {
   return (
     <Box
       style={{
-        marginTop: "7rem",
+        marginTop: "4rem",
+        marginBottom: "4rem",
       }}
     >
       <Stack

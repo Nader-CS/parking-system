@@ -3,14 +3,14 @@ import style from './garageowner.module.css'
 import { Formik, Field, Form } from 'formik'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUpUser, createUserCollection } from '../../../redux/slices/signupSlice';
+import { signUpUser, createUserCollection, resetData } from '../../../redux/slices/signupSlice';
 import $ from 'jquery';
 
 
 export default function GarageOwner() {
 
     const { ownerDetails, ownerId, uIsCreated, uCollection, usedEmail } = useSelector(state => state.signupReducer)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [userData, setUserData] = useState({})
 
@@ -25,6 +25,7 @@ export default function GarageOwner() {
                 setTimeout(() => {
                     $('.sucMsg').fadeOut(500)
                     navigate('/signup/garageDetails')
+                    dispatch(resetData())
                 }, 3000)
             })
         }
@@ -32,6 +33,7 @@ export default function GarageOwner() {
             $('.errMsg').fadeIn(500, () => {
                 setTimeout(() => {
                     $('.errMsg').fadeOut(500)
+                    dispatch(resetData())
                 }, 3000)
             })
         }
@@ -43,6 +45,10 @@ export default function GarageOwner() {
             dispatch(createUserCollection({ ...userData, ownerId: ownerId }))
         }
     }, [uIsCreated])
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
 
 
     const validateName = (value) => {
@@ -94,23 +100,23 @@ export default function GarageOwner() {
                             <div className={`row`}>
                                 <div className={`col-md-12 pt-4 pb-1 px-0 mx-auto`}>
                                     <Field id='name' validate={validateName} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Name' name="ownerName" />
-                                    {errors.ownerName && touched.ownerName ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.ownerName}</div> : ''}
+                                    {errors.ownerName && touched.ownerName ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.ownerName}</div> : ''}
                                 </div>
                                 <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
                                     <Field id='email' validate={validateEmail} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Email' name="ownerEmail" />
-                                    {errors.ownerEmail && touched.ownerEmail ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.ownerEmail}</div> : ''}
+                                    {errors.ownerEmail && touched.ownerEmail ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.ownerEmail}</div> : ''}
                                 </div>
                                 <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
                                     <Field id='phone' validate={validatePhone} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Phone Number' name="ownerPhone" />
-                                    {errors.ownerPhone && touched.ownerPhone ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.ownerPhone}</div> : ''}
+                                    {errors.ownerPhone && touched.ownerPhone ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.ownerPhone}</div> : ''}
                                 </div>
                                 <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
                                     <Field type="password" id='password' validate={validatePassword} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Password' name="password" />
-                                    {errors.password && touched.password ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.password}</div> : ''}
+                                    {errors.password && touched.password ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.password}</div> : ''}
                                 </div>
                                 <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
                                     <Field type="password" id='rePassword' validate={(value) => { return validateRePassword(value, values) }} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Confirm Password' name="rePassword" />
-                                    {errors.rePassword && touched.rePassword ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.rePassword}</div> : ''}
+                                    {errors.rePassword && touched.rePassword ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.rePassword}</div> : ''}
                                 </div>
                             </div>
                         </div>
