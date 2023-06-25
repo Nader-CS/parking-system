@@ -32,7 +32,7 @@ function Map() {
   };
   
   if (!isFilled) return <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}>
-    <CircularProgress />
+    <CircularProgress color="secondary" />
   </div> 
    if (data.length === 0) return (
       <div
