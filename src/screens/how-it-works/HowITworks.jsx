@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './how-it-works.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,11 +10,16 @@ import WhereToGo from '../../components/HowItWorksComponent/WhereToGo';
 
 
 export default function HowITworks() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return <>
     <Container fluid className={` ${style.mainBG} py-5`}>
       <Container>
         <Row>
-          <Col>
+          <Col xs={12} md={6}>
             <div className='fs-1 fw-bolder pb-3'>
               Parking sorted in seconds.
             </div>
@@ -27,7 +32,7 @@ export default function HowITworks() {
               <p>Simply enter where & when you'll need parking and we'll find the perfect space for you.</p>
             </div>
           </Col>
-          <Col>
+          <Col xs={12} md={6}>
             <Image className={`w-100`} rounded src={require('../../assets/images/AboutUs/4.png')} />
           </Col>
         </Row>
@@ -37,10 +42,10 @@ export default function HowITworks() {
     <WhereToGo />
     <Container className='py-5'>
       <Row className={`${style.crdBtm}`}>
-        <Col>
+        <Col xs={12} md={6}>
           <Image className={`w-100`} rounded src={require('../../assets/images/AboutUs/5.png')} />
         </Col>
-        <Col>
+        <Col xs={12} md={6}>
           <div className='px-4'>
             <div className='mb-4'>
               <h3 className={`${style.underLine} fw-bolder d-inline`}>The simplest way</h3><span className={`fw-bolder fs-3`}> to book a parking space.</span>
@@ -101,19 +106,19 @@ export default function HowITworks() {
       </Row>
     </Container>
     <Container>
-      <Row className='text-center'>
+      <Row className='text-center pt-2 pb-5'>
         <div className='pt-5'><h2 className='fw-semibold'>Why book parking?</h2></div>
-        <Col>
+        <Col xs={12} md={4}>
           <div className={`${style.crd_1} mb-3`}></div>
           <h5 className='fw-semibold'>Get Closer</h5>
           <p>With over 100k spaces available to book, including driveways, you’ll always be a stone’s throw away from where you need to be.</p>
         </Col>
-        <Col>
+        <Col xs={12} md={4}>
           <div className={`${style.crd_2} mb-3`}></div>
           <h5 className='fw-semibold'>Park smarter</h5>
           <p>Save time, money & hassle by booking your space before you set out.</p>
         </Col>
-        <Col>
+        <Col xs={12} md={4}>
           <div className={`${style.crd_3} mb-3`}></div>
           <h5 className='fw-semibold'>Peace of mind</h5>
           <p>Find the best spot, see exactly what you’re paying & even extend your stay - all through our award-winning app.</p>

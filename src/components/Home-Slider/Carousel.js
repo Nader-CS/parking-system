@@ -21,7 +21,7 @@ export default function Carousel() {
   const options = {
     nav: false,
     items: 3,
-    autoplay: true,
+    autoplay: false,
     autoplayTimeout: 2500,
     smartSpeed: 1000,
     responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 4 } },
@@ -36,375 +36,377 @@ export default function Carousel() {
   }, [t]);
   return (
     <>
-      <Container align="center" style={{ marginTop: "7rem" }}>
-        <Typography
-          variant="h6"
-          sx={{ mt: "1rem", pb: "1rem" }}
-          className={`${style.headerLine}`}
-          fontFamily={
-            i18n.language === "ar"
-              ? "'Noto Kufi Arabic', sans-serif"
-              : "'Nunito', sans-serif"
-          }
-        >
-          {t("what")}
-          <span className="fw-semibold"> {t("users")} </span>
-          {t("are-saying")}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ mt: "1rem" }}
-          fontFamily={
-            i18n.language === "ar"
-              ? "'Noto Kufi Arabic', sans-serif"
-              : "'Nunito', sans-serif"
-          }
-          fontSize={15}
-        >
-          {t("don’t-just-take-our-word-for-it")}
-        </Typography>
-      </Container>
-      <OwlCarousel className="owl-theme" loop margin={0} {...options} dir="ltr">
-        <div className={`item`}>
-          <Card className={`${style.crd}`}>
-            <CardContent sx={{ height: 150 }}>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                align="center"
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
+      <div className={`${style.mainBg} py-4`}>
+        <Container align="center">
+          <Typography
+            variant="h6"
+            sx={{ mt: "1rem", pb: "1rem" }}
+            className={`${style.headerLine}`}
+            fontFamily={
+              i18n.language === "ar"
+                ? "'Noto Kufi Arabic', sans-serif"
+                : "'Nunito', sans-serif"
+            }
+          >
+            {t("what")}
+            <span className="fw-semibold"> {t("users")} </span>
+            {t("are-saying")}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ mt: "1rem" }}
+            fontFamily={
+              i18n.language === "ar"
+                ? "'Noto Kufi Arabic', sans-serif"
+                : "'Nunito', sans-serif"
+            }
+            fontSize={15}
+          >
+            {t("don’t-just-take-our-word-for-it")}
+          </Typography>
+        </Container>
+        <OwlCarousel className="owl-theme" loop margin={0} {...options} dir="ltr">
+          <div className={`item`}>
+            <Card className={`${style.crd}`}>
+              <CardContent sx={{ height: 150 }}>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  align="center"
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("simple-and-easy-to-use-app")}
+                </Typography>
+              </CardContent>
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                {t("simple-and-easy-to-use-app")}
-              </Typography>
-            </CardContent>
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Container className={`${style.imgLineThrow}`}>
-                <Avatar
-                  aria-label="review"
-                  sx={{ width: 75, height: 75, margin: "auto" }}
-                  src={require("../../assets/images/Home~Slider/user_1.jpg")}
-                ></Avatar>
-              </Container>
-              <Typography
-                variant="body2"
-                align="center"
-                sx={{ mt: "1rem" }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
+                <Container className={`${style.imgLineThrow}`}>
+                  <Avatar
+                    aria-label="review"
+                    sx={{ width: 75, height: 75, margin: "auto" }}
+                    src={require("../../assets/images/Home~Slider/user_1.jpg")}
+                  ></Avatar>
+                </Container>
+                <Typography
+                  variant="body2"
+                  align="center"
+                  sx={{ mt: "1rem" }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("gemma-t")}
+                </Typography>
+                <Typography
+                  align="center"
+                  sx={{ my: 1 }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("whiteladies-road")}
+                </Typography>
+                <Typography align="center">
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarHalfIcon sx={{ color: "gold" }} />
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <div className={`item`}>
+            <Card className={`${style.crd}`}>
+              <CardContent sx={{ height: 150 }}>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  align="center"
+                  className={``}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("sheaper-than-other-car-parks")}
+                </Typography>
+              </CardContent>
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                {t("gemma-t")}
-              </Typography>
-              <Typography
-                align="center"
-                sx={{ my: 1 }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
+                <Container className={`${style.imgLineThrow}`}>
+                  <Avatar
+                    aria-label="review"
+                    sx={{ width: 75, height: 75, margin: "auto" }}
+                    src={require("../../assets/images/Home~Slider/user_2.jpg")}
+                  ></Avatar>
+                </Container>
+                <Typography
+                  variant="body2"
+                  align="center"
+                  sx={{ mt: "1rem" }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("richard-b")}
+                </Typography>
+                <Typography
+                  align="center"
+                  sx={{ my: 1 }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("high-holborn")}
+                </Typography>
+                <Typography align="center">
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarHalfIcon sx={{ color: "gold" }} />
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <div className={`item`}>
+            <Card className={`${style.crd}`}>
+              <CardContent sx={{ height: 150 }}>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  align="center"
+                  className={``}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("space-for-a-hospital-appointment-in-London")}
+                </Typography>
+              </CardContent>
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                {t("whiteladies-road")}
-              </Typography>
-              <Typography align="center">
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarHalfIcon sx={{ color: "gold" }} />
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={`item`}>
-          <Card className={`${style.crd}`}>
-            <CardContent sx={{ height: 150 }}>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                align="center"
-                className={``}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
+                <Container className={`${style.imgLineThrow}`}>
+                  <Avatar
+                    aria-label="review"
+                    sx={{ width: 75, height: 75, margin: "auto" }}
+                    src={require("../../assets/images/Home~Slider/user_3.jpg")}
+                  ></Avatar>
+                </Container>
+                <Typography
+                  variant="body2"
+                  align="center"
+                  sx={{ mt: "1rem" }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("jennifier-m")}
+                </Typography>
+                <Typography
+                  align="center"
+                  sx={{ my: 1 }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("melton-street")}
+                </Typography>
+                <Typography align="center">
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarHalfIcon sx={{ color: "gold" }} />
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <div className={`item`}>
+            <Card className={`${style.crd}`}>
+              <CardContent sx={{ height: 150 }}>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  align="center"
+                  className={``}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("away-supporters-attending-a-fulham-game")}
+                </Typography>
+              </CardContent>
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                {t("sheaper-than-other-car-parks")}
-              </Typography>
-            </CardContent>
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Container className={`${style.imgLineThrow}`}>
-                <Avatar
-                  aria-label="review"
-                  sx={{ width: 75, height: 75, margin: "auto" }}
-                  src={require("../../assets/images/Home~Slider/user_2.jpg")}
-                ></Avatar>
-              </Container>
-              <Typography
-                variant="body2"
-                align="center"
-                sx={{ mt: "1rem" }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
+                <Container className={`${style.imgLineThrow}`}>
+                  <Avatar
+                    aria-label="review"
+                    sx={{ width: 75, height: 75, margin: "auto" }}
+                    src={require("../../assets/images/Home~Slider/user_4.jpg")}
+                  ></Avatar>
+                </Container>
+                <Typography
+                  variant="body2"
+                  align="center"
+                  sx={{ mt: "1rem" }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("marcus-f")}
+                </Typography>
+                <Typography
+                  align="center"
+                  sx={{ my: 1 }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("vicarage-road")}
+                </Typography>
+                <Typography align="center">
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarHalfIcon sx={{ color: "gold" }} />
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <div className={`item`}>
+            <Card className={`${style.crd}`}>
+              <CardContent sx={{ height: 150 }}>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  align="center"
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("higher quality")}
+                </Typography>
+              </CardContent>
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                {t("richard-b")}
-              </Typography>
-              <Typography
-                align="center"
-                sx={{ my: 1 }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("high-holborn")}
-              </Typography>
-              <Typography align="center">
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarHalfIcon sx={{ color: "gold" }} />
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={`item`}>
-          <Card className={`${style.crd}`}>
-            <CardContent sx={{ height: 150 }}>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                align="center"
-                className={``}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("space-for-a-hospital-appointment-in-London")}
-              </Typography>
-            </CardContent>
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Container className={`${style.imgLineThrow}`}>
-                <Avatar
-                  aria-label="review"
-                  sx={{ width: 75, height: 75, margin: "auto" }}
-                  src={require("../../assets/images/Home~Slider/user_3.jpg")}
-                ></Avatar>
-              </Container>
-              <Typography
-                variant="body2"
-                align="center"
-                sx={{ mt: "1rem" }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("jennifier-m")}
-              </Typography>
-              <Typography
-                align="center"
-                sx={{ my: 1 }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("melton-street")}
-              </Typography>
-              <Typography align="center">
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarHalfIcon sx={{ color: "gold" }} />
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={`item`}>
-          <Card className={`${style.crd}`}>
-            <CardContent sx={{ height: 150 }}>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                align="center"
-                className={``}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("away-supporters-attending-a-fulham-game")}
-              </Typography>
-            </CardContent>
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Container className={`${style.imgLineThrow}`}>
-                <Avatar
-                  aria-label="review"
-                  sx={{ width: 75, height: 75, margin: "auto" }}
-                  src={require("../../assets/images/Home~Slider/user_4.jpg")}
-                ></Avatar>
-              </Container>
-              <Typography
-                variant="body2"
-                align="center"
-                sx={{ mt: "1rem" }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("marcus-f")}
-              </Typography>
-              <Typography
-                align="center"
-                sx={{ my: 1 }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("vicarage-road")}
-              </Typography>
-              <Typography align="center">
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarHalfIcon sx={{ color: "gold" }} />
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={`item`}>
-          <Card className={`${style.crd}`}>
-            <CardContent sx={{ height: 150 }}>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                align="center"
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("higher quality")}
-              </Typography>
-            </CardContent>
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Container className={`${style.imgLineThrow}`}>
-                <Avatar
-                  aria-label="review"
-                  sx={{ width: 75, height: 75, margin: "auto" }}
-                  src={require("../../assets/images/Home~Slider/user_5.jpg")}
-                ></Avatar>
-              </Container>
-              <Typography
-                variant="body2"
-                align="center"
-                sx={{ mt: "1rem" }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("carol-n")}
-              </Typography>
-              <Typography
-                align="center"
-                sx={{ my: 1 }}
-                fontFamily={
-                  i18n.language === "ar"
-                    ? "'Noto Kufi Arabic', sans-serif"
-                    : "'Nunito', sans-serif"
-                }
-                fontSize={15}
-              >
-                {t("royal-car-park")}
-              </Typography>
-              <Typography align="center">
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarIcon sx={{ color: "gold" }} />
-                <StarHalfIcon sx={{ color: "gold" }} />
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-      </OwlCarousel>
+                <Container className={`${style.imgLineThrow}`}>
+                  <Avatar
+                    aria-label="review"
+                    sx={{ width: 75, height: 75, margin: "auto" }}
+                    src={require("../../assets/images/Home~Slider/user_5.jpg")}
+                  ></Avatar>
+                </Container>
+                <Typography
+                  variant="body2"
+                  align="center"
+                  sx={{ mt: "1rem" }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("carol-n")}
+                </Typography>
+                <Typography
+                  align="center"
+                  sx={{ my: 1 }}
+                  fontFamily={
+                    i18n.language === "ar"
+                      ? "'Noto Kufi Arabic', sans-serif"
+                      : "'Nunito', sans-serif"
+                  }
+                  fontSize={15}
+                >
+                  {t("royal-car-park")}
+                </Typography>
+                <Typography align="center">
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarIcon sx={{ color: "gold" }} />
+                  <StarHalfIcon sx={{ color: "gold" }} />
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+        </OwlCarousel>
+      </div>
     </>
   );
 }

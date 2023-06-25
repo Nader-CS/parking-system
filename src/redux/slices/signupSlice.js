@@ -70,6 +70,12 @@ const signUpData = createSlice({
             const geoLoc = action.payload;
             state.garageDetails.lat = geoLoc.lat;
             state.garageDetails.lon = geoLoc.lng;
+        },
+        resetData: (state, action)=>{
+            state.uCollection = null;
+            state.gCollection = null;
+            state.uIsCreated = false;
+            state.usedEmail = false
         }
     },
     extraReducers: {
@@ -81,19 +87,14 @@ const signUpData = createSlice({
             if (action.error.message === 'Firebase: Error (auth/email-already-in-use).') state.usedEmail = !state.usedEmail;
         },
 
-        [createUserCollection.fulfilled]: (state, action) => {
-            state.uCollection = true;
-        },
-
-        [createGarageCollection.fulfilled]: (state, action) => {
-            state.gCollection = true
-        },
+        [createUserCollection.fulfilled]: (state, action) => { state.uCollection = true; },
+        [createGarageCollection.fulfilled]: (state, action) => { state.gCollection = true },
 
     }
 })
 
 
-export const { getLanLon } = signUpData.actions;
+export const { getLanLon, resetData } = signUpData.actions;
 export default signUpData.reducer;
 
 

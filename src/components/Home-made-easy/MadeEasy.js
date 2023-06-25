@@ -28,7 +28,7 @@ const MadeEasy = () => {
             ? "'Noto Kufi Arabic', sans-serif"
             : "'Nunito', sans-serif",
       }}
-      className={i18n.language === "ar" ? style.ar : ""}
+      className={`${i18n.language === "ar" ? style.ar : ""} pb-5`}
     >
       <h1 className={style.header}>{t("parking-made-easy")}</h1>
       <OwlCarousel
