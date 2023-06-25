@@ -13,7 +13,7 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import { useDispatch, useSelector } from "react-redux";
 import closestGarage from "../../utilities/closestGarage";
-import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
+import { checkIsFilled, getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { Link } from "react-router-dom";
 import { getSelectedGarage } from "../../redux/slices/selectedGarage";
 import { kCalculatePrice } from "../../utilities/Constants";
@@ -26,10 +26,12 @@ const GarageCards = () => {
   // const { duration } = useSelector((state) => state.dateGeocode);
   const dutrationString = sessionStorage.getItem('duration');
   const duration = JSON.parse(dutrationString);
-  const { geocode } = useSelector((state) => state.dateGeocode);
+  // const { geocode } = useSelector((state) => state.dateGeocode);
+  const geoString = sessionStorage.getItem('geocode');
+  const geocode = JSON.parse(geoString);
   const [open, setOpen] = React.useState(false);
   const [id, setID] = React.useState('');
-  const [isFilled, setIsFilled] = React.useState(false);
+  const {isFilled} = useSelector((state) => state.garageSpaces)
   const handleClickOpen = (id) => {
     setOpen(true);
     setID(id)
@@ -39,10 +41,10 @@ const GarageCards = () => {
     setOpen(false);
   };
 
-  React.useEffect(() => {
-    closestGarage().then((res) => {
+  React.useEffect(() => { 
+    closestGarage(geocode.lat, geocode.lng).then((res) => {
       dispatch(getNearbyGarageSpaces(res));
-    }).then(()=>setIsFilled(true))
+    }).then(()=>dispatch(checkIsFilled(true)))
   }, [dispatch]);
 
   if (!isFilled) return  <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', marginTop:'20px'}}>
@@ -50,6 +52,7 @@ const GarageCards = () => {
     <Skeleton style={{margin:'20 auto'}}  variant="rounded" width={400} height={120} />
     <Skeleton variant="rounded" width={400} height={120} />
     <Skeleton variant="rounded" width={400} height={120} />
+    {console.log(data)}
   </Stack>
   </div> 
   if (data.length === 0 ) return ""
@@ -63,6 +66,7 @@ const GarageCards = () => {
     >
       {data.map((garage) => (
         <div style={{ padding: "2%" }} className={style.card} key={garage.garage["id"]}>
+          {console.log(data)}
           <Card sx={{ maxWidth: 450 }}>
             <CardActionArea
               onClick={()=>{

@@ -7,8 +7,9 @@
 //  * @author	"Nader"
 //  */
 export default async function closestGarage(
-  originLong = 31.2486498,
-  originLati = 30.0505454,
+  
+  originLati,
+  originLong,
   distance = 500
 ) {
   const NearestGarages = [];

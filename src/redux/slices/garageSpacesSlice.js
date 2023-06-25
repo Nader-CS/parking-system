@@ -4,6 +4,7 @@ const garageSpacesSlice = createSlice({
   name: "garageSpaces",
   initialState: {
     data: [],
+    isFilled: false,
   },
   reducers: {
     getNearbyGarageSpaces: (state, { payload }) => {
@@ -11,8 +12,11 @@ const garageSpacesSlice = createSlice({
         return item.garage.availableSpots >= 1;
       });
     },
+    checkIsFilled: (state, {payload}) => {
+      state.isFilled = payload;
+    }
   },
 });
 
-export const { getNearbyGarageSpaces } = garageSpacesSlice.actions;
+export const { getNearbyGarageSpaces, checkIsFilled } = garageSpacesSlice.actions;
 export default garageSpacesSlice.reducer;
