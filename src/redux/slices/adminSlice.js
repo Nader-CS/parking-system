@@ -8,9 +8,9 @@ import { FirebaseCollections } from "../../utilities/FirebaseCollections";
 
 export const getData = createAsyncThunk("admin/getData", async () => {
   try {
-    const adminData = await getAdminData();
+    // const adminData = await getAdminData();
     const { approvedGarages, unApprovedGarages } = await getAllGarages();
-    return { adminData, approvedGarages, unApprovedGarages };
+    return { approvedGarages, unApprovedGarages };
   } catch (error) {
     console.log(error);
   }
@@ -33,8 +33,8 @@ const AdminSlice = createSlice({
   name: "admin",
   initialState: {
     adminData: null,
-    unApprovedGarages: null,
-    approvedGarages: null,
+    unApprovedGarages: [],
+    approvedGarages: [],
     isApprovedLoading: false,
   },
   reducers: {},
@@ -44,9 +44,9 @@ const AdminSlice = createSlice({
         state.adminData = action.payload.adminData;
         state.unApprovedGarages = action.payload.unApprovedGarages;
         state.approvedGarages = action.payload.approvedGarages;
-        console.log(
-          `state admin id ${state.adminData.id} approvedGarages ${state.approvedGarages.length} unApprovedGarages ${state.unApprovedGarages.length}`
-        );
+        // console.log(
+        //   `state admin id ${state.adminData.id} approvedGarages ${state.approvedGarages.length} unApprovedGarages ${state.unApprovedGarages.length}`
+        // );
       })
       .addCase(approveGarage.pending, (state, action) => {
         state.isApprovedLoading = true;
