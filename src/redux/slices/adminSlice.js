@@ -42,8 +42,8 @@ const AdminSlice = createSlice({
   initialState: {
     isAdmin: false,
     adminData: null,
-    unApprovedGarages: null,
-    approvedGarages: null,
+    unApprovedGarages: [],
+    approvedGarages: [],
     isApprovedLoading: false,
   },
   reducers: {},
@@ -59,9 +59,9 @@ const AdminSlice = createSlice({
       .addCase(getGarages.fulfilled, (state, action) => {
         state.unApprovedGarages = action.payload.unApprovedGarages;
         state.approvedGarages = action.payload.approvedGarages;
-        console.log(
-          `state admin id ${state.adminData.adminId} approvedGarages ${state.approvedGarages.length} unApprovedGarages ${state.unApprovedGarages.length}`
-        );
+        // console.log(
+        //   `state admin id ${state.adminData.adminId} approvedGarages ${state.approvedGarages.length} unApprovedGarages ${state.unApprovedGarages.length}`
+        // );
       })
       .addCase(approveGarage.pending, (state, action) => {
         state.isApprovedLoading = true;

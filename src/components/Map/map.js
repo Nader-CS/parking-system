@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
 import { kCalculatePrice } from "../../utilities/Constants";
 import Sheet from "../Cards/sheet";
@@ -8,18 +8,17 @@ import marker from "../../assets/icons/marker.PNG";
 import markerPurple from "../../assets/icons/marker-purple.png";
 import { CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
-import closestGarage from "../../utilities/closestGarage";
-import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 
 function Map() {
-  const dispatch = useDispatch();
   const [loadded, setLoadded] = useState(true);
   const [activeMarker, setActiveMarker] = useState(null);
   const { data } = useSelector((state) => state.garageSpaces);
-  const { geocode } = useSelector((state) => state.dateGeocode);
+  // const { geocode } = useSelector((state) => state.dateGeocode);
+  const geoString = sessionStorage.getItem('geocode');
+  const geocode = JSON.parse(geoString)
   const dutrationString = sessionStorage.getItem("duration");
   const duration = JSON.parse(dutrationString);
-  const [isFilled, setIsFilled] = useState(false);
+  const {isFilled} = useSelector((state) => state.garageSpaces)
   const [open, setOpen] = React.useState(false);
   const [id, setID] = React.useState("");
   const handleClose = () => {
@@ -32,16 +31,8 @@ function Map() {
     setActiveMarker(marker);
   };
   
-  useEffect(() => {
-    
-      closestGarage().then((res) => {
-        dispatch(getNearbyGarageSpaces(res));
-      }).then(()=>setIsFilled(true))
-    
-  }, [dispatch]);
-  
   if (!isFilled) return <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}>
-    <CircularProgress />
+    <CircularProgress color="secondary" />
   </div> 
    if (data.length === 0) return (
       <div
@@ -93,14 +84,14 @@ function Map() {
     )
   let googleMap = (
     <GoogleMap
-      center={{ lat: 30.0505454, lng: 31.2486498 }}
+      center={{ lat: geocode.lat , lng: geocode.lng }}
       zoom={17}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: "100%", height: "100%" }}
       onLoad={() => setLoadded(true)}
     >
       <Marker
-        position={{ lat: 30.0505454, lng: 31.2486498 }}
+        position={{ lat: geocode.lat , lng: geocode.lng }}
         icon={{
           url: markerPurple,
           scaledSize: new window.google.maps.Size(70, 50),

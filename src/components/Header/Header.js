@@ -25,6 +25,7 @@ import LanguageDropdown from "../Languages/LanguagesDropdown";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { logUserOut } from "../../redux/slices/loginSlice";
+import { resetData } from "../../redux/slices/profileSlice";
 
 const drawerWidth = 240;
 const icons = [
@@ -37,21 +38,23 @@ const icons = [
 ];
 
 function Header(props) {
+
   const { validUser } = useSelector((state) => state.loginReducer);
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
     dispatch(logUserOut());
+    dispatch(resetData())
   };
 
 
 
   const navItems = validUser 
-    ? [ t("home"), t("how-it-works"), t("contact"), t("about-us"), t("Profile"), "Logout", ] 
+    ? [ t("home"), t("how-it-works"), t("contact"), t("about-us"), t("Profile"), t("Logout"), ] 
     : [ t("home"), t("how-it-works"), t("contact"), t("about-us"), t("login"), t("signup"), ];
   const pages = validUser
-    ? ["/", "/how-it-works", "/contact", "/about-us", "/profile"]
+    ? ["/", "/how-it-works", "/contact", "/about-us", "/profile", "/"]
     : ["/", "/how-it-works", "/contact", "/about-us", "/login", "/signup"];
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);

@@ -6,6 +6,7 @@ import signUpData from "../slices/signupSlice";
 import loginData from "../slices/loginSlice";
 import reservationSlice from "../slices/reservationSlice";
 import adminSlice from "../slices/adminSlice";
+import userProfileSlice from "../slices/profileSlice";
 
 const rootReducer = combineReducers({
   dateGeocode: dateGeocodeReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   signupReducer: signUpData,
   loginReducer: loginData,
   reservation: reservationSlice,
-  admin: adminSlice
+  admin: adminSlice,
+  profile: userProfileSlice,
 });
 
 const store = configureStore({ reducer: rootReducer });

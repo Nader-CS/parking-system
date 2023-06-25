@@ -26,6 +26,7 @@ const ParkingSearch = () => {
   const [isDisabled, setIsDisabled] = useState(true); //state variable for button
   const parkingFrom = useSelector((state) => state.dateGeocode.parkingFrom);
   const parkingUntil = useSelector((state) => state.dateGeocode.parkingUntil);
+  const {geocode} = useSelector((state) => state.dateGeocode);
   const { t, i18n } = useTranslation();
 
   const handlePlaceSelect = (place) => {
@@ -222,6 +223,8 @@ const ParkingSearch = () => {
                 }
                 const dutrationString = JSON.stringify(duration);
                 sessionStorage.setItem(`duration`, `${dutrationString}`);
+                const geoString = JSON.stringify(geocode);
+                sessionStorage.setItem('geocode', geoString);
               }}
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >
