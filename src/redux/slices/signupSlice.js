@@ -48,7 +48,7 @@ const signUpData = createSlice({
             ownerEmail: '',
             ownerPhone: '',
             password: '',
-            rePassword: ''
+            rePassword: '',
         },
         garageDetails: {
             garageName: '',
@@ -58,7 +58,8 @@ const signUpData = createSlice({
             availableSpots: '',
             lat: '',
             lon: '',
-            images: ['', '', '', '']
+            images: ['', '', '', ''],
+            approved: false
         },
         usedEmail: false,
         uIsCreated: false,
