@@ -45,7 +45,7 @@ const GarageCards = () => {
     closestGarage(geocode.lat, geocode.lng).then((res) => {
       dispatch(getNearbyGarageSpaces(res));
     }).then(()=>dispatch(checkIsFilled(true)))
-  }, [dispatch, geocode]);
+  }, [dispatch]);
 
   if (!isFilled) return  <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', marginTop:'20px'}}>
     <Stack spacing={1}>
