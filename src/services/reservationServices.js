@@ -42,18 +42,12 @@ export const listenToValueChange = (snapshot) => {
 };
 
 export const getAdminData = async () => {
-  let filteredUser = null;
   const uid = localStorage.getItem("uid");
-  const url = `${FirebaseCollections.baseURL}/${FirebaseCollections.userCollection}`;
+  const url = `${FirebaseCollections.baseURL}/ipark-admin.json`;
   const res = await axios.get(url);
   const data = res.data;
-  const user = Object.entries(data).find(
-    ([key, value]) => value.ownerId === uid
-  );
-  const [id, userData] = user;
-  filteredUser = { id, ...userData };
-  console.log(filteredUser);
-  return filteredUser;
+  const user = data.find((value) => value.adminId === uid);
+  return user;
 };
 
 export const getAllGarages = async () => {

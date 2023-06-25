@@ -6,11 +6,19 @@ import {
 } from "../../services/reservationServices";
 import { FirebaseCollections } from "../../utilities/FirebaseCollections";
 
-export const getData = createAsyncThunk("admin/getData", async () => {
+export const getAdmin = createAsyncThunk("admin/getAdmin", async () => {
   try {
     const adminData = await getAdminData();
+    return adminData;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const getGarages = createAsyncThunk("admin/getGarages", async () => {
+  try {
     const { approvedGarages, unApprovedGarages } = await getAllGarages();
-    return { adminData, approvedGarages, unApprovedGarages };
+    return { approvedGarages, unApprovedGarages };
   } catch (error) {
     console.log(error);
   }
@@ -32,6 +40,7 @@ export const approveGarage = createAsyncThunk(
 const AdminSlice = createSlice({
   name: "admin",
   initialState: {
+    isAdmin: false,
     adminData: null,
     unApprovedGarages: null,
     approvedGarages: null,
@@ -40,12 +49,18 @@ const AdminSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getData.fulfilled, (state, action) => {
-        state.adminData = action.payload.adminData;
+      .addCase(getAdmin.fulfilled, (state, action) => {
+        state.isAdmin = action.payload ? true : false;
+        state.adminData = action.payload ?? null;
+        console.log(
+          `state admin id ${state.adminData.adminId} ${state.isAdmin}`
+        );
+      })
+      .addCase(getGarages.fulfilled, (state, action) => {
         state.unApprovedGarages = action.payload.unApprovedGarages;
         state.approvedGarages = action.payload.approvedGarages;
         console.log(
-          `state admin id ${state.adminData.id} approvedGarages ${state.approvedGarages.length} unApprovedGarages ${state.unApprovedGarages.length}`
+          `state admin id ${state.adminData.adminId} approvedGarages ${state.approvedGarages.length} unApprovedGarages ${state.unApprovedGarages.length}`
         );
       })
       .addCase(approveGarage.pending, (state, action) => {
@@ -68,5 +83,6 @@ const AdminSlice = createSlice({
 
 export default AdminSlice.reducer;
 
-// to use getData dispatch(getData());
+// to use getAdmin dispatch(getAdmin());
+// to use getGarages dispatch(getGarages());
 // to use approveGarage dispatch(approveGarage(garage)); send whole garage obj
