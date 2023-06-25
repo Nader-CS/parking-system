@@ -9,7 +9,6 @@ import $ from "jquery";
 
 export default function Contact() {
     const form = useRef();
-    const [messageStatus, setMessageStatus] = useState(null)
     const [userMessage, setUserMessage] = useState({
         name: "",
         email: "",
@@ -21,45 +20,20 @@ export default function Contact() {
         window.scrollTo(0, 0);
     }, [])
 
-    // useEffect(() => {
-    //     if (messageStatus === true) {
-    //         setUserMessage({ name: "", email: "", subject: "", message: "" })
-    //         $(".sucMsg").fadeIn(500, () => {
-    //             setTimeout(() => {
-    //                 $(".sucMsg").fadeOut(500);
-    //                 setMessageStatus(null)
-    //                 console.log(userMessage);
-    //             }, 3000);
-    //         });
-    //     } else if (messageStatus === false) {
-    //         $(".errMsg").fadeIn(500, () => {
-    //             setTimeout(() => {
-    //                 $(".errMsg").fadeOut(500);
-    //                 setMessageStatus(null)
-    //             }, 3000);
-    //         });
-    //     }
-    // }, [messageStatus]);
 
-    const sendEmail = (event) => {
-        // event.preventDefault();
+    const sendEmail = (formReset) => {
         emailjs.sendForm('service_vujzn4e', 'template_qr9o07c', form.current, '-BNdkFXEOMys51fhZ')
             .then((result) => {
-                setMessageStatus(true)
-                setUserMessage({ name: "", email: "", subject: "", message: "" })
                 $(".sucMsg").fadeIn(500, () => {
                     setTimeout(() => {
                         $(".sucMsg").fadeOut(500);
-                        setMessageStatus(null)
-                        console.log(userMessage);
+                        formReset()
                     }, 3000);
                 });
             }, (error) => {
-                setMessageStatus(false)
                 $(".errMsg").fadeIn(500, () => {
                     setTimeout(() => {
                         $(".errMsg").fadeOut(500);
-                        setMessageStatus(null)
                     }, 3000);
                 });
             });
@@ -127,12 +101,8 @@ export default function Contact() {
                         <Formik
                             initialValues={userMessage}
                             onSubmit={(values, { resetForm }) => {
-                                sendEmail();
-                                setTimeout(() => {
-                                    resetForm();
-                                }, 1000)
+                                sendEmail(resetForm);
                             }}
-
                         >
                             {({ errors, touched }) => (
                                 <Form ref={form} className={`mx-auto`}>
