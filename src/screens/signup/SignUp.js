@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './signup.module.css'
 import { Link } from 'react-router-dom';
 
 
 
 export default function SignUp() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
 
   return <>
     <div className={`${style.mainBg} overflow-hidden`}>

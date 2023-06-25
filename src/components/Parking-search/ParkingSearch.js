@@ -14,6 +14,7 @@ import dayjs from "dayjs";
 // import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import './ParkingSearch.css';
 
 const ParkingSearch = () => {
   const { duration } = useSelector((state) => state.dateGeocode);
@@ -115,7 +116,7 @@ const ParkingSearch = () => {
     // console.log("ParkingUntilBeforeParkingFrom: "+ParkingUntilBeforeParkingFrom)
     // console.log("isParkingFromNotChosen: "+isParkingFromNotChosen)
     // console.log("isParkingUntilNotChosen: "+isParkingUntilNotChosen)
-    console.log("isLocationNotChosen: " + isLocationNotChosen);
+    // console.log("isLocationNotChosen: " + isLocationNotChosen);
     // console.log("isFieldsValid: "+isFieldsValid)
 
     const isButtonDisabled =
@@ -147,9 +148,8 @@ const ParkingSearch = () => {
     >
       <div className="container">
         <div
-          className={`row justify-content-center justify-content-md-start ${
-            i18n.language === "ar" ? "justify-content-md-center" : undefined
-          } `}
+          className={`row justify-content-center justify-content-md-start ${i18n.language === "ar" ? "justify-content-md-center" : undefined
+            } `}
         >
           <div
             className="col col-lg-5 col-10"
@@ -163,16 +163,15 @@ const ParkingSearch = () => {
             </div>
 
             {/* input field to search for location */}
-            <div className={classes.autocompleteContainer}>
+            <div className={`${classes.autocompleteContainer} differ`}>
               <AutoComplete
                 placeholder={t("auto-complete-placeholder")}
                 apiKey="AIzaSyDxE47Kh4gnM9Sh-Nj6vTjFzful_q7lZdY"
-                autocompletePlaceHolder
-                className={`${classes.autocompleteField} ${
-                  i18n.language === "ar"
-                    ? classes.arautocompleteInputPlaceHolder
-                    : classes.enautocompleteInputPlaceHolder
-                }`}
+                autocompleteInputPlaceHolder
+                className={`${classes.autocompleteField} ${i18n.language === "ar"
+                  ? classes.arautocompleteInputPlaceHolder
+                  : classes.enautocompleteInputPlaceHolder
+                  }`}
                 ref={autocompleteRef}
                 onChange={handleAutocompleteChange}
                 style={{
@@ -231,9 +230,8 @@ const ParkingSearch = () => {
 
           {/* Modal */}
           <div
-            className={`modal fade bd-example-modal-lg ${
-              showModal ? "show" : ""
-            }`}
+            className={`modal fade bd-example-modal-lg ${showModal ? "show" : ""
+              }`}
             tabIndex="-1"
             role="dialog"
             aria-labelledby="myLargeModalLabel"

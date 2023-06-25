@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  MDBFooter,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-} from "mdb-react-ui-kit";
+import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import { ReactComponent as MasterCard } from "../../assets/icons/mastercard.svg";
 import { ReactComponent as Visa } from "../../assets/icons/visa-10.svg";
@@ -17,7 +11,7 @@ const Footer = () => {
   const { t, i18n } = useTranslation();
   return (
     <MDBFooter
-      className="text-md-center text-lg-start text-sm-start pt-2 mt-5"
+      className="text-md-center text-lg-start text-sm-start pt-2"
       style={{ backgroundColor: "#1c1b1b", color: "white", textAlign: "left" }}
     >
       <section
@@ -37,65 +31,12 @@ const Footer = () => {
         </div>
 
         <div>
-          <a
-            href="#"
-            className="me-4"
-            style={{
-              fontSize: "1.5rem",
-            }}
-          >
-            <MDBIcon fab icon="facebook-f" />
-          </a>
-          <a
-            href="#"
-            className="me-4"
-            style={{
-              color: "#1DA1F2",
-              fontSize: "1.5rem",
-            }}
-          >
-            <MDBIcon fab icon="twitter" />
-          </a>
-          <a
-            href="#"
-            className="me-4"
-            style={{
-              color: "#FF5733",
-              fontSize: "1.5rem",
-            }}
-          >
-            <MDBIcon fab icon="google" />
-          </a>
-          <a
-            href="#"
-            className="me-4"
-            style={{
-              color: "#e95950",
-              fontSize: "1.5rem",
-            }}
-          >
-            <MDBIcon fab icon="instagram" />
-          </a>
-          <a
-            href="#"
-            className="me-4"
-            style={{
-              color: "#0077b5",
-              fontSize: "1.5rem",
-            }}
-          >
-            <MDBIcon fab icon="linkedin" />
-          </a>
-          <a
-            href="#"
-            className="me-4"
-            style={{
-              color: "#f5f5f5",
-              fontSize: "1.5rem",
-            }}
-          >
-            <MDBIcon fab icon="github" />
-          </a>
+          <a href="#" className="me-4" style={{ fontSize: "1.5rem", }} > <MDBIcon fab icon="facebook-f" /> </a>
+          <a href="#" className="me-4" style={{ color: "#1DA1F2", fontSize: "1.5rem", }} > <MDBIcon fab icon="twitter" /> </a>
+          <a href="#" className="me-4" style={{ color: "#FF5733", fontSize: "1.5rem", }} > <MDBIcon fab icon="google" /> </a>
+          <a href="#" className="me-4" style={{ color: "#e95950", fontSize: "1.5rem", }} > <MDBIcon fab icon="instagram" /> </a>
+          <a href="#" className="me-4" style={{ color: "#0077b5", fontSize: "1.5rem", }} > <MDBIcon fab icon="linkedin" /> </a>
+          <a href="#" className="me-4" style={{ color: "#f5f5f5", fontSize: "1.5rem", }} > <MDBIcon fab icon="github" /> </a>
         </div>
       </section>
 
@@ -136,103 +77,41 @@ const Footer = () => {
               >
                 {t("helpful-links")}
               </h6>
-              <p
-                style={{
-                  fontFamily:
-                    i18n.language === "ar"
-                      ? "'Noto Kufi Arabic', sans-serif"
-                      : "'Nunito', sans-serif",
-                }}
-              >
-                <Link to="/">{t("home")}</Link>
+              <p style={{ fontFamily: i18n.language === "ar" ? "'Noto Kufi Arabic', sans-serif" : "'Nunito', sans-serif", }} >
+                <Link style={{textDecoration: 'none'}} to="/">{t("home")}</Link>
               </p>
-              <p
-                style={{
-                  fontFamily:
-                    i18n.language === "ar"
-                      ? "'Noto Kufi Arabic', sans-serif"
-                      : "'Nunito', sans-serif",
-                }}
-              >
-                <Link to="/how-it-works">{t("how-it-works")}</Link>
+              <p style={{ fontFamily: i18n.language === "ar" ? "'Noto Kufi Arabic', sans-serif" : "'Nunito', sans-serif", }}>
+                <Link style={{textDecoration: 'none'}} to="/how-it-works">{t("how-it-works")}</Link>
               </p>
-              <p
-                style={{
-                  fontFamily:
-                    i18n.language === "ar"
-                      ? "'Noto Kufi Arabic', sans-serif"
-                      : "'Nunito', sans-serif",
-                }}
-              >
-                <Link to="/plan">{t("plan")}</Link>
+              <p style={{ fontFamily: i18n.language === "ar" ? "'Noto Kufi Arabic', sans-serif" : "'Nunito', sans-serif", }} >
+                <Link style={{textDecoration: 'none'}} to="/contact">{t("complaint-inquiry")}</Link>
               </p>
-              <p
-                style={{
-                  fontFamily:
-                    i18n.language === "ar"
-                      ? "'Noto Kufi Arabic', sans-serif"
-                      : "'Nunito', sans-serif",
-                }}
-              >
-                <Link to="/about-us">{t("about-us")}</Link>
+              <p style={{ fontFamily: i18n.language === "ar" ? "'Noto Kufi Arabic', sans-serif" : "'Nunito', sans-serif", }}>
+                <Link style={{textDecoration: 'none'}} to="/about-us">{t("about-us")}</Link>
               </p>
             </MDBCol>
 
             <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
               <h6
-                className="text-uppercase fw-bold mb-4"
-                style={{
-                  fontFamily:
-                    i18n.language === "ar"
-                      ? "'Noto Kufi Arabic', sans-serif"
-                      : "'Nunito', sans-serif",
-                }}
+                className="text-uppercase fw-bold mb-4" style={{ fontFamily: i18n.language === "ar" ? "'Noto Kufi Arabic', sans-serif" : "'Nunito', sans-serif", }}
               >
                 {t("other-links")}
               </h6>
-              <p
-                style={{
-                  fontFamily:
-                    i18n.language === "ar"
-                      ? "'Noto Kufi Arabic', sans-serif"
-                      : "'Nunito', sans-serif",
-                }}
-              >
-                <a href="https://www.google.com/maps/">{t("google-maps")}</a>
+              <p style={{ fontFamily: i18n.language === "ar" ? "'Noto Kufi Arabic', sans-serif" : "'Nunito', sans-serif",}} >
+                <a style={{textDecoration: 'none'}} href="https://www.google.com/maps/">{t("google-maps")}</a>
               </p>
-              <p
-                style={{
-                  fontFamily:
-                    i18n.language === "ar"
-                      ? "'Noto Kufi Arabic', sans-serif"
-                      : "'Nunito', sans-serif",
-                }}
-              >
-                <a href="https://www.chevroletarabia.com/eg-ar">
+              <p style={{ fontFamily: i18n.language === "ar" ? "'Noto Kufi Arabic', sans-serif" : "'Nunito', sans-serif",}} >
+                <a style={{textDecoration: 'none'}} href="https://www.chevroletarabia.com/eg-ar">
                   {t("chevrolet-egypt")}
                 </a>
               </p>
-              <p
-                style={{
-                  fontFamily:
-                    i18n.language === "ar"
-                      ? "'Noto Kufi Arabic', sans-serif"
-                      : "'Nunito', sans-serif",
-                }}
-              >
-                <a href="https://www.mercedes-benz.com.eg/en/passengercars.html">
+              <p style={{ fontFamily: i18n.language === "ar" ? "'Noto Kufi Arabic', sans-serif" : "'Nunito', sans-serif",}} >
+                <a style={{textDecoration: 'none'}} href="https://www.mercedes-benz.com.eg/en/passengercars.html">
                   {t("mercedes-egypt")}
                 </a>
               </p>
-              <p
-                style={{
-                  fontFamily:
-                    i18n.language === "ar"
-                      ? "'Noto Kufi Arabic', sans-serif"
-                      : "'Nunito', sans-serif",
-                }}
-              >
-                <a href="#!">{t("complaint-inquiry")}</a>
+              <p style={{ fontFamily: i18n.language === "ar" ? "'Noto Kufi Arabic', sans-serif" : "'Nunito', sans-serif",}}>
+                <a style={{textDecoration: 'none'}} href="#!">{t("plan")}</a>
               </p>
             </MDBCol>
 
@@ -325,9 +204,7 @@ const Footer = () => {
               <div className={classes["partner-icons"]}>
                 <MasterCard className={classes.partner} />
                 <Visa className={`${classes.partner} ${classes.visa}`} />
-                <Vodafone
-                  className={`${classes.partner} ${classes.Vodafone}`}
-                />
+                <Vodafone className={`${classes.partner} ${classes.Vodafone}`} />
               </div>
             </div>
           </div>
@@ -337,10 +214,10 @@ const Footer = () => {
         <LanguageDropdown />
       </div>
       <div
-        className="text-center p-4"
+        className="text-center py-2"
         style={{
           backgroundColor: "#0978BD",
-          fontSize: "1.3rem",
+          fontSize: "1rem",
           fontFamily:
             i18n.language === "ar"
               ? "'Noto Kufi Arabic', sans-serif"

@@ -16,6 +16,11 @@ const Login = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
+
+  useEffect(() => {
     if (isLogged === true) {
       $(".sucMsg").fadeIn(500, () => {
         setTimeout(() => {
@@ -57,16 +62,10 @@ const Login = () => {
       <div>
         <h2 className="container my-4 me-4">Login</h2>
 
-        <div
-          style={{ display: "none" }}
-          className="errMsg alert alert-danger w-50 mx-auto text-center"
-        >
+        <div style={{ display: "none" }} className="errMsg alert alert-danger w-50 mx-auto text-center" >
           Incorrect email or password
         </div>
-        <div
-          style={{ display: "none" }}
-          className="sucMsg alert alert-success w-50 mx-auto text-center"
-        >
+        <div style={{ display: "none" }} className="sucMsg alert alert-success w-50 mx-auto text-center" >
           Successfull login, Welcome Back
         </div>
         <Formik
@@ -88,7 +87,7 @@ const Login = () => {
                       name="userEmail"
                     />
                     {errors.userEmail && touched.userEmail ? (
-                      <div className={`mt-1 alert alert-danger rounded-0 py-2`}>
+                      <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>
                         {errors.userEmail}
                       </div>
                     ) : (
@@ -105,7 +104,7 @@ const Login = () => {
                       name="userPassword"
                     />
                     {errors.userPassword && touched.userPassword ? (
-                      <div className={`mt-1 alert alert-danger rounded-0 py-2`}>
+                      <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>
                         {errors.userPassword}
                       </div>
                     ) : (

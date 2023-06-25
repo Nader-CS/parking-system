@@ -1,6 +1,11 @@
-.MuiSvgIcon-root {
-    color: #851fbf;
+.differ .pac-target-input:focus-visible {
+    outline: 02px solid #851fbf !important;
 }
+
+.MuiFormControl-root .MuiSvgIcon-root {
+    color: #851fbf !important;
+}
+
 
 .MuiOutlinedInput-notchedOutline {
     border: 0 solid transparent !important;

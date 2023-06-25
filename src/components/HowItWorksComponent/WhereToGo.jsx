@@ -14,25 +14,25 @@ export default function WhereToGo() {
                 </Col>
             </Row>
             <Row className={`${style.rowLine} text-center`}>
-                <Col>
+                <Col xs={6} md={3}>
                     <div className='m-1 rounded-2 bg-white p-2'>
                         <Image className={`${style.crdImg} w-75 mx-auto`} src={require('../../assets/images/AboutUs/wCrd1.png')} />
                         <div><h5 className='mt-2 fw-semibold' >Office</h5></div>
                     </div>
                 </Col>
-                <Col>
+                <Col xs={6} md={3}>
                     <div className='m-1 rounded-2 bg-white p-2'>
                         <Image className={`${style.crdImg} w-75 mx-auto`} src={require('../../assets/images/AboutUs/wCrd2.png')} />
                         <div><h5 className='mt-2 fw-semibold' >Airports</h5></div>
                     </div>
                 </Col>
-                <Col>
+                <Col xs={6} md={3}>
                     <div className='m-1 rounded-2 bg-white p-2'>
                         <Image className={`${style.crdImg} w-75 mx-auto`} src={require('../../assets/images/AboutUs/wCrd3.png')} />
                         <div><h5 className='mt-2 fw-semibold' >Stadiums</h5></div>
                     </div>
                 </Col>
-                <Col>
+                <Col xs={6} md={3}>
                     <div className='m-1 rounded-2 bg-white p-2'>
                         <Image className={`${style.crdImg} w-75 mx-auto`} src={require('../../assets/images/AboutUs/wCrd4.png')} />
                         <div><h5 className='mt-2 fw-semibold' >City Breaks</h5></div>

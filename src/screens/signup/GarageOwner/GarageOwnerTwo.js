@@ -4,7 +4,7 @@ import { Formik, Field, Form } from 'formik'
 import $ from 'jquery';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createGarageCollection, getLanLon } from '../../../redux/slices/signupSlice';
+import { createGarageCollection, getLanLon, resetData } from '../../../redux/slices/signupSlice';
 import classes from '../../../components/Parking-search/ParkingSearch.module.css'
 import AutoComplete from 'react-google-autocomplete';
 import { useRef } from 'react';
@@ -28,11 +28,17 @@ export default function GarageOwnerTwo() {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
+
+    useEffect(() => {
         if (gCollection === true) {
             $('.sucMsg').fadeIn(500, () => {
                 setTimeout(() => {
                     $('.sucMsg').fadeOut(500)
                     navigate('/login')
+                    dispatch(resetData())
                 }, 2000)
             })
         }
@@ -121,7 +127,7 @@ export default function GarageOwnerTwo() {
             if (status === "OK") {
                 if (results[0]) {
                     const address = results[0].formatted_address;
-                    autocompleteRef.current.value = address; 
+                    autocompleteRef.current.value = address;
 
                     const geocode = {
                         lat: latitude,
@@ -141,13 +147,13 @@ export default function GarageOwnerTwo() {
     library.add(faLocationCrosshairs);
 
 
-    const handleBlur = (event)=>{
+    const handleBlur = (event) => {
         if (!event.target.value) {
             setLocError(true)
         } else {
             setLocError(false)
         }
-        
+
     }
     return <>
         <div>
@@ -164,17 +170,17 @@ export default function GarageOwnerTwo() {
                             <div className={`row`}>
                                 <div className="col-md-12 py-3 px-0 mx-auto">
                                     <Field id='gName' validate={validateGarageName} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Garage Name' name="garageName" />
-                                    {errors.garageName && touched.garageName ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.garageName}</div> : ''}
+                                    {errors.garageName && touched.garageName ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.garageName}</div> : ''}
                                 </div>
 
                                 <div className="col-md-12 py-3 px-0 mx-auto">
                                     <Field id='description' validate={validateDescription} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Garage Description' name="description" />
-                                    {errors.description && touched.description ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.description}</div> : ''}
+                                    {errors.description && touched.description ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.description}</div> : ''}
                                 </div>
-                                
+
                                 <div className="col-md-12 py-3 px-0 mx-auto">
                                     <Field id='address' validate={validateAddress} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Garage Address' name="address" />
-                                    {errors.address && touched.address ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>{errors.address}</div> : ''}
+                                    {errors.address && touched.address ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.address}</div> : ''}
                                 </div>
 
                                 <div className={`${classes.autocompleteContainer} w-100 p-0`}>
@@ -193,17 +199,17 @@ export default function GarageOwnerTwo() {
                                             style={{ position: "absolute", top: "-42px", right: "15px", cursor: "pointer" }}
                                         />
                                     </div>
-                                    {locationError ? <div className={`mt-1 alert alert-danger rounded-0 py-2`}>Garage Location is Required</div> : ''}
+                                    {locationError ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>Garage Location is Required</div> : ''}
                                 </div>
 
                                 <div className="col-md-6 py-3 px-0 mx-auto">
                                     <Field id='cost' validate={validateCost} className={`${style.inputField} form-control mt-1 w-75 me-auto`} placeholder='Price Per Hour in EGP' name="pricePerHour" />
-                                    {errors.pricePerHour && touched.pricePerHour ? <div className={`my-1 alert w-75 alert-danger me-auto rounded-0 py-2`}>{errors.pricePerHour}</div> : ''}
+                                    {errors.pricePerHour && touched.pricePerHour ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.pricePerHour}</div> : ''}
                                 </div>
 
                                 <div className="col-md-6 py-3 px-0 mx-auto">
                                     <Field id='spots' validate={validateSpots} className={`${style.inputField} form-control mt-1 w-75 me-auto`} placeholder='Available Spots' name="availableSpots" />
-                                    {errors.availableSpots && touched.availableSpots ? <div className={`my-1 alert w-75 alert-danger me-auto rounded-0 py-2`}>{errors.availableSpots}</div> : ''}
+                                    {errors.availableSpots && touched.availableSpots ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.availableSpots}</div> : ''}
                                 </div>
 
                                 <div className="col-md-12 py-3 px-0 mx-auto">
@@ -212,7 +218,7 @@ export default function GarageOwnerTwo() {
                                     <Field type='file' value={undefined} onChange={(event) => { setFieldValue('images[1]', event.target.files[0]) }} id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name='images[1]' />
                                     <Field type='file' value={undefined} onChange={(event) => { setFieldValue('images[2]', event.target.files[0]) }} id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name='images[2]' />
                                     <Field type='file' value={undefined} onChange={(event) => { setFieldValue('images[3]', event.target.files[0]) }} id='image' validate={validateImage} className={`${style.inputField} form-control d-inline mt-1 w-50`} name='images[3]' />
-                                    {errors.images && touched.images ? <div className={`my-1 alert w-100 alert-danger me-auto rounded-0 py-2`}>{errors.images ? '4 Images Required' : ''}</div> : ''}
+                                    {errors.images && touched.images ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.images ? '4 Images Required' : ''}</div> : ''}
                                 </div>
 
                             </div>
