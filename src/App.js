@@ -24,9 +24,7 @@ import { realDb } from "./services/firebase/firebase-config";
 import { listenToValueChange } from "./services/reservationServices";
 import { useDispatch } from "react-redux";
 import { userValid } from "./redux/slices/loginSlice";
-
-
-
+import Dashboard from "./screens/dashboard/Dashboard";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +37,6 @@ function App() {
 
   useEffect(() => {
     const databaseRef = ref(realDb, "user-collection");
-    console.log(databaseRef);
     const listener = onValue(databaseRef, (snapshot) => {
       listenToValueChange(snapshot);
     });
@@ -65,6 +62,7 @@ function App() {
         <Route path="search" element={<PickGarage />}></Route>
         <Route path="reservation" element={<Reservation />}></Route>
         <Route path="completion" element={<Completion />} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
