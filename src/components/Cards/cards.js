@@ -16,7 +16,7 @@ import closestGarage from "../../utilities/closestGarage";
 import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { Link } from "react-router-dom";
 import { getSelectedGarage } from "../../redux/slices/selectedGarage";
-import { kCalculatePrice, kFormatDuration } from "../../utilities/Constants";
+import { kCalculatePrice } from "../../utilities/Constants";
 import Skeleton from '@mui/material/Skeleton';
 import Sheet from "./sheet";
 
@@ -29,6 +29,7 @@ const GarageCards = () => {
   const { geocode } = useSelector((state) => state.dateGeocode);
   const [open, setOpen] = React.useState(false);
   const [id, setID] = React.useState('');
+  const [isFilled, setIsFilled] = React.useState(false);
   const handleClickOpen = (id) => {
     setOpen(true);
     setID(id)
@@ -41,15 +42,17 @@ const GarageCards = () => {
   React.useEffect(() => {
     closestGarage().then((res) => {
       dispatch(getNearbyGarageSpaces(res));
-    });
+    }).then(()=>setIsFilled(true))
   }, [dispatch]);
-  if (data.length <= 0) return  <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', marginTop:'20px'}}>
+
+  if (!isFilled) return  <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', marginTop:'20px'}}>
     <Stack spacing={1}>
     <Skeleton style={{margin:'20 auto'}}  variant="rounded" width={400} height={120} />
     <Skeleton variant="rounded" width={400} height={120} />
     <Skeleton variant="rounded" width={400} height={120} />
   </Stack>
   </div> 
+  if (data.length === 0 ) return ""
   return (
     <div
       style={{
@@ -59,8 +62,8 @@ const GarageCards = () => {
       }}
     >
       {data.map((garage) => (
-        <div style={{ padding: "2%" }} key={garage.garage["id"]}>
-          <Card sx={{ maxWidth: 450 }} className={style.card}>
+        <div style={{ padding: "2%" }} className={style.card} key={garage.garage["id"]}>
+          <Card sx={{ maxWidth: 450 }}>
             <CardActionArea
               onClick={()=>{
                 handleClickOpen(garage.garage["id"])
@@ -160,6 +163,7 @@ const GarageCards = () => {
               </CardContent>
             </CardActionArea>
             <Sheet
+              filled = {isFilled}
               id={id}
               open={open}
               close={handleClose}

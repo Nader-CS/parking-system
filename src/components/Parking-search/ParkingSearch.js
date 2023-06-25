@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 // import { getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import './ParkingSearch.css';
+import "./ParkingSearch.css";
 
 const ParkingSearch = () => {
   const { duration } = useSelector((state) => state.dateGeocode);
@@ -148,8 +148,9 @@ const ParkingSearch = () => {
     >
       <div className="container">
         <div
-          className={`row justify-content-center justify-content-md-start ${i18n.language === "ar" ? "justify-content-md-center" : undefined
-            } `}
+          className={`row justify-content-center justify-content-md-start ${
+            i18n.language === "ar" ? "justify-content-md-center" : undefined
+          } `}
         >
           <div
             className="col col-lg-5 col-10"
@@ -167,11 +168,12 @@ const ParkingSearch = () => {
               <AutoComplete
                 placeholder={t("auto-complete-placeholder")}
                 apiKey="AIzaSyDxE47Kh4gnM9Sh-Nj6vTjFzful_q7lZdY"
-                autocompleteInputPlaceHolder
-                className={`${classes.autocompleteField} ${i18n.language === "ar"
-                  ? classes.arautocompleteInputPlaceHolder
-                  : classes.enautocompleteInputPlaceHolder
-                  }`}
+                // autocompletePlaceHolder
+                className={`${classes.autocompleteField} ${
+                  i18n.language === "ar"
+                    ? classes.arautocompleteInputPlaceHolder
+                    : classes.enautocompleteInputPlaceHolder
+                }`}
                 ref={autocompleteRef}
                 onChange={handleAutocompleteChange}
                 style={{
@@ -218,8 +220,8 @@ const ParkingSearch = () => {
                 if (!isDisabled) {
                   navigate("/search");
                 }
-                const dutrationString = JSON.stringify(duration)
-                sessionStorage.setItem(`duration`, `${dutrationString}`)
+                const dutrationString = JSON.stringify(duration);
+                sessionStorage.setItem(`duration`, `${dutrationString}`);
               }}
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >
@@ -230,8 +232,9 @@ const ParkingSearch = () => {
 
           {/* Modal */}
           <div
-            className={`modal fade bd-example-modal-lg ${showModal ? "show" : ""
-              }`}
+            className={`modal fade bd-example-modal-lg ${
+              showModal ? "show" : ""
+            }`}
             tabIndex="-1"
             role="dialog"
             aria-labelledby="myLargeModalLabel"

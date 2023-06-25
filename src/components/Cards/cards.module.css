@@ -6,5 +6,6 @@
 }
 
 .card {
-    margin-bottom: 5px;
+    width: 450px;
+    margin: 5px auto;
 }
