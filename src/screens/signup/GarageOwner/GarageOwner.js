@@ -76,7 +76,6 @@ export default function GarageOwner() {
         return error;
     }
     const validateRePassword = (value, values) => {
-        console.log(value);
         let error = ''
         if (!value) error = 'Re-Password is Required'
         else if (value !== values.password) error = 'Password and Re-Password must be matching';

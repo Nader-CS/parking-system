@@ -34,6 +34,9 @@ const loginData = createSlice({
                 state.validUser = false;
             }
         },
+        resetData: (state, action)=>{
+            state.isLogged = null;
+        }
     },
     extraReducers: {
         [logUserIn.fulfilled]: (state, action) => {
@@ -52,13 +55,12 @@ const loginData = createSlice({
         },
         [logUserOut.fulfilled]: (state, action) => {
             state.validUser = false;
-            state.isLogged = null;
             localStorage.removeItem('token')
             localStorage.removeItem('uid')
         }
     }
 })
-export const { userValid } = loginData.actions;
+export const { userValid, resetData } = loginData.actions;
 export default loginData.reducer;
 
 
