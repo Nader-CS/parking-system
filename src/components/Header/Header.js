@@ -38,21 +38,32 @@ const icons = [
 ];
 
 function Header(props) {
-
   const { validUser } = useSelector((state) => state.loginReducer);
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
     dispatch(logUserOut());
-    dispatch(resetData())
+    dispatch(resetData());
   };
 
-
-
-  const navItems = validUser 
-    ? [ t("home"), t("how-it-works"), t("contact"), t("about-us"), t("Profile"), t("Logout"), ] 
-    : [ t("home"), t("how-it-works"), t("contact"), t("about-us"), t("login"), t("signup"), ];
+  const navItems = validUser
+    ? [
+        t("home"),
+        t("how-it-works"),
+        t("contact"),
+        t("about-us"),
+        t("profile"),
+        t("logout"),
+      ]
+    : [
+        t("home"),
+        t("how-it-works"),
+        t("contact"),
+        t("about-us"),
+        t("login"),
+        t("signup"),
+      ];
   const pages = validUser
     ? ["/", "/how-it-works", "/contact", "/about-us", "/profile", "/"]
     : ["/", "/how-it-works", "/contact", "/about-us", "/login", "/signup"];
@@ -83,7 +94,15 @@ function Header(props) {
               style={{ textDecoration: "none", color: "rgb(122, 38, 193)" }}
             >
               <ListItem key={item} disablePadding>
-                <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemButton
+                  sx={{ textAlign: "center" }}
+                  onClick={
+                    item.toLowerCase() === "logout" ||
+                    item.toLowerCase() === "تسجيل الخروج"
+                      ? logoutHandler
+                      : undefined
+                  }
+                >
                   <Icon className={classes["nav-icon"]} />
                   <ListItemText primary={item} />
                 </ListItemButton>

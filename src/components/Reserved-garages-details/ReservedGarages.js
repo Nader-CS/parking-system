@@ -57,17 +57,35 @@ const ReservedGarages = (props) => {
             </tr>
           </thead>
           <tbody>
-            {reservedGarages.map((garage, index) => {
-              return (
-                <tr>
-                  <th scope="row">{index + 1}</th>
-                  <td>{garage[0][1].address}</td>
-                  <td>{garage[0][1].garageName}</td>
-                  <td>{garage[0][1].description}</td>
-                  <td>{garage[0][1].pricePerHour}</td>
-                </tr>
-              );
-            })}
+            {reservedGarages.length >= 1 ? (
+              reservedGarages.map((garage, index) => {
+                return (
+                  <tr>
+                    <th scope="row">{index + 1}</th>
+                    <td>{garage[0][1].address}</td>
+                    <td>{garage[0][1].garageName}</td>
+                    <td>{garage[0][1].description}</td>
+                    <td>{garage[0][1].pricePerHour}</td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan="5">
+                  <p
+                    style={{
+                      fontSize: "1.2rem",
+                      fontWeight: "bold",
+                      verticalAlign: "center",
+                      marginTop: "1rem",
+                      color: "red",
+                    }}
+                  >
+                    There is no Reservations
+                  </p>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

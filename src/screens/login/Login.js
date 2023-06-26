@@ -3,7 +3,7 @@ import style from "./login.module.css";
 import { Formik, Field, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logUserIn } from "../../redux/slices/loginSlice";
+import { logUserIn, resetData } from "../../redux/slices/loginSlice";
 import $ from "jquery";
 
 const Login = () => {
@@ -26,13 +26,15 @@ const Login = () => {
         setTimeout(() => {
           $(".sucMsg").fadeOut(500);
           navigate(-1);
+          dispatch(resetData())
         }, 2000);
       });
     } else if (isLogged === false) {
       $(".errMsg").fadeIn(500, () => {
         setTimeout(() => {
           $(".errMsg").fadeOut(500);
-        }, 3000);
+          dispatch(resetData())
+        }, 2000);
       });
     }
   }, [isLogged]);

@@ -54,8 +54,9 @@ const Dashboard = () => {
     }
   }, [garageCollection]);
   useEffect(() => {
-    setReservedGarages();
-  }, [garageCollection, userCollectionData]);
+    if (currentUser && currentUser["reserved-garages"])
+      setReservedGarages(Object.values(currentUser["reserved-garages"]));
+  }, [garageCollection, userCollectionData, currentUser]);
   const isLogged = localStorage.getItem("token");
 
   if (!isLogged) {
@@ -64,11 +65,19 @@ const Dashboard = () => {
   return (
     <div>
       {currentUser && currentUser.garageOwner && (
-        <GarageDetails garageDetails={userOwnGarage} />
+        <GarageDetails
+          garageDetails={userOwnGarage}
+          users={userCollectionData}
+          currentUser={currentUser}
+        />
       )}
       {currentUser && currentUser.CarOwner && (
         <ReservedGarages
-          reservedGarages={Object.values(currentUser["reserved-garages"])}
+          reservedGarages={
+            reservedGarages
+              ? Object.values(currentUser["reserved-garages"])
+              : []
+          }
         />
       )}
     </div>

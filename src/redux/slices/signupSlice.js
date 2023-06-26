@@ -18,26 +18,46 @@ export const createUserCollection = createAsyncThunk('user/collection', async (u
 })
 
 export const createGarageCollection = createAsyncThunk('garage/collection', async (gMainData) => {
-    await axios.post(`${_baseURL}garage-collection.json`, gMainData)
-        .then((response) => {
-            const imagesURL = [];
-            const imagesListRef = response.data.name;
-            gMainData.images.map(async (image) => {
-                const imageRef = ref(storage, `${imagesListRef}/${image.name}`)
-                await uploadBytes(imageRef, image)
-                    .then(async () => {
-                        await listAll(ref(storage, `${imagesListRef}/`)).then(async (collection) => {
-                            const arr = collection.items
-                            const lastIdx = arr.length - 1
-                            await getDownloadURL(arr[lastIdx]).then(async (url) => {
-                                imagesURL.push(url);
-                                await axios.patch(`${_baseURL}garage-collection/${imagesListRef}.json`, { ...gMainData, imagesURL: imagesURL })
-                            })
-                        })
-                    })
-            })
-        })
-})
+    const response = await axios.post(`${_baseURL}garage-collection.json`, gMainData);
+    const imagesURL = [];
+
+    for (const image of gMainData.images) {
+        const imageRef = ref(storage, `${response.data.name}/${image.name}`);
+        await uploadBytes(imageRef, image);
+
+        const collectionRef = ref(storage, `${response.data.name}/`);
+        const collection = await listAll(collectionRef);
+        const lastImageRef = collection.items[collection.items.length - 1];
+        const url = await getDownloadURL(lastImageRef);
+        imagesURL.push(url);
+    }
+
+    await axios.patch(`${_baseURL}garage-collection/${response.data.name}.json`, { ...gMainData, imagesURL: imagesURL });
+});
+
+
+// export const createGarageCollection = createAsyncThunk('garage/collection', async (gMainData) => {
+//     await axios.post(`${_baseURL}garage-collection.json`, gMainData)
+//         .then((response) => {
+//             const imagesURL = [];
+//             const imagesListRef = response.data.name;
+//             gMainData.images.map(async (image) => {
+//                 const imageRef = ref(storage, `${imagesListRef}/${image.name}`)
+//                 await uploadBytes(imageRef, image)
+//                     .then(async () => {
+//                         await listAll(ref(storage, `${imagesListRef}/`)).then(async (collection) => {
+//                             const arr = collection.items
+//                             const lastIdx = arr.length - 1
+//                             await getDownloadURL(arr[lastIdx]).then(async (url) => {
+//                                 imagesURL.push(url);
+//                                 console.log(imagesURL);
+//                                 await axios.patch(`${_baseURL}garage-collection/${imagesListRef}.json`, { ...gMainData, imagesURL: imagesURL })
+//                             })
+//                         })
+//                     })
+//             })
+//         })
+// })
 
 const signUpData = createSlice({
     name: 'signupData',
@@ -72,7 +92,7 @@ const signUpData = createSlice({
             state.garageDetails.lat = geoLoc.lat;
             state.garageDetails.lon = geoLoc.lng;
         },
-        resetData: (state, action)=>{
+        resetData: (state, action) => {
             state.uCollection = null;
             state.gCollection = null;
             state.uIsCreated = false;
