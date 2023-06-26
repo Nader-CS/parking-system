@@ -2,7 +2,7 @@ import { format } from "date-fns";
 export const isNotSigned = localStorage.getItem("uid") ? false : true;
 
 export function kCalculatePrice(duration, pricePerHour, fee = 5) {
-  console.log(duration);
+  // console.log(duration);
   const totalMinutes =
     duration.days * 24 * 60 + duration.hours * 60 + duration.minutes;
   const totalPrice = (totalMinutes / 60) * pricePerHour;

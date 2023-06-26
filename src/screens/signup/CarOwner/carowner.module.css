@@ -28,3 +28,7 @@
 .AuthBtn:focus-visible {
     outline: 01px solid #aa23b6 !important;
 }
+
+.passwordIcon {
+    cursor: pointer;
+}

@@ -9,6 +9,7 @@ export const getUserData = createAsyncThunk('get/uData', async () => {
     const { data } = await axios.get(`${_baseURL}user-collection.json`)
     const users = Object.values(data);
     const getUser = users.filter((user) => user.ownerId === uid)
+    console.log(`get user ${getUser}`);
     const sendU = getUser[0];
     console.log(getUser[0]);
     return sendU

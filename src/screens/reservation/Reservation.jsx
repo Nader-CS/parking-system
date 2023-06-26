@@ -9,15 +9,17 @@ import { userValid } from "../../redux/slices/loginSlice";
 
 export default function Reservation() {
   const dispatch = useDispatch();
-  
+
   const garageData = useSelector((state) => state.selectedGarage);
   const reservation = useSelector((state) => state.reservation);
   const isGarageEmpty = Object.keys(garageData.garage).length === 0;
   const navigate = useNavigate();
-  
+
+  const { isGarageOwner } = useSelector((state) => state.loginReducer);
+
   useEffect(() => {
-    dispatch(userValid())
-  }, [])
+    dispatch(userValid());
+  }, []);
 
   useEffect(() => {
     if (reservation.successMessage !== null) {
@@ -36,8 +38,24 @@ export default function Reservation() {
     }
   }, [reservation.successMessage, reservation.errorMessage, navigate]);
 
-
-  if (isGarageEmpty) {
+  console.log(`${isGarageOwner}`);
+  if (isGarageOwner === true) {
+   return  <Box
+      height="60vh"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      paddingX={{ xs: 2, md: 8.5 }}
+      paddingY={4}
+      sx={{ backgroundColor: "#f3f7f9" }}
+    >
+      <Typography variant="body1" fontWeight="bold" align="center">
+        {/* You Cannot Access This Page. GET OUT! */}
+        You're not a user
+      </Typography>
+    </Box>;
+  } else
+    if (isGarageEmpty) {
     console.log("null");
     return (
       <Box

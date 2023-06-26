@@ -13,49 +13,75 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import { useDispatch, useSelector } from "react-redux";
 import closestGarage from "../../utilities/closestGarage";
-import { checkIsFilled, getNearbyGarageSpaces } from "../../redux/slices/garageSpacesSlice";
-import { Link } from "react-router-dom";
+import {
+  checkIsFilled,
+  getNearbyGarageSpaces,
+} from "../../redux/slices/garageSpacesSlice";
+import { Link, useNavigate } from "react-router-dom";
 import { getSelectedGarage } from "../../redux/slices/selectedGarage";
 import { kCalculatePrice } from "../../utilities/Constants";
-import Skeleton from '@mui/material/Skeleton';
+import Skeleton from "@mui/material/Skeleton";
 import Sheet from "./sheet";
 
 const GarageCards = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.garageSpaces);
   // const { duration } = useSelector((state) => state.dateGeocode);
-  const dutrationString = sessionStorage.getItem('duration');
+  const dutrationString = sessionStorage.getItem("duration");
   const duration = JSON.parse(dutrationString);
   // const { geocode } = useSelector((state) => state.dateGeocode);
-  const geoString = sessionStorage.getItem('geocode');
+  const geoString = sessionStorage.getItem("geocode");
   const geocode = JSON.parse(geoString);
   const [open, setOpen] = React.useState(false);
-  const [id, setID] = React.useState('');
-  const {isFilled} = useSelector((state) => state.garageSpaces)
+  const [id, setID] = React.useState("");
+  const { isFilled } = useSelector((state) => state.garageSpaces);
   const handleClickOpen = (id) => {
     setOpen(true);
-    setID(id)
+    setID(id);
   };
+
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setOpen(false);
   };
 
   React.useEffect(() => {
-    closestGarage(geocode.lat, geocode.lng).then((res) => {
-      dispatch(getNearbyGarageSpaces(res));
-    }).then(()=>dispatch(checkIsFilled(true)))
+    closestGarage(geocode.lat, geocode.lng)
+      .then((res) => {
+        dispatch(getNearbyGarageSpaces(res));
+      })
+      .then(() => dispatch(checkIsFilled(true)));
   }, [dispatch]);
 
-  if (!isFilled) return  <div style={{width:'100%', height:'100%', display:'flex', justifyContent:'center', marginTop:'20px'}}>
-    <Stack spacing={1}>
-    <Skeleton style={{margin:'20 auto'}}  variant="rounded" width={400} height={120} />
-    <Skeleton variant="rounded" width={400} height={120} />
-    <Skeleton variant="rounded" width={400} height={120} />
-    {console.log(data)}
-  </Stack>
-  </div> 
-  if (data.length === 0 ) return ""
+  let isGarageOwner = localStorage.getItem("garageOwner");
+  console.log(`isGarageOwner ${isGarageOwner}`);
+
+  if (!isFilled)
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "20px",
+        }}
+      >
+        <Stack spacing={1}>
+          <Skeleton
+            style={{ margin: "20 auto" }}
+            variant="rounded"
+            width={400}
+            height={120}
+          />
+          <Skeleton variant="rounded" width={400} height={120} />
+          <Skeleton variant="rounded" width={400} height={120} />
+          {console.log(data)}
+        </Stack>
+      </div>
+    );
+  if (data.length === 0) return "";
   return (
     <div
       style={{
@@ -65,12 +91,16 @@ const GarageCards = () => {
       }}
     >
       {data.map((garage) => (
-        <div style={{ padding: "2%" }} className={style.card} key={garage.garage["id"]}>
+        <div
+          style={{ padding: "2%" }}
+          className={style.card}
+          key={garage.garage["id"]}
+        >
           {console.log(data)}
           <Card sx={{ maxWidth: 450 }}>
             <CardActionArea
-              onClick={()=>{
-                handleClickOpen(garage.garage["id"])
+              onClick={() => {
+                handleClickOpen(garage.garage["id"]);
               }}
               className="d-flex ps-2"
               style={{ height: "150px" }}
@@ -142,32 +172,36 @@ const GarageCards = () => {
                   </p>
                 </div>
                 <Link to={`/reservation`}>
-                  <Button
-                    onClick={() => {
-                      const garageObj = garage;
-                      const price = kCalculatePrice(
-                        duration,
-                        garage.garage["pricePerHour"]
-                      );
-                      dispatch(getSelectedGarage({ garageObj, price }));
-                    }}
-                    style={{
-                      backgroundColor: "#AA23B6",
-                      width: "100%",
-                      marginTop: "10px",
-                      zIndex: 2,
-                    }}
-                    variant="contained"
-                  >
-                    Reserve for{" "}
-                    {kCalculatePrice(duration, garage.garage["pricePerHour"])}{" "}
-                    LE
-                  </Button>
+                <Button
+                  // disabled={isGarageOwner === true}
+                  onClick={() => {
+                    const garageObj = garage;
+                    const price = kCalculatePrice(
+                      duration,
+                      garage.garage["pricePerHour"]
+                    );
+                    dispatch(getSelectedGarage({ garageObj, price }));
+                    // if (isGarageOwner === false) {
+                    //   console.log(`yes`);
+                    //   navigate("/reservation");
+                    // }
+                  }}
+                  style={{
+                    backgroundColor: "#AA23B6",
+                    width: "100%",
+                    marginTop: "10px",
+                    zIndex: 2,
+                  }}
+                  variant="contained"
+                >
+                  Reserve for{" "}
+                  {kCalculatePrice(duration, garage.garage["pricePerHour"])} LE
+                </Button>
                 </Link>
               </CardContent>
             </CardActionArea>
             <Sheet
-              filled = {isFilled}
+              filled={isFilled}
               id={id}
               open={open}
               close={handleClose}
@@ -176,7 +210,7 @@ const GarageCards = () => {
         </div>
       ))}
     </div>
-  )
+  );
 };
 
 export default GarageCards;

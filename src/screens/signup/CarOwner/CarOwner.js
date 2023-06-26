@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpUser, createUserCollection, resetData } from '../../../redux/slices/signupSlice';
 import $ from 'jquery';
+import { Stack } from '@mui/material';
+import { RemoveRedEye, VisibilityOff } from '@mui/icons-material';
 
 export default function CarOwner() {
 
@@ -13,6 +15,17 @@ export default function CarOwner() {
     const navigate = useNavigate();
     const [userData, setUserData] = useState({})
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
+
+      const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+      const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+      };
 
     const submitForm = (values) => {
         setUserData(values)
@@ -88,52 +101,182 @@ export default function CarOwner() {
         return error;
     }
 
-    return <>
+    return (
+      <>
         <div>
-            <h2 className='container my-4 me-4'>Sign Up</h2>
-            <div style={{ 'display': 'none' }} className='errMsg alert alert-danger w-50 mx-auto text-center'>Email already in use, Please sing in or register with another email</div>
-            <div style={{ 'display': 'none' }} className='sucMsg alert alert-success w-50 mx-auto text-center'>Congratulations your account has been created</div>
+          <h2 className="container my-4 me-4">Sign Up</h2>
+          <div
+            style={{ display: "none" }}
+            className="errMsg alert alert-danger w-50 mx-auto text-center"
+          >
+            Email already in use, Please sing in or register with another email
+          </div>
+          <div
+            style={{ display: "none" }}
+            className="sucMsg alert alert-success w-50 mx-auto text-center"
+          >
+            Congratulations your account has been created
+          </div>
 
-            <Formik
-                initialValues={{ ...ownerDetails, plateNumber: '', CarOwner: true }}
-                onSubmit={(values) => submitForm(values)}
-            >
-                {({ errors, touched, values }) => (
-                    <Form className={`w-50 mx-auto`}>
-                        <div className={`container`}>
-                            <div className={`row`}>
-                                <div className={`col-md-12 pt-4 pb-1 px-0 mx-auto`}>
-                                    <Field id='name' validate={validateName} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Name' name="ownerName" />
-                                    {errors.ownerName && touched.ownerName ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.ownerName}</div> : ''}
-                                </div>
-                                <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
-                                    <Field id='email' validate={validateEmail} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Email' name="ownerEmail" />
-                                    {errors.ownerEmail && touched.ownerEmail ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.ownerEmail}</div> : ''}
-                                </div>
-                                <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
-                                    <Field id='phone' validate={validatePhone} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Phone Number' name="ownerPhone" />
-                                    {errors.ownerPhone && touched.ownerPhone ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.ownerPhone}</div> : ''}
-                                </div>
-                                <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
-                                    <Field type="password" id='password' validate={validatePassword} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Password' name="password" />
-                                    {errors.password && touched.password ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.password}</div> : ''}
-                                </div>
-                                <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
-                                    <Field type="password" id='rePassword' validate={(value) => { return validateRePassword(value, values) }} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Confirm Password' name="rePassword" />
-                                    {errors.rePassword && touched.rePassword ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.rePassword}</div> : ''}
-                                </div>
-                                <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
-                                    <Field id='plateNumber' validate={validatePlate} className={`${style.inputField} form-control mt-1 w-100`} placeholder='Car Plate Number' name="plateNumber" />
-                                    {errors.plateNumber && touched.plateNumber ? <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>{errors.plateNumber}</div> : ''}
-                                </div>
-                            </div>
+          <Formik
+            initialValues={{ ...ownerDetails, plateNumber: "", CarOwner: true }}
+            onSubmit={(values) => submitForm(values)}
+          >
+            {({ errors, touched, values }) => (
+              <Form className={`w-50 mx-auto`}>
+                <div className={`container`}>
+                  <div className={`row`}>
+                    <div className={`col-md-12 pt-4 pb-1 px-0 mx-auto`}>
+                      <Field
+                        id="name"
+                        validate={validateName}
+                        className={`${style.inputField} form-control mt-1 w-100`}
+                        placeholder="Name"
+                        name="ownerName"
+                      />
+                      {errors.ownerName && touched.ownerName ? (
+                        <div
+                          className={`warning mt-1 text-danger fw-semibold w-100 px-3`}
+                        >
+                          {errors.ownerName}
                         </div>
-                        <div className={`my-4 text-end`}>
-                            <button className={`${style.AuthBtn} py-2 px-5 rounded-1 text-white`}>Submit</button>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
+                      <Field
+                        id="email"
+                        validate={validateEmail}
+                        className={`${style.inputField} form-control mt-1 w-100`}
+                        placeholder="Email"
+                        name="ownerEmail"
+                      />
+                      {errors.ownerEmail && touched.ownerEmail ? (
+                        <div
+                          className={`warning mt-1 text-danger fw-semibold w-100 px-3`}
+                        >
+                          {errors.ownerEmail}
                         </div>
-                    </Form>
-                )}
-            </Formik>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
+                      <Field
+                        id="phone"
+                        validate={validatePhone}
+                        className={`${style.inputField} form-control mt-1 w-100`}
+                        placeholder="Phone Number"
+                        name="ownerPhone"
+                      />
+                      {errors.ownerPhone && touched.ownerPhone ? (
+                        <div
+                          className={`warning mt-1 text-danger fw-semibold w-100 px-3`}
+                        >
+                          {errors.ownerPhone}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
+                      <Stack direction="row">
+                        <Field
+                          type={showPassword ? "text" : "password"}
+                          id="password"
+                          validate={validatePassword}
+                          className={`${style.inputField} form-control mt-1 w-100`}
+                          placeholder="Password"
+                          name="password"
+                        />
+                        {showPassword ? (
+                          <VisibilityOff
+                            className={style.passwordIcon}
+                            onClick={togglePasswordVisibility}
+                          />
+                        ) : (
+                          <RemoveRedEye
+                            className={style.passwordIcon}
+                            onClick={togglePasswordVisibility}
+                          />
+                        )}
+                      </Stack>
+                      {errors.password && touched.password ? (
+                        <div
+                          className={`warning mt-1 text-danger fw-semibold w-100 px-3`}
+                        >
+                          {errors.password}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
+                      <Stack direction="row">
+                        <Field
+                          type={showConfirmPassword ? "text" : "password"}
+                          id="rePassword"
+                          validate={(value) => {
+                            return validateRePassword(value, values);
+                          }}
+                          className={`${style.inputField} form-control mt-1 w-100`}
+                          placeholder="Confirm Password"
+                          name="rePassword"
+                        />
+                        {showConfirmPassword ? (
+                          <VisibilityOff
+                            className={style.passwordIcon}
+                            onClick={toggleConfirmPasswordVisibility}
+                          />
+                        ) : (
+                          <RemoveRedEye
+                            className={style.passwordIcon}
+                            onClick={toggleConfirmPasswordVisibility}
+                          />
+                        )}
+                      </Stack>
+                      {errors.rePassword && touched.rePassword ? (
+                        <div
+                          className={`warning mt-1 text-danger fw-semibold w-100 px-3`}
+                        >
+                          {errors.rePassword}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <div className="col-md-12 pt-4 pb-1 px-0 mx-auto">
+                      <Field
+                        id="plateNumber"
+                        validate={validatePlate}
+                        className={`${style.inputField} form-control mt-1 w-100`}
+                        placeholder="Car Plate Number"
+                        name="plateNumber"
+                      />
+                      {errors.plateNumber && touched.plateNumber ? (
+                        <div
+                          className={`warning mt-1 text-danger fw-semibold w-100 px-3`}
+                        >
+                          {errors.plateNumber}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className={`my-4 text-end`}>
+                  <button
+                    className={`${style.AuthBtn} py-2 px-5 rounded-1 text-white`}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
-    </>
+      </>
+    );
 }

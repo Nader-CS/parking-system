@@ -1,15 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./login.module.css";
 import { Formik, Field, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logUserIn, resetData } from "../../redux/slices/loginSlice";
 import $ from "jquery";
+import { RemoveRedEye, VisibilityOff } from "@mui/icons-material";
+import { Stack } from "@mui/material";
 
 const Login = () => {
   const { userData, isLogged } = useSelector((state) => state.loginReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const submitForm = async (values) => {
     dispatch(logUserIn(values));
@@ -25,8 +32,9 @@ const Login = () => {
       $(".sucMsg").fadeIn(500, () => {
         setTimeout(() => {
           $(".sucMsg").fadeOut(500);
-          navigate(-1);
+          // navigate(-1);
           dispatch(resetData())
+          navigate('/');
         }, 2000);
       });
     } else if (isLogged === false) {
@@ -64,10 +72,16 @@ const Login = () => {
       <div>
         <h2 className="container my-4 me-4">Login</h2>
 
-        <div style={{ display: "none" }} className="errMsg alert alert-danger w-50 mx-auto text-center" >
+        <div
+          style={{ display: "none" }}
+          className="errMsg alert alert-danger w-50 mx-auto text-center"
+        >
           Incorrect email or password
         </div>
-        <div style={{ display: "none" }} className="sucMsg alert alert-success w-50 mx-auto text-center" >
+        <div
+          style={{ display: "none" }}
+          className="sucMsg alert alert-success w-50 mx-auto text-center"
+        >
           Successfull login, Welcome Back
         </div>
         <Formik
@@ -89,7 +103,9 @@ const Login = () => {
                       name="userEmail"
                     />
                     {errors.userEmail && touched.userEmail ? (
-                      <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>
+                      <div
+                        className={`warning mt-1 text-danger fw-semibold w-100 px-3`}
+                      >
                         {errors.userEmail}
                       </div>
                     ) : (
@@ -97,16 +113,31 @@ const Login = () => {
                     )}
                   </div>
                   <div className="col-md-12 py-4 px-0 mx-auto">
-                    <Field
-                      type="password"
-                      id="userPassword"
-                      validate={validatePassword}
-                      className={`${style.inputField} form-control mt-1 w-100`}
-                      placeholder="Password"
-                      name="userPassword"
-                    />
+                    <Stack direction="row">
+                      <Field
+                        type={showPassword ? "text" : "password"}
+                        id="userPassword"
+                        validate={validatePassword}
+                        className={`${style.inputField} form-control mt-1 w-100`}
+                        placeholder="Password"
+                        name="userPassword"
+                      />
+                      {showPassword ? (
+                        <VisibilityOff
+                          className={style.passwordIcon}
+                          onClick={togglePasswordVisibility}
+                        />
+                      ) : (
+                        <RemoveRedEye
+                          className={style.passwordIcon}
+                          onClick={togglePasswordVisibility}
+                        />
+                      )}
+                    </Stack>
                     {errors.userPassword && touched.userPassword ? (
-                      <div className={`warning mt-1 text-danger fw-semibold w-100 px-3`}>
+                      <div
+                        className={`warning mt-1 text-danger fw-semibold w-100 px-3`}
+                      >
                         {errors.userPassword}
                       </div>
                     ) : (

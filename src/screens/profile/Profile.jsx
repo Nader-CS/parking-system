@@ -9,7 +9,7 @@ import { getUserData, getAdminData } from "../../redux/slices/profileSlice";
 
 
 export default function Profile() {
-  const { userData, adminData } = useSelector(state => state.profile)
+ 
 
   const dispatch = useDispatch();
 
@@ -17,6 +17,10 @@ export default function Profile() {
     dispatch(getUserData());
     dispatch(getAdminData());
   }, []);
+
+   const { userData, adminData } = useSelector((state) => state.profile);
+
+  console.log(`profile ${userData}`);
 
 
   return (
