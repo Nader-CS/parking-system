@@ -8,14 +8,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import AddTaskIcon from "@mui/icons-material/AddTask";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import "./table.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { approveGarage, getData } from "../../redux/slices/adminSlice";
+import { useDispatch } from "react-redux";
+import { approveGarage } from "../../redux/slices/adminSlice";
 import { Button } from "@mui/material";
-import { Box } from "@mui/system";
 import BasicModal from "./modal";
 import { CircularProgress } from "@mui/material";
 
@@ -42,7 +38,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CustomizedTables({ data, flag }) {
   const dispatch = useDispatch();
-  const { isApprovedLoading } = useSelector((state) => state.admin)
   const [id, setID] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
