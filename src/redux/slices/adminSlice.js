@@ -42,7 +42,7 @@ const AdminSlice = createSlice({
   initialState: {
     isAdmin: false,
     adminData: null,
-    unApprovedGarages: [],
+    unApprovedGarages: null,
     approvedGarages: [],
     isApprovedLoading: false,
   },

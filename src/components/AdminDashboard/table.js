@@ -42,6 +42,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CustomizedTables({ data, flag }) {
   const dispatch = useDispatch();
+  const { isApprovedLoading } = useSelector((state) => state.admin)
   const [id, setID] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
@@ -49,75 +50,86 @@ export default function CustomizedTables({ data, flag }) {
     setOpen(true)
     setID(id)
 };
-  useEffect(() => {}, []);
-  if (data.length === 0) return <div style={{
+
+  if (data === []) return <div style={{
     display:'flex',
     justifyContent:'center',
     alignItems:'center',
     width:'100%',
     height:'400px'
   }}><CircularProgress color="secondary" /></div>;
+  
   return (
     <TableContainer component={Paper}>
-      {console.log(data)}
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">Garage Address</StyledTableCell>
-            <StyledTableCell align="center">Garage Name</StyledTableCell>
-            <StyledTableCell align="center">Avilable spots</StyledTableCell>
-            <StyledTableCell align="center">Garage location</StyledTableCell>
-            <StyledTableCell align="center">Price per hour</StyledTableCell>
-            <StyledTableCell align="center">Images</StyledTableCell>
-            <StyledTableCell align="center" style={flag && { display: "none" }}>
-              Approve
-            </StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell align="center" component="th" scope="row">
-                {row.address}
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.garageName}</StyledTableCell>
-              <StyledTableCell align="center">
-                {row.availableSpots}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                {row.lat} , {row.lon}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                {row.pricePerHour}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                <Button color="secondary" onClick={()=>{handleOpen(row.id)}}>
-                  Show Images
-                </Button>
-                <BasicModal 
-                id={id}
-                open={open}
-                close ={handleClose}
-                data = {data}
-                ></BasicModal>
-              </StyledTableCell>
-              <StyledTableCell
-                align="center"
-                style={flag && { display: "none" }}
-              >
-                <Button
-                  color="secondary"
-                  onClick={() => {
-                    dispatch(approveGarage(row));
-                  }}
-                >
-                  <AddTaskIcon style={{ color: "#ba68c8" }} />
-                </Button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
+      {data.length === 0? <div style={{
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    width:'100%',
+    height:'400px'
+  }}>
+    {flag?'There are no approved garages':'There are no Unapproved garages'}
+  </div>:
+  <Table sx={{ minWidth: 700 }} aria-label="customized table">
+    
+  <TableHead>
+    <TableRow>
+      <StyledTableCell align="center">Garage Address</StyledTableCell>
+      <StyledTableCell align="center">Garage Name</StyledTableCell>
+      <StyledTableCell align="center">Avilable spots</StyledTableCell>
+      <StyledTableCell align="center">Garage location</StyledTableCell>
+      <StyledTableCell align="center">Price per hour</StyledTableCell>
+      <StyledTableCell align="center">Images</StyledTableCell>
+      <StyledTableCell align="center" style={flag && { display: "none" }}>
+        Approve
+      </StyledTableCell>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    {data.map((row) => (
+      <StyledTableRow key={row.id}>
+        <StyledTableCell align="center" component="th" scope="row">
+          {row.address}
+        </StyledTableCell>
+        <StyledTableCell align="center">{row.garageName}</StyledTableCell>
+        <StyledTableCell align="center">
+          {row.availableSpots}
+        </StyledTableCell>
+        <StyledTableCell align="center">
+          {row.lat} , {row.lon}
+        </StyledTableCell>
+        <StyledTableCell align="center">
+          {row.pricePerHour}
+        </StyledTableCell>
+        <StyledTableCell align="center">
+          <Button color="secondary" onClick={()=>{handleOpen(row.id)}}>
+            Show Images
+          </Button>
+          <BasicModal 
+          id={id}
+          open={open}
+          close ={handleClose}
+          data = {data}
+          ></BasicModal>
+        </StyledTableCell>
+        <StyledTableCell
+          align="center"
+          style={flag && { display: "none" }}
+        >
+          <Button
+            color="secondary"
+            onClick={() => {
+              dispatch(approveGarage(row));
+            }}
+          >
+            <AddTaskIcon style={{ color: "#ba68c8" }} />
+          </Button>
+        </StyledTableCell>
+      </StyledTableRow>
+    ))}
+  </TableBody>
+</Table>}
+      
     </TableContainer>
   );
 }
