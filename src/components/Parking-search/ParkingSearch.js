@@ -168,7 +168,7 @@ const ParkingSearch = () => {
             <div className={`${classes.autocompleteContainer} differ`}>
               <AutoComplete
                 placeholder={t("auto-complete-placeholder")}
-                apiKey="AIzaSyDxE47Kh4gnM9Sh-Nj6vTjFzful_q7lZdY"
+                apiKey="AIzaSyCyzZgvyAC_OQpyYKGU-jA-nVFw4Js6Th8"
                 // autocompletePlaceHolder
                 className={`${classes.autocompleteField} ${
                   i18n.language === "ar"
@@ -224,7 +224,7 @@ const ParkingSearch = () => {
                 const dutrationString = JSON.stringify(duration);
                 sessionStorage.setItem(`duration`, `${dutrationString}`);
                 const geoString = JSON.stringify(geocode);
-                sessionStorage.setItem('geocode', geoString);
+                sessionStorage.setItem("geocode", geoString);
               }}
               style={{ backgroundColor: "#851fbf", color: "white" }}
             >
