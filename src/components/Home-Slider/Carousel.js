@@ -21,7 +21,7 @@ export default function Carousel() {
   const options = {
     nav: false,
     items: 3,
-    autoplay: false,
+    autoplay: true,
     autoplayTimeout: 2500,
     smartSpeed: 1000,
     responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 4 } },
